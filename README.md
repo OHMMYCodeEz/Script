@@ -4258,16 +4258,15 @@ for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
           game.Players.LocalPlayer.Character.HumanoidRootPart.Position = v.Position
           wait(.15)
       end
+end
   for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
    wait()
    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
    end
-   end
   end)
     end
-  end
 end)
 
 spawn(function()
