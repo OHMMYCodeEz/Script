@@ -3909,7 +3909,7 @@ task.spawn(function()
     end)
 
 local AttackList = {"0", "0.09", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}
-_G.FastAttackDelay = "0.175"
+_G.FastAttackDelay = "0.09"
 Main:AddDropdown("Fast Attack Delay", AttackList,function(MakoGay)
     _G.FastAttackDelay = MakoGay
 end)
@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.4)
+                        wait(a.length * 0.2)
                         a:Stop()
                     else
                         a:Play()
@@ -4008,9 +4008,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 150
-            CmrFwLib.activeController.focusStart = 1455503339.0980349
+            CmrFwLib.activeController.focusStart = 1455503339.0580349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
-            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 0.1, "")
+            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
     end
 end
@@ -4225,9 +4225,9 @@ spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
-				if v.Name:find("Chest") then
+				if v.Name:find("Chest") and v:IsA("TouchTransmitter") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20000+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10000+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
