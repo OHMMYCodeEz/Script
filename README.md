@@ -1,4 +1,4 @@
----[Notify Má»›i LÃ m:))]
+---[Notify Uzaki_Shop:))]
 local Notif = {}
 
 local CoreGUI = game:GetService("CoreGui")
