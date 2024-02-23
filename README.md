@@ -11341,6 +11341,9 @@ end
     while wait() do
 		pcall(function()
 			if Useskill then
+   			game:GetService'VirtualUser':CaptureController()
+			game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                        wait(0.1)
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
