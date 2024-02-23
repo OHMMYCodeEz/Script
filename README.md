@@ -3569,9 +3569,9 @@ end
     if Distance < 25 then
         Speed = 45
     elseif Distance < 50 then
-        Speed = 400
+        Speed = 80
     elseif Distance < 150 then
-        Speed = 700
+        Speed = 300
     elseif Distance < 250 then
         Speed = 600
     elseif Distance < 500 then
@@ -3591,11 +3591,11 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 100
+            Speed = 45
         elseif Distance < 50 then
-            Speed = 400
+            Speed = 80
         elseif Distance < 150 then
-            Speed = 700
+            Speed = 300
         elseif Distance < 250 then
             Speed = 600
         elseif Distance < 500 then
@@ -3617,9 +3617,9 @@ end
         if Distance < 25 then
             Speed = 45
         elseif Distance < 50 then
-            Speed = 400
+            Speed = 80
         elseif Distance < 150 then
-            Speed = 700
+            Speed = 300
         elseif Distance < 250 then
             Speed = 600
         elseif Distance < 500 then
@@ -3641,9 +3641,9 @@ end
         if Distance < 10 then
             Speed = 45
         elseif Distance < 25 then
-            Speed = 100
+            Speed = 80
         elseif Distance < 50 then
-            Speed = 400
+            Speed = 300
         elseif Distance < 150 then
             Speed = 600
         elseif Distance < 250 then
@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.3)
+                        wait(a.length * 0.01)
                         a:Stop()
                     else
                         a:Play()
@@ -4006,8 +4006,8 @@ for i = 1, 1 do
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 4 + 6 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 150
+            CmrFwLib.activeController.increment = 6 + 7 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 180
             CmrFwLib.activeController.focusStart = 1425503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
