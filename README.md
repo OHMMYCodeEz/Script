@@ -4220,14 +4220,14 @@ Main:AddToggle("Farm Chest | Safe ",false,function(value)
 --StopTween(AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 0
+ _G.MagnitudeAdd = 17000
 spawn(function()
 	while wait() do 
 		if AutoFarmChest then
                   for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if string.find(v.Name, "Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
