@@ -13895,12 +13895,12 @@ end)
     end)
     
     Misc:AddToggle("Remove Damage",function()
-		for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
+		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v.Name == "DamageCounter" then   
 				v:Destroy()
 			end
 		end
-		for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
+		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v.Name == "DamageCounter" then   
 				v:Destroy()
 			end
