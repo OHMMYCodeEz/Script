@@ -4304,15 +4304,7 @@ end)
     end)
 
     Main:AddButton("Bypass Cake Island Teleport",function()
-        if BypassTP then
-            local cakepos = CFrame.new(-2077, 252, -12373)
-            BTP(cakepos)
-            wait(.1)
-            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
-            wait(.1)
-            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
-            wait(.1)
-            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
+    HyperCahaya(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
         end
     end)
     
@@ -11997,7 +11989,7 @@ end)
                     HyperCahaya(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
                 elseif _G.SelectIsland == "Cocoa Island" then
                     HyperCahaya(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
-                elseif _G.SelectIsland == "Candy Island NewÃ¢â€ºâ€ž" then
+                elseif _G.SelectIsland == "Candy Island New" then
                     HyperCahaya(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
                 elseif _G.SelectIsland == "Tiki Outpost" then
                     HyperCahaya(CFrame.new(-15852.91796875, 485.5301818847656, 452.25537109375))
