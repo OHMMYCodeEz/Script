@@ -4304,7 +4304,10 @@ end)
     end)
 
     Main:AddButton("Bypass Cake Island Teleport",function()
-    HyperCahaya(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
+                    game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375) 
+                    game.Players.LocalPlayer.Character.Head:Destroy()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+        end
     end)
     
     Main:AddToggle("Farm Cake Prince",_G.AutoDoughtBoss,function(value)
