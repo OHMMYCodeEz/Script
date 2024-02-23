@@ -7253,14 +7253,14 @@ function two(gotoCFrame) --- Tween
           game.Players.LocalPlayer.Character.Humanoid.Sit = false
           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 300 then
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
           pcall(function() 
               tweenz:Cancel()
           end)
           game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
       else
           local tween_s = game:service"TweenService"
-          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/350, Enum.EasingStyle.Linear)
+          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/345, Enum.EasingStyle.Linear)
            tween, err = pcall(function()
               tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
               tweenz:Play()
@@ -7270,8 +7270,10 @@ function two(gotoCFrame) --- Tween
       function _TweenCanCle()
           tweenz:Cancel()
       end
-  end
+  
+end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
+
 for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -7286,7 +7288,7 @@ spawn(function()
             if _G.BiirTrax then
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        wait(8) 
+                        wait(5) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
@@ -7298,7 +7300,7 @@ spawn(function()
                     {name = "Shark", variable = "bjirShark"},
                     {name = "Piranha", variable = "bjirPiranha"},
                     {name = "FishBoat", variable = "bjirFishBoat"}, 
-		    {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
+		            {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
                     {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
                 }
 
@@ -7372,9 +7374,9 @@ spawn(function()
                     local targetModel = workspace:FindFirstChild(targetModelName)
 
                     if targetModel then
-                        local speed = 11.6
+                        local speed = 11.7
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
-                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 16
+                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 12
                         
                         while (targetModel.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             targetModel:SetPrimaryPartCFrame(targetModel.PrimaryPart.CFrame + forwardDirection * speed)
