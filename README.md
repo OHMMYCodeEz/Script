@@ -3579,7 +3579,7 @@ end
     elseif Distance < 750 then
         Speed = 450
     elseif Distance >= 1000 then
-        Speed = 400
+        Speed = 360
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -3603,7 +3603,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 360
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3627,7 +3627,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 360
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3651,9 +3651,9 @@ end
         elseif Distance < 500 then
             Speed = 610
         elseif Distance < 750 then
-            Speed = 470
+            Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 360
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
