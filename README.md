@@ -4262,9 +4262,9 @@ for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
  -- game.Players.LocalPlayer.Character.Head:Destroy()
   for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
-   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Position, 0) --0 is touch
    wait()
-   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Position, 1) -- 1 is untouch
    end
    end
   end)
