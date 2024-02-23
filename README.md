@@ -5295,9 +5295,9 @@ end)
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-    Mirragecheck:Set('ðŸï¸: Mystic Island Spawning')
+    Mirragecheck:Set('Status: Mystic Island Spawning')
     else
-      Mirragecheck:Set('âŒ: Mystic Island Not Found ' )end
+      Mirragecheck:Set('Status: Mystic Island Not Found ' )end
             end
         end)
 end)
