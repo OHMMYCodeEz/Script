@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.3)
+                        wait(a.length * 0.2)
                         a:Stop()
                     else
                         a:Play()
@@ -4006,9 +4006,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 3 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 150
-            CmrFwLib.activeController.focusStart = 1855503339.0480349
+            CmrFwLib.activeController.increment = 2 + 4 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 200
+            CmrFwLib.activeController.focusStart = 1255503339.0680349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
@@ -4220,14 +4220,14 @@ _G.AutoFarmChest = value
 StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 1
+ _G.MagnitudeAdd = 99999
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 15000+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
@@ -4256,10 +4256,10 @@ for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
       if string.find(v.Name, "Chest") then
           print(v.Name)
           game.Players.LocalPlayer.Character.HumanoidRootPart.Position = v.Position
-          wait(.15)
+          wait(.25)
       end
   end
- -- game.Players.LocalPlayer.Character.Head:Destroy()
+  game.Players.LocalPlayer.Character.Head:Destroy()
   for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Position, 0) --0 is touch
