@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.4)
+                        wait(a.length * 0.3)
                         a:Stop()
                     else
                         a:Play()
@@ -3990,7 +3990,7 @@ local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").
 local CmrFwLib = CombatFrameworkLib[2]
 local plr = game.Players.LocalPlayer
 for i = 1, 1 do
-    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},70)
     local cac = {}
     local hash = {}
     for k, v in pairs(bladehit) do
@@ -4006,8 +4006,8 @@ for i = 1, 1 do
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 4 + 10 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 200
+            CmrFwLib.activeController.increment = 4 + 6 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 150
             CmrFwLib.activeController.focusStart = 2425503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
