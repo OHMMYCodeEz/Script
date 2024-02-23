@@ -3844,7 +3844,7 @@ NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
 NguyenTien:AddLabel("Ui: Thunderz Hub")
-NguyenTien:AddLabel("Thank You For Assisting Me With The\n Script Interface!")
+NguyenTien:AddLabel("วันนี้วันหน้าวันไหนก็บิด !")
 
 NguyenTien:AddSeperator("Social Network")
 NguyenTien:AddButton("Discord Sever",function()
@@ -4305,14 +4305,9 @@ end)
 
     Main:AddButton("Bypass Cake Island Teleport",function()
         if BypassTP then
-            local cakepos = CFrame.new(-2077, 252, -12373)
-            BTP(cakepos)
-            wait(.1)
-            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
-            wait(.1)
-            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
-            wait(.1)
-            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
+                    game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375) 
+                    game.Players.LocalPlayer.Character.Head:Destroy()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
         end
     end)
     
