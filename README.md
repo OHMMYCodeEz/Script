@@ -13896,19 +13896,19 @@ end)
     
     Misc:AddToggle("Remove Damage",function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
-			if v.Name == "DamageCounter" then   
+			if v.Name == "DamageText" then   
 				v:Destroy()
 			end
 		end
 		for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
-			if v.Name == "DamageCounter" then   
+			if v.Name == "DamageTex" then   
 				v:Destroy()
 			end
 		end
 	end)
     
     Misc:AddButton("Unlock FPS",function()
-        setfpscap(120)
+        setfpscap(12000)
     end)
     
     Misc:AddButton("Reduce Cpu", function()
