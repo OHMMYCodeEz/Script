@@ -4070,7 +4070,7 @@ Main:AddToggle("Fast Attack ",true,function(value)
         _G.FastAttack = value
     end)      
 
-   Main:AddSeperator("Farm Level,...")
+   Main:AddSeperator("Farm Level")
    
     Main:AddToggle("Farm Level",_G.AutoFarm,function(value)
         _G.AutoFarm = value
@@ -4854,18 +4854,18 @@ end)
     Main:AddLabel("Pos Y High and low")
     Main:AddLabel("Pos Z Behind")
 
-    PosX = 1
-    Main:AddSlider("Pos X",0,50,1,function(value)
+    PosX = 8
+    Main:AddSlider("Pos X",0,50,8,function(value)
     PosX = value
     end)
 
-    PosY = 30
-    Main:AddSlider("Pos Y",0,50,25,function(value)
+    PosY = 32
+    Main:AddSlider("Pos Y",0,50,32,function(value)
     PosY = value
     end)
 
     PosZ = 10
-    Main:AddSlider("Pos Z",0,50,20,function(value)
+    Main:AddSlider("Pos Z",0,50,10,function(value)
     PosZ = value
     end)
     
@@ -6758,9 +6758,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                FrozenIsland:Set('âœ…: Frozen Dimension Spawning')
+                FrozenIsland:Set('Status: Frozen Dimension Spawning')
             else
-                FrozenIsland:Set('âŒ: Frozen Dimension Not Found')
+                FrozenIsland:Set('Status: Frozen Dimension Not Found')
             end
         end
     end)
@@ -7873,17 +7873,17 @@ end)
             while task.wait() do
                 pcall(function()
                     if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
-                        FM:Set("ðŸŒ‘: Full Moon 100%")
+                        FM:Set("Status: Full Moon 100%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
-                        FM:Set("ðŸŒ’: Full Moon 75%")
+                        FM:Set("Status: Full Moon 75%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
-                        FM:Set("ðŸŒ“: Full Moon 50%")
+                        FM:Set("Status“: Full Moon 50%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
-                        FM:Set("ðŸŒ”: Full Moon 25%")
+                        FM:Set("Status: Full Moon 25%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
-                        FM:Set("ðŸŒ–: Full Moon 15%")
+                        FM:Set("Status: Full Moon 15%")
                     else
-                        FM:Set("ðŸŒ•: Wait For Moon")
+                        FM:Set("Status: Wait For Moon")
                     end
                 end)
             end
@@ -8675,9 +8675,9 @@ end)
 		while wait() do
 			pcall(function()
 				if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-					Elite_Hunter_Status:Set("âœ…: Elite Spawn!")	
+					Elite_Hunter_Status:Set("Status: Elite Spawn!")	
 				else
-					Elite_Hunter_Status:Set("âŒ: Elite Not Spawn")	
+					Elite_Hunter_Status:Set("Status: Elite Not Spawn :( ")	
 				end
 			end)
 		end
@@ -12468,7 +12468,7 @@ S:AddToggle("Auto Buy Abilities", false, function(t)
     end
 end)
 
-S:AddSeperator("Ã¢â€ºÂµ Boats Ã¢â€ºÂµ")
+S:AddSeperator("  Boats  ")
 
 BoatList = {
     "Pirate Sloop",
@@ -12555,6 +12555,10 @@ end)
 
     S:AddButton("Buy God Human | $5,000 Frag | $5,000,000  ",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+    end)
+
+    S:AddButton("Buy Sanguine Art | $5,000 Frag | $5,000,000  ",function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt")
     end)
     -----Shop----------------
     
@@ -12667,7 +12671,7 @@ end)
 
     ------------Bone------------------
     
-    S:AddSeperator("Ã°Å¸Â¦Â´ BonesÃ°Å¸Â¦Â´")
+    S:AddSeperator(" Bones ")
     
     S:AddButton("Buy Surprise [ $50 Bone ]",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
@@ -12675,7 +12679,7 @@ end)
     
     ------------Stat------------------
     
-    S:AddSeperator("Ã°Å¸â€œÅ  Fragments Ã°Å¸â€œÅ ")
+    S:AddSeperator("   Fragments   ")
 
 S:AddButton("Reset Stats (Use 2.5K Fragments)", function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
@@ -12687,7 +12691,7 @@ S:AddButton("Random Race (Use 3K Fragments)", function()
 	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
 end)
     --------------Accessories-----------------
-    	S:AddSeperator("Ã¢Å¡â„¢Ã¯Â¸Â Accessories Ã¢Å¡â„¢Ã¯Â¸Â")
+    	S:AddSeperator("  Accessories  ")
 	S:AddButton("Black Cape [ $50,000 Beli ]",function()
 		local args = {
 			[1] = "BuyItem",
@@ -13438,7 +13442,7 @@ Misc:AddToggle("Graphic",false,function(v)
 		end
 	end)
 
-    Misc:AddSeperator("Ã¢Å¡â„¢Ã¯Â¸Â Misc Ã¢Å¡â„¢Ã¯Â¸Â")
+    Misc:AddSeperator("  Misc  ")
 
 Misc:AddToggle("Anti AFK", true, function()
 local vu = game:GetService("VirtualUser")
