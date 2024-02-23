@@ -3569,13 +3569,13 @@ end
     if Distance < 25 then
         Speed = 45
     elseif Distance < 50 then
-        Speed = 900
-    elseif Distance < 150 then
         Speed = 800
-    elseif Distance < 250 then
+    elseif Distance < 150 then
         Speed = 700
-    elseif Distance < 500 then
+    elseif Distance < 250 then
         Speed = 600
+    elseif Distance < 500 then
+        Speed = 500
     elseif Distance < 750 then
         Speed = 450
     elseif Distance >= 1000 then
@@ -3593,13 +3593,13 @@ end
         if Distance < 25 then
             Speed = 100
         elseif Distance < 50 then
-            Speed = 900
-        elseif Distance < 150 then
             Speed = 800
-        elseif Distance < 250 then
+        elseif Distance < 150 then
             Speed = 700
-        elseif Distance < 500 then
+        elseif Distance < 250 then
             Speed = 600
+        elseif Distance < 500 then
+            Speed = 500
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
@@ -3617,13 +3617,13 @@ end
         if Distance < 25 then
             Speed = 45
         elseif Distance < 50 then
-            Speed = 900
-        elseif Distance < 150 then
             Speed = 800
-        elseif Distance < 250 then
+        elseif Distance < 150 then
             Speed = 700
-        elseif Distance < 500 then
+        elseif Distance < 250 then
             Speed = 600
+        elseif Distance < 500 then
+            Speed = 500
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
@@ -3641,13 +3641,13 @@ end
         if Distance < 10 then
             Speed = 45
         elseif Distance < 25 then
-            Speed = 900
+            Speed = 100
         elseif Distance < 50 then
-            Speed = 800
-        elseif Distance < 150 then
             Speed = 700
+        elseif Distance < 150 then
+            Speed = 600
         elseif Distance < 250 then
-            Speed = 820
+            Speed = 520
         elseif Distance < 500 then
             Speed = 610
         elseif Distance < 750 then
@@ -3673,7 +3673,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 250 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 270 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
