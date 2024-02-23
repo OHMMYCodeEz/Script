@@ -7239,7 +7239,7 @@ if _G.BiirTrax then
 
 game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15852.91796875, 485.5301818847656, 452.25537109375) 
 game.Players.LocalPlayer.Character.Head:Destroy()
-wait(1)
+wait(7)
 
 local args = {
     [1] = "BuyBoat",
@@ -7273,7 +7273,6 @@ function two(gotoCFrame) --- Tween
   
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
-wait(5)
 for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
