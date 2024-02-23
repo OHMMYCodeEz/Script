@@ -4220,7 +4220,7 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 1000
+ _G.MagnitudeAdd = 500
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
