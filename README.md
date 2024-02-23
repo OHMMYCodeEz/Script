@@ -13605,7 +13605,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 		local total2 = 0
 		while total2<total do 
 			local i = 0
-			while i < 25000 and total2<total do 
+			while i < 15000 and total2<total do 
 				game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.CanvasPosition = Vector2.new(0,i)
 				for k,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.Frame:GetChildren()) do 
 					if v:IsA("Frame") and not rac[v.ItemName.Text] and v.ItemName.Visible==true then 
@@ -13626,7 +13626,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 			wait()
 		end
 		function GetXY(vec) 
-			return vec*100
+			return vec*1
 		end
 
 		local tvk = Instance.new("UIListLayout")
@@ -13668,7 +13668,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 					if v.ItemLine2.Text~="Accessory" then 
 						local bucac = v.ItemName:Clone()
 						bucac.BackgroundTransparency = 1
-						bucac.TextSize = 10
+						bucac.TextSize = 5
 						bucac.TextXAlignment  = 2
 						bucac.TextYAlignment  = 2
 						bucac.ZIndex  = 5
