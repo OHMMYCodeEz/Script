@@ -4305,6 +4305,7 @@ end)
 
     Main:AddButton("Bypass Cake Island Teleport",function()
     HyperCahaya(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
+    end)
     
     Main:AddToggle("Farm Cake Prince",_G.AutoDoughtBoss,function(value)
         _G.AutoDoughtBoss = value
