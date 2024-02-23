@@ -7237,9 +7237,9 @@ end)
 
 if _G.BiirTrax then
 
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15852.91796875, 485.5301818847656, 452.25537109375) 
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)  
 game.Players.LocalPlayer.Character.Head:Destroy()
-wait(7)
+wait(10)
 
 local args = {
     [1] = "BuyBoat",
@@ -7253,7 +7253,7 @@ function two(gotoCFrame) --- Tween
           game.Players.LocalPlayer.Character.Humanoid.Sit = false
           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 300 then
           pcall(function() 
               tweenz:Cancel()
           end)
@@ -7272,6 +7272,7 @@ function two(gotoCFrame) --- Tween
       end
   
 end
+wait(5)
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
