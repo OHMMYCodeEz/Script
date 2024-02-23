@@ -5295,9 +5295,9 @@ end)
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-    Mirragecheck:Set('ðŸï¸: Mystic Island Spawning')
+    Mirragecheck:Set('Status: Mystic Island Spawning')
     else
-      Mirragecheck:Set('âŒ: Mystic Island Not Found ' )end
+      Mirragecheck:Set('Status: Mystic Island Not Found ' )end
             end
         end)
 end)
@@ -6758,9 +6758,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                FrozenIsland:Set('âœ…: Frozen Dimension Spawning')
+                FrozenIsland:Set('Status: Frozen Dimension Spawning')
             else
-                FrozenIsland:Set('âŒ: Frozen Dimension Not Found')
+                FrozenIsland:Set('Status: Frozen Dimension Not Found')
             end
         end
     end)
@@ -7882,7 +7882,7 @@ end)
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
                         FM:Set("ðŸŒ–: Full Moon 15%")
                     else
-                        FM:Set("ðŸŒ•: Wait For Moon")
+                        FM:Set("Status: Wait For Moon")
                     end
                 end)
             end
@@ -13437,7 +13437,7 @@ Misc:AddToggle("Graphic",false,function(v)
 		end
 	end)
 
-    Misc:AddSeperator("Ã¢Å¡â„¢Ã¯Â¸Â Misc Ã¢Å¡â„¢Ã¯Â¸Â")
+    Misc:AddSeperator("    Misc   ")
 
 Misc:AddToggle("Anti AFK", true, function()
 local vu = game:GetService("VirtualUser")
