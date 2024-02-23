@@ -4225,7 +4225,7 @@ spawn(function()
 	while wait() do 
 		if AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
-				if v.Name:find("Chest") then
+				if v.Name:find("Chest") == or v.Name:find("Chest2") == or v.Name:find("Chest3") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
 						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
 							repeat wait()
