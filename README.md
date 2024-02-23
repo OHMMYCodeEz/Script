@@ -1,4 +1,4 @@
----[Notify Uzaki_Shop:))]
+---[Notify UzakiShop:))]
 local Notif = {}
 
 local CoreGUI = game:GetService("CoreGui")
@@ -3919,7 +3919,7 @@ spawn(function()
             pcall(function()
                 if _G.FastAttackDelay == "0" then
                     _G.FastAttackDelay = 0
-                elseif _G.FastAttackDelay == "0.1" then
+                elseif _G.FastAttackDelay == "0.9" then
                     _G.FastAttackDelay = 0.09
                 elseif _G.FastAttackDelay == "0.15" then
                     _G.FastAttackDelay = 0.15
@@ -3937,8 +3937,8 @@ spawn(function()
                     _G.FastAttackDelay = 0.18
                 elseif _G.FastAttackDelay == "0.185" then
                     _G.FastAttackDelay = 0.185
-                elseif _G.FastAttackDelay == "0.09" then
-                    _G.FastAttackDelay = 0.09
+                elseif _G.FastAttackDelay == "0.001" then
+                    _G.FastAttackDelay = 0.001
                 end
             end)
         end
@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.2)
+                        wait(a.length * 0.3)
                         a:Stop()
                     else
                         a:Play()
@@ -4008,7 +4008,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 150
-            CmrFwLib.activeController.focusStart = 1455503339.0580349
+            CmrFwLib.activeController.focusStart = 1855503339.0480349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
@@ -4227,14 +4227,14 @@ spawn(function()
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20000+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
 							break
 						end
 					end
