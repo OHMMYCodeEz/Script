@@ -3567,9 +3567,9 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 50
+        Speed = 35
     elseif Distance < 50 then
-        Speed = 2000
+        Speed = 1200
     elseif Distance < 150 then
         Speed = 1000
     elseif Distance < 250 then
@@ -3579,7 +3579,7 @@ end
     elseif Distance < 750 then
         Speed = 400
     elseif Distance >= 1000 then
-        Speed = 350
+        Speed = 390
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -3591,9 +3591,9 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 50
+            Speed = 35
         elseif Distance < 50 then
-            Speed = 2000
+            Speed = 1200
         elseif Distance < 150 then
             Speed = 1000
         elseif Distance < 250 then
@@ -3603,7 +3603,7 @@ end
         elseif Distance < 750 then
             Speed = 400
         elseif Distance >= 1000 then
-            Speed = 380
+            Speed = 390
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3615,9 +3615,9 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 50
+            Speed = 35
         elseif Distance < 50 then
-            Speed = 2000
+            Speed = 1200
         elseif Distance < 150 then
             Speed = 1000
         elseif Distance < 250 then
@@ -3627,7 +3627,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 380
+            Speed = 390
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -4006,9 +4006,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 4 + 6 + math.huge
+            CmrFwLib.activeController.increment = 4 + 8 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
-            CmrFwLib.activeController.focusStart = 1755503339.0680349
+            CmrFwLib.activeController.focusStart = 2455503339.0680349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
@@ -4220,14 +4220,14 @@ _G.AutoFarmChest = value
 StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 50
+ _G.MagnitudeAdd = 0
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20000+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 7500+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
@@ -4235,7 +4235,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+2500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+4500
 							break
 						end
 					end
