@@ -7244,7 +7244,7 @@ end)
 if _G.BiirTrax then
 
 --game.Players.LocalPlayer.Character.Head:Destroy()
---game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906) 
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906) 
 wait(0.5)
 
 local args = {
