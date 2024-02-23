@@ -3573,7 +3573,7 @@ end
     elseif Distance < 150 then
         Speed = 300
     elseif Distance < 250 then
-        Speed = 600
+        Speed = 400
     elseif Distance < 500 then
         Speed = 500
     elseif Distance < 750 then
@@ -3597,7 +3597,7 @@ end
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
-            Speed = 600
+            Speed = 400
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3621,7 +3621,7 @@ end
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
-            Speed = 600
+            Speed = 400
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3645,7 +3645,7 @@ end
         elseif Distance < 50 then
             Speed = 300
         elseif Distance < 150 then
-            Speed = 600
+            Speed = 400
         elseif Distance < 250 then
             Speed = 500
         elseif Distance < 500 then
