@@ -4304,10 +4304,15 @@ end)
     end)
 
     Main:AddButton("Bypass Cake Island Teleport",function()
-            if BypassTP then
-                    game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375) 
-                    game.Players.LocalPlayer.Character.Head:Destroy()
-					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+        if BypassTP then
+            local cakepos = CFrame.new(-2077, 252, -12373)
+            BTP(cakepos)
+            wait(.1)
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
+            wait(.1)
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
+            wait(.1)
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
         end
     end)
     
