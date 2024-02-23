@@ -4215,15 +4215,15 @@ spawn(function()
   
     Main:AddLabel("Chest Farm")
     
-Main:AddToggle("Farm Chest | Safe ",false,function(value)
- AutoFarmChest = value
---StopTween(AutoFarmChest)
+Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
+ _G.AutoFarmChest = value
+ StopTween(_G.AutoFarmChest)
  end)
  
  _G.MagnitudeAdd = 7000
 spawn(function()
 	while wait() do 
-		if AutoFarmChest then
+		if _G.AutoFarmChest then
                   for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if string.find(v.Name, "Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
@@ -4233,7 +4233,7 @@ spawn(function()
 									HyperCahaya(v.CFrame)
 	                                                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 								end
-							until AutoFarmChest == false or not v.Parent
+							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 							_G.MagnitudeAdd = _G.MagnitudeAdd+500
 							break
