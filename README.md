@@ -4666,7 +4666,7 @@ spawn(function()
                 elseif _G.BringMode == "Normal" then
                     _G.BringMode = 300
                 elseif _G.BringMode == "Super Bring" then
-                    _G.BringMode = 350
+                    _G.BringMode = 400
                 end
             end)
         end
