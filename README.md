@@ -7243,9 +7243,9 @@ end)
 
 if _G.BiirTrax then
 
---game.Players.LocalPlayer.Character.Head:Destroy()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906) 
-wait(0.5)
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15852.91796875, 485.5301818847656, 452.25537109375) 
+game.Players.LocalPlayer.Character.Head:Destroy()
+wait(1)
 
 local args = {
     [1] = "BuyBoat",
@@ -7306,7 +7306,8 @@ spawn(function()
                     {name = "Shark", variable = "bjirShark"},
                     {name = "Piranha", variable = "bjirPiranha"},
                     {name = "FishBoat", variable = "bjirFishBoat"}, 
-		    {name = "Seabaest", variable = "bjirSeabaest"},
+		    {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
+                    {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
                 }
 
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
@@ -11998,7 +11999,7 @@ end)
                     HyperCahaya(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
                 elseif _G.SelectIsland == "Cocoa Island" then
                     HyperCahaya(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
-                elseif _G.SelectIsland == "Candy Island NewÃ¢â€ºâ€ž" then
+                elseif _G.SelectIsland == "Candy Island New" then
                     HyperCahaya(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
                 elseif _G.SelectIsland == "Tiki Outpost" then
                     HyperCahaya(CFrame.new(-15852.91796875, 485.5301818847656, 452.25537109375))
@@ -12469,7 +12470,7 @@ S:AddToggle("Auto Buy Abilities", false, function(t)
     end
 end)
 
-S:AddSeperator("Ã¢â€ºÂµ Boats Ã¢â€ºÂµ")
+S:AddSeperator(" Boats ")
 
 BoatList = {
     "Pirate Sloop",
@@ -12556,6 +12557,10 @@ end)
 
     S:AddButton("Buy God Human | $5,000 Frag | $5,000,000  ",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+    end)
+
+    S:AddButton("Buy Sanguine Art | $5,000 Frag | $5,000,000  ",function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineart")
     end)
     -----Shop----------------
     
@@ -12668,7 +12673,7 @@ end)
 
     ------------Bone------------------
     
-    S:AddSeperator("Ã°Å¸Â¦Â´ BonesÃ°Å¸Â¦Â´")
+    S:AddSeperator(" Bones ")
     
     S:AddButton("Buy Surprise [ $50 Bone ]",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
@@ -12676,7 +12681,7 @@ end)
     
     ------------Stat------------------
     
-    S:AddSeperator("Ã°Å¸â€œÅ  Fragments Ã°Å¸â€œÅ ")
+    S:AddSeperator("   Fragments   ")
 
 S:AddButton("Reset Stats (Use 2.5K Fragments)", function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
