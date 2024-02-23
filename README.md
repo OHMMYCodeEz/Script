@@ -3844,20 +3844,20 @@ NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
 NguyenTien:AddLabel("Ui: Thunderz Hub")
-NguyenTien:AddLabel("Thank You For Assisting Me With The\n Script Interface!")
+NguyenTien:AddLabel("วันนี้วันหน้าวันไหนก็บิด !")
 
 NguyenTien:AddSeperator("Social Network")
 NguyenTien:AddButton("Discord Sever",function()
 setclipboard("https://discord.gg/ohmmy69")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
 NguyenTien:AddButton("YouTube Official",function()
 setclipboard("https://www.youtube.com/@ohmmycode")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
 NguyenTien:AddButton("Facebook Official Owner",function()
 setclipboard("https://www.facebook.com/OHMMY.HUB")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
 ---- Trang Chá»§
 Main:AddSeperator("Farm Settings")
@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.5)
+                        wait(a.length * 0.6)
                         a:Stop()
                     else
                         a:Play()
@@ -3990,7 +3990,7 @@ local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").
 local CmrFwLib = CombatFrameworkLib[2]
 local plr = game.Players.LocalPlayer
 for i = 1, 1 do
-    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},50)
+    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
     local cac = {}
     local hash = {}
     for k, v in pairs(bladehit) do
@@ -4006,7 +4006,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 4 + 8 + math.huge
+            CmrFwLib.activeController.increment = 6 + 8 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
             CmrFwLib.activeController.focusStart = 2955503339.0880349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
