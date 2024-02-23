@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.6)
+                        wait(a.length * 0.4)
                         a:Stop()
                     else
                         a:Play()
@@ -4002,13 +4002,13 @@ for i = 1, 1 do
     bladehit = cac
     if #bladehit > 0 then
         pcall(function()
-            CmrFwLib.activeController.timeToNextAttack = -2
+            CmrFwLib.activeController.timeToNextAttack = -9e9
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 6 + 8 + math.huge
+            CmrFwLib.activeController.increment = 8 + 10 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
-            CmrFwLib.activeController.focusStart = 2955503339.0880349
+            CmrFwLib.activeController.focusStart = 2755503339.0180349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
