@@ -7278,9 +7278,8 @@ function two(gotoCFrame) --- Tween
       end
   
 end
-wait(5)
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
-
+wait(5)
 for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
