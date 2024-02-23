@@ -13664,7 +13664,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 
 			local tvk = Instance.new("UIGridLayout",cac)
 			tvk.CellPadding = UDim2.new(.005,0,.005,0)
-			tvk.CellSize =  UDim2.new(0,70,0,70)
+			tvk.CellSize =  UDim2.new(0,40,0,40)
 			tvk.FillDirectionMaxCells = 100
 			tvk.FillDirection = Enum.FillDirection.Horizontal
 
@@ -13675,13 +13675,13 @@ Misc:AddButton("Kaitun Cap", function(value)
 					if v.ItemLine2.Text~="Accessory" then 
 						local bucac = v.ItemName:Clone()
 						bucac.BackgroundTransparency = 1
-						bucac.TextSize = 5
-						bucac.TextXAlignment  = 2
-						bucac.TextYAlignment  = 2
-						bucac.ZIndex  = 5
+						bucac.TextSize = 2
+						bucac.TextXAlignment  = 1
+						bucac.TextYAlignment  = 1
+						bucac.ZIndex  = 2
 						bucac.Text = Items[v.ItemName.Text].Mastery
-						bucac.Size = UDim2.new(.5,0,.5,0)
-						bucac.Position = UDim2.new(.5,0,.5,0)
+						bucac.Size = UDim2.new(.3,0,.3,0)
+						bucac.Position = UDim2.new(.3,0,.3,0)
 						bucac.Parent = v
 					end
 					v.Parent = cac
@@ -13731,7 +13731,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 		thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
 		thieunang.Position = UDim2.new(0,800,0.63,0)
 		local n = formatNumber(game.Players.LocalPlayer.Data.Fragments.Value)
-		thieunang.Text = "ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢"..n
+		thieunang.Text = "Uzaki Shop"..n
 		print("Done")
 		pcall(function() 
 			game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton:Destroy()
