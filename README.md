@@ -11485,9 +11485,9 @@ end
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 1') then
-    Island1:Set('âœ…: Island 1')
+    Island1:Set('Status: Island 1')
     else
-      Island1:Set('âŒ: Island 1' )end
+      Island1:Set('Status: Island 1' )end
             end
         end)
 end)
@@ -11496,9 +11496,9 @@ spawn(function()
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 2') then
-    Island2:Set('âœ…: Island 2')
+    Island2:Set('Status: Island 2')
     else
-      Island2:Set('âŒ: Island 2' )end
+      Island2:Set('Status: Island 2' )end
             end
         end)
 end)
@@ -11507,9 +11507,9 @@ spawn(function()
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 3') then
-    Island3:Set('âœ…: Island 3')
+    Island3:Set('Status: Island 3')
     else
-      Island3:Set('âŒ: Island 3' )end
+      Island3:Set('Status: Island 3' )end
             end
         end)
 end)
@@ -11518,9 +11518,9 @@ spawn(function()
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 4') then
-    Island4:Set('âœ…: Island 4')
+    Island4:Set('Status: Island 4')
     else
-      Island4:Set('âŒ: Island 4' )end
+      Island4:Set('Status: Island 4' )end
             end
         end)
 end)
@@ -11529,9 +11529,9 @@ spawn(function()
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 5') then
-    Island5:Set('âœ…: Island 5')
+    Island5:Set('Status: Island 5')
     else
-      Island5:Set('âŒ: Island 5' )end
+      Island5:Set('Status: Island 5' )end
             end
         end)
 end)
