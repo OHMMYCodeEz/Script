@@ -3567,7 +3567,7 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 35
+        Speed = 45
     elseif Distance < 50 then
         Speed = 1000
     elseif Distance < 150 then
@@ -3579,7 +3579,7 @@ end
     elseif Distance < 750 then
         Speed = 450
     elseif Distance >= 1000 then
-        Speed = 400
+        Speed = 370
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -3591,7 +3591,7 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 5000
+            Speed = 100
         elseif Distance < 50 then
             Speed = 1000
         elseif Distance < 150 then
@@ -3603,7 +3603,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 370
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3615,7 +3615,7 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 35
+            Speed = 45
         elseif Distance < 50 then
             Speed = 1000
         elseif Distance < 150 then
@@ -3627,7 +3627,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 370
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3639,7 +3639,7 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 35
+            Speed = 45
         elseif Distance < 25 then
             Speed = 950
         elseif Distance < 50 then
@@ -3653,7 +3653,7 @@ end
         elseif Distance < 750 then
             Speed = 470
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 370
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
