@@ -13896,12 +13896,12 @@ end)
     
     Misc:AddToggle("Remove Damage",function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
-			if v.Name == "DamageText" then   
+			if v.Name == "DamageCounter" then   
 				v:Destroy()
 			end
 		end
 		for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
-			if v.Name == "DamageTex" then   
+			if v.Name == "DamageCounter" then   
 				v:Destroy()
 			end
 		end
