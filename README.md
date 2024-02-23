@@ -7300,8 +7300,7 @@ spawn(function()
                     {name = "Shark", variable = "bjirShark"},
                     {name = "Piranha", variable = "bjirPiranha"},
                     {name = "FishBoat", variable = "bjirFishBoat"}, 
-		            {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
-                    {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
+		    {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
                 }
 
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
