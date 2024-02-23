@@ -3567,7 +3567,7 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 1000
+        Speed = 50
     elseif Distance < 50 then
         Speed = 2000
     elseif Distance < 150 then
@@ -3591,7 +3591,7 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 1000
+            Speed = 50
         elseif Distance < 50 then
             Speed = 2000
         elseif Distance < 150 then
@@ -3615,7 +3615,7 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 1000
+            Speed = 50
         elseif Distance < 50 then
             Speed = 2000
         elseif Distance < 150 then
@@ -3627,7 +3627,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 350
+            Speed = 380
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -4220,14 +4220,14 @@ _G.AutoFarmChest = value
 StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 0
+ _G.MagnitudeAdd = 50
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20000+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
@@ -4235,7 +4235,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+100000
+							_G.MagnitudeAdd = _G.MagnitudeAdd+2500
 							break
 						end
 					end
