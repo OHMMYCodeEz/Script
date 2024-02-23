@@ -11287,7 +11287,7 @@ end
 								end
 								EquipWeapon(_G.SelectWeapon)
 								Useskill = true
-								HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))								
+								HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(0,-5,4))								
 								v.HumanoidRootPart.Size = Vector3.new(60,60,60)
 								game:GetService'VirtualUser':CaptureController()
 								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -11323,7 +11323,7 @@ end
 								end
 								EquipWeapon(_G.SelectWeapon)
 								Useskill = true
-								HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))								
+								HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(0,-5,4))								
 								v.HumanoidRootPart.Size = Vector3.new(60,60,60)
 								game:GetService'VirtualUser':CaptureController()
 								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
