@@ -7270,7 +7270,7 @@ function two(gotoCFrame) --- Tween
       function _TweenCanCle()
           tweenz:Cancel()
       end
-  
+  end
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
