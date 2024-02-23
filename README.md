@@ -4259,7 +4259,7 @@ for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
           wait(.15)
       end
   end
-  game.Players.LocalPlayer.Character.Head:Destroy()
+  --game.Players.LocalPlayer.Character.Head:Destroy()
   for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
