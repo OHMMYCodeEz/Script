@@ -299,14 +299,14 @@ function Update:Window(text,logo,keybind)
     local keybind = keybind or Enum.KeyCode.RightControl
     local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
 
-    local UzakiShop = Instance.new("ScreenGui")
-    UzakiShop.Name = "UzakiShop"
-    UzakiShop.Parent = game.CoreGui
-    UzakiShop.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    local THUNDERZHUB = Instance.new("ScreenGui")
+    THUNDERZHUB.Name = "THUNDERZHUB"
+    THUNDERZHUB.Parent = game.CoreGui
+    THUNDERZHUB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     local Main = Instance.new("Frame")
     Main.Name = "Main"
-    Main.Parent = UzakiShop
+    Main.Parent = THUNDERZHUB
     Main.ClipsDescendants = true
     Main.AnchorPoint = Vector2.new(0.5,0.5)
     Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -3567,9 +3567,9 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 35
+        Speed = 10000
     elseif Distance < 50 then
-        Speed = 900
+        Speed = 3000
     elseif Distance < 150 then
         Speed = 1000
     elseif Distance < 250 then
@@ -3579,7 +3579,7 @@ end
     elseif Distance < 750 then
         Speed = 450
     elseif Distance >= 1000 then
-        Speed = 400
+        Speed = 380
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -3591,9 +3591,9 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 35
+            Speed = 5000
         elseif Distance < 50 then
-            Speed = 900
+            Speed = 3000
         elseif Distance < 150 then
             Speed = 1000
         elseif Distance < 250 then
@@ -3603,7 +3603,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 380
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3615,9 +3615,9 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 35
+            Speed = 5000
         elseif Distance < 50 then
-            Speed = 900
+            Speed = 3000
         elseif Distance < 150 then
             Speed = 1000
         elseif Distance < 250 then
@@ -3627,7 +3627,7 @@ end
         elseif Distance < 750 then
             Speed = 450
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 380
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3639,21 +3639,21 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 35
+            Speed = 40
         elseif Distance < 25 then
-            Speed = 950
+            Speed = 5050
         elseif Distance < 50 then
-            Speed = 1340
+            Speed = 2040
         elseif Distance < 150 then
-            Speed = 900
+            Speed = 1300
         elseif Distance < 250 then
             Speed = 820
         elseif Distance < 500 then
-            Speed = 600
+            Speed = 610
         elseif Distance < 750 then
-            Speed = 450
+            Speed = 470
         elseif Distance >= 1000 then
-            Speed = 400
+            Speed = 380
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -3677,12 +3677,12 @@ getgenv().HyperCahayas = function(p)
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
-                K.Size = Vector3.new(1,0.7,1)
+                K.Size = Vector3.new(1,0.5,1)
                 K.Name = "Root"
                 K.Anchored = true
                 K.Transparency = 1
                 K.CanCollide = false
-                K.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,30,0)
+                K.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
             end
             local U = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude
             local z = game:service("TweenService")
@@ -3844,7 +3844,7 @@ NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
 NguyenTien:AddLabel("Ui: Thunderz Hub")
-NguyenTien:AddLabel("วันนี้วันหน้าวันไหนก็บิด !")
+NguyenTien:AddLabel("Thank You For Assisting Me With The\n Script Interface!")
 
 NguyenTien:AddSeperator("Social Network")
 NguyenTien:AddButton("Discord Sever",function()
@@ -3919,7 +3919,7 @@ spawn(function()
             pcall(function()
                 if _G.FastAttackDelay == "0" then
                     _G.FastAttackDelay = 0
-                elseif _G.FastAttackDelay == "0.9" then
+                elseif _G.FastAttackDelay == "0.09" then
                     _G.FastAttackDelay = 0.09
                 elseif _G.FastAttackDelay == "0.15" then
                     _G.FastAttackDelay = 0.15
@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.5)
+                        wait(a.length * 0.4)
                         a:Stop()
                     else
                         a:Play()
@@ -3990,7 +3990,7 @@ local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").
 local CmrFwLib = CombatFrameworkLib[2]
 local plr = game.Players.LocalPlayer
 for i = 1, 1 do
-    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},50)
     local cac = {}
     local hash = {}
     for k, v in pairs(bladehit) do
@@ -4002,11 +4002,11 @@ for i = 1, 1 do
     bladehit = cac
     if #bladehit > 0 then
         pcall(function()
-            CmrFwLib.activeController.timeToNextAttack = -1
+            CmrFwLib.activeController.timeToNextAttack = 0
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 4 + 8 + math.huge
+            CmrFwLib.activeController.increment = 1 + 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
             CmrFwLib.activeController.focusStart = 2655503339.0780349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
@@ -4018,7 +4018,7 @@ end
 
 
 spawn(function()
-while wait(.01) do
+while wait(.1) do
     if _G.FastAttack then
         pcall(function()
             repeat task.wait(_G.FastAttackDelay)
@@ -4070,7 +4070,7 @@ Main:AddToggle("Fast Attack ",true,function(value)
         _G.FastAttack = value
     end)      
 
-   Main:AddSeperator("Farm Level")
+   Main:AddSeperator("Farm Level,...")
    
     Main:AddToggle("Farm Level",_G.AutoFarm,function(value)
         _G.AutoFarm = value
@@ -4215,27 +4215,26 @@ spawn(function()
   
     Main:AddLabel("Chest Farm")
     
-Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
-_G.AutoFarmChest = value
-StopTween(_G.AutoFarmChest)
+Main:AddToggle("Farm Chest | Safe ",false,function(value)
+ AutoFarmChest = value
+--StopTween(AutoFarmChest)
  end)
  
  _G.MagnitudeAdd = 0
 spawn(function()
 	while wait() do 
-		if _G.AutoFarmChest then
+		if AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 7500+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
-                                                        game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 								end
-							until _G.AutoFarmChest == false or not v.Parent
+							until AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+4500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
 							break
 						end
 					end
@@ -4256,16 +4255,16 @@ pcall(function()
 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
       if string.find(v.Name, "Chest") then
           print(v.Name)
-          game.Players.LocalPlayer.Character.HumanoidRootPart.Position = v.Position
-          wait(.25)
+          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+          wait(.15)
       end
   end
   game.Players.LocalPlayer.Character.Head:Destroy()
   for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
-   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Position, 0) --0 is touch
+   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
    wait()
-   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Position, 1) -- 1 is untouch
+   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
    end
    end
   end)
@@ -4304,9 +4303,15 @@ end)
     end)
 
     Main:AddButton("Bypass Cake Island Teleport",function()
-                    game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375) 
-                    game.Players.LocalPlayer.Character.Head:Destroy()
-					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+        if BypassTP then
+            local cakepos = CFrame.new(-2077, 252, -12373)
+            BTP(cakepos)
+            wait(.1)
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
+            wait(.1)
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
+            wait(.1)
+            game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2077, 252, -12373)
         end
     end)
     
@@ -4848,13 +4853,13 @@ end)
     Main:AddLabel("Pos Y High and low")
     Main:AddLabel("Pos Z Behind")
 
-    PosX = 5
+    PosX = 1
     Main:AddSlider("Pos X",0,50,1,function(value)
     PosX = value
     end)
 
-    PosY = 32
-    Main:AddSlider("Pos Y",0,50,30,function(value)
+    PosY = 30
+    Main:AddSlider("Pos Y",0,50,25,function(value)
     PosY = value
     end)
 
@@ -5289,9 +5294,9 @@ end)
         pcall(function()
             while wait() do
     if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-    Mirragecheck:Set('Status: Mystic Island Spawning')
+    Mirragecheck:Set('ðŸï¸: Mystic Island Spawning')
     else
-      Mirragecheck:Set('Status: Mystic Island Not Found ' )end
+      Mirragecheck:Set('âŒ: Mystic Island Not Found ' )end
             end
         end)
 end)
@@ -6752,9 +6757,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                FrozenIsland:Set('Status: Frozen Dimension Spawning')
+                FrozenIsland:Set('âœ…: Frozen Dimension Spawning')
             else
-                FrozenIsland:Set('Status: Frozen Dimension Not Found')
+                FrozenIsland:Set('âŒ: Frozen Dimension Not Found')
             end
         end
     end)
@@ -7208,7 +7213,7 @@ spawn(function()
 
                 for _, model in pairs(models) do
                     if model.Name == targetModelName then
-                        local speed = 11.5
+                        local speed = 10.5
                         local forwardDirection = model.PrimaryPart.CFrame.lookVector
                         local targetPosition = model.PrimaryPart.Position + forwardDirection * 10
                         
@@ -7231,15 +7236,13 @@ end)
         _G.BiirTrax = true
     else
         _G.BiirTrax = false
-        StopTween(_G.BiirTrax)
     end
 
 
 if _G.BiirTrax then
 
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)  
-game.Players.LocalPlayer.Character.Head:Destroy()
-wait(5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906) 
+wait(0.5) 
 
 local args = {
     [1] = "BuyBoat",
@@ -7300,7 +7303,8 @@ spawn(function()
                     {name = "Shark", variable = "bjirShark"},
                     {name = "Piranha", variable = "bjirPiranha"},
                     {name = "FishBoat", variable = "bjirFishBoat"}, 
-		    {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
+		            {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
+                    {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
                 }
 
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
@@ -7878,7 +7882,7 @@ end)
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
                         FM:Set("ðŸŒ–: Full Moon 15%")
                     else
-                        FM:Set("Status: Wait For Moon")
+                        FM:Set("ðŸŒ•: Wait For Moon")
                     end
                 end)
             end
@@ -11992,7 +11996,7 @@ end)
                     HyperCahaya(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
                 elseif _G.SelectIsland == "Cocoa Island" then
                     HyperCahaya(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
-                elseif _G.SelectIsland == "Candy Island New" then
+                elseif _G.SelectIsland == "Candy Island NewÃ¢â€ºâ€ž" then
                     HyperCahaya(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
                 elseif _G.SelectIsland == "Tiki Outpost" then
                     HyperCahaya(CFrame.new(-15852.91796875, 485.5301818847656, 452.25537109375))
@@ -12463,7 +12467,7 @@ S:AddToggle("Auto Buy Abilities", false, function(t)
     end
 end)
 
-S:AddSeperator(" Boats ")
+S:AddSeperator("Ã¢â€ºÂµ Boats Ã¢â€ºÂµ")
 
 BoatList = {
     "Pirate Sloop",
@@ -12550,10 +12554,6 @@ end)
 
     S:AddButton("Buy God Human | $5,000 Frag | $5,000,000  ",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
-    end)
-
-    S:AddButton("Buy Sanguine Art | $5,000 Frag | $5,000,000  ",function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineart")
     end)
     -----Shop----------------
     
@@ -12666,7 +12666,7 @@ end)
 
     ------------Bone------------------
     
-    S:AddSeperator(" Bones ")
+    S:AddSeperator("Ã°Å¸Â¦Â´ BonesÃ°Å¸Â¦Â´")
     
     S:AddButton("Buy Surprise [ $50 Bone ]",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
@@ -12674,7 +12674,7 @@ end)
     
     ------------Stat------------------
     
-    S:AddSeperator("   Fragments   ")
+    S:AddSeperator("Ã°Å¸â€œÅ  Fragments Ã°Å¸â€œÅ ")
 
 S:AddButton("Reset Stats (Use 2.5K Fragments)", function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
@@ -13437,7 +13437,7 @@ Misc:AddToggle("Graphic",false,function(v)
 		end
 	end)
 
-    Misc:AddSeperator("    Misc   ")
+    Misc:AddSeperator("Ã¢Å¡â„¢Ã¯Â¸Â Misc Ã¢Å¡â„¢Ã¯Â¸Â")
 
 Misc:AddToggle("Anti AFK", true, function()
 local vu = game:GetService("VirtualUser")
@@ -13625,7 +13625,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 			wait()
 		end
 		function GetXY(vec) 
-			return vec*30
+			return vec*100
 		end
 
 		local tvk = Instance.new("UIListLayout")
@@ -13723,7 +13723,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 		thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
 		thieunang.Position = UDim2.new(0,800,0.63,0)
 		local n = formatNumber(game.Players.LocalPlayer.Data.Fragments.Value)
-		thieunang.Text = "Shop"..n
+		thieunang.Text = "ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢"..n
 		print("Done")
 		pcall(function() 
 			game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton:Destroy()
@@ -13907,7 +13907,7 @@ end)
 	end)
     
     Misc:AddButton("Unlock FPS",function()
-        setfpscap(1200)
+        setfpscap(120)
     end)
     
     Misc:AddButton("Reduce Cpu", function()
