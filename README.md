@@ -4220,21 +4220,21 @@ _G.AutoFarmChest = value
 StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 0
+ _G.MagnitudeAdd = 1
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
 			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20000+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+500
 							break
 						end
 					end
