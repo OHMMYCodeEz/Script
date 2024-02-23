@@ -4231,6 +4231,7 @@ spawn(function()
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
+	                                                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 								end
 							until AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
