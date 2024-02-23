@@ -4235,6 +4235,7 @@ spawn(function()
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 							_G.MagnitudeAdd = _G.MagnitudeAdd+500
+                                                        game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 							break
 						end
 					end
