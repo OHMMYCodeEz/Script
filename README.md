@@ -4220,7 +4220,7 @@ _G.AutoFarmChest = value
 StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 1
+ _G.MagnitudeAdd = 0
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
