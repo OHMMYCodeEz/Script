@@ -7287,7 +7287,7 @@ spawn(function()
             if _G.BiirTrax then
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        wait(5) 
+                        wait(8) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
