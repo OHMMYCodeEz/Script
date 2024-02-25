@@ -3647,9 +3647,9 @@ end
         elseif Distance < 150 then
             Speed = 350
         elseif Distance < 250 then
-            Speed = 500
+            Speed = 360
         elseif Distance < 500 then
-            Speed = 600
+            Speed = 500
         elseif Distance < 750 then
             Speed = 400
         elseif Distance >= 1000 then
@@ -4007,9 +4007,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 1 + 3 + math.huge
+            CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
-            CmrFwLib.activeController.focusStart = 1420503339.0980349
+            CmrFwLib.activeController.focusStart = 142050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4626,8 +4626,8 @@ Main:AddToggle("Bring Mob",true,function(Mag)
                 if _G.BringMonster then
                     CheckQuest()
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 220 then
-                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                        if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                            v.HumanoidRootPart.Size = Vector3.new(50,60,50)
                             v.HumanoidRootPart.CFrame = PosMon
                             v.Humanoid:ChangeState(14)
                             v.HumanoidRootPart.CanCollide = false
@@ -4663,11 +4663,11 @@ spawn(function()
         if _G.BringMode then
             pcall(function()
                 if _G.BringMode == "Low" then
-                    _G.BringMode = 250
+                    _G.BringMode = 150
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 300
+                    _G.BringMode = 250
                 elseif _G.BringMode == "Super Bring" then
-                    _G.BringMode = 400
+                    _G.BringMode = 300
                 end
             end)
         end
