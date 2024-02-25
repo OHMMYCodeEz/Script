@@ -4859,8 +4859,8 @@ end)
     PosX = value
     end)
 
-    PosY = 28
-    Main:AddSlider("Pos Y",0,50,28,function(value)
+    PosY = 32
+    Main:AddSlider("Pos Y",0,50,32,function(value)
     PosY = value
     end)
 
