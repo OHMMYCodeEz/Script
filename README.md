@@ -13708,7 +13708,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 		MeleeG.LayoutOrder = 100
 		local tvk = Instance.new("UIGridLayout",MeleeG)
 		tvk.CellPadding = UDim2.new(.005,0,.005,0)
-		tvk.CellSize =  UDim2.new(0,70,0,70)
+		tvk.CellSize =  UDim2.new(0,50,0,50)
 		tvk.FillDirectionMaxCells = 100
 		tvk.FillDirection = Enum.FillDirection.Horizontal
 
@@ -13717,7 +13717,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 			if ListHuhu[v] and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"..v,true) == 1 then 
 				local huhu = Instance.new("ImageLabel",MeleeG)
 				huhu.Image = "rbxassetid://9945562382"
-				huhu.ImageRectSize = Vector2.new(100,100)
+				huhu.ImageRectSize = Vector2.new(70,70)
 				huhu.ImageRectOffset = ListHuhu[v]*100
 			end
 		end
@@ -13731,7 +13731,7 @@ Misc:AddButton("Kaitun Cap", function(value)
 		thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
 		thieunang.Position = UDim2.new(0,800,0.63,0)
 		local n = formatNumber(game.Players.LocalPlayer.Data.Fragments.Value)
-		thieunang.Text = "Uzaki Shop"..n
+		thieunang.Text = "Fragments:"..n
 		print("Done")
 		pcall(function() 
 			game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton:Destroy()
