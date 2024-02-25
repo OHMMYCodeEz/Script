@@ -6852,7 +6852,7 @@ spawn(function()
                                         v.Head.CanCollide = false 
                                         MakoriGayMag = false
                                         PosGay = v.HumanoidRootPart.CFrame
-                                        HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(2,60,2))
+                                        HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(2,70,2))
                                         game:GetService("VirtualUser"):CaptureController()
                                         game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                     until not _G.bjirShark or not v.Parent or v.Humanoid.Health <= 0
@@ -7214,7 +7214,7 @@ spawn(function()
 
                 for _, model in pairs(models) do
                     if model.Name == targetModelName then
-                        local speed = 10.5
+                        local speed = 11.5
                         local forwardDirection = model.PrimaryPart.CFrame.lookVector
                         local targetPosition = model.PrimaryPart.Position + forwardDirection * 10
                         
