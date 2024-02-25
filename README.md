@@ -13724,8 +13724,8 @@ Misc:AddButton("Kaitun Cap", function(value)
 		function formatNumber(v)
 			return tostring(v):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
 		end
-		game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0,800,0,45)
-		game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0,800,0,10)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0,800,70,45)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0,800,80,10)
 
 		local thieunang = game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Clone()
 		thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
@@ -13851,7 +13851,7 @@ Misc:AddButton("Kaitun Cap", function(value)
             local t = w.Terrain
             t.WaterWaveSize = 0
             t.WaterWaveSpeed = 0
-            t.WaterReflectance = 0
+            t.WaterReflectance = 10
             t.WaterTransparency = 0
             l.GlobalShadows = false
             l.FogEnd = 9e9
@@ -13860,14 +13860,14 @@ Misc:AddButton("Kaitun Cap", function(value)
             for i, v in pairs(g:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
                     v.Material = "Plastic"
-                    v.Reflectance = 0
+                    v.Reflectance = 10
                 elseif v:IsA("Decal") or v:IsA("Texture") then
                     v.Transparency = 1
                 elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
                     v.Lifetime = NumberRange.new(0)
                 elseif v:IsA("Explosion") then
                     v.BlastPressure = 1
-                    v.BlastRadius = 1
+                    v.BlastRadius = 100
                 elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
                     v.Enabled = false
                 elseif v:IsA("MeshPart") then
