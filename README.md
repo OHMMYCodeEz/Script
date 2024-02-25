@@ -3595,9 +3595,9 @@ end
         elseif Distance < 50 then
             Speed = 80
         elseif Distance < 150 then
-            Speed = 300
+            Speed = 200
         elseif Distance < 250 then
-            Speed = 400
+            Speed = 300
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3619,9 +3619,9 @@ end
         elseif Distance < 50 then
             Speed = 80
         elseif Distance < 150 then
-            Speed = 300
+            Speed = 200
         elseif Distance < 250 then
-            Speed = 400
+            Speed = 300
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3643,9 +3643,9 @@ end
         elseif Distance < 25 then
             Speed = 80
         elseif Distance < 50 then
-            Speed = 300
+            Speed = 200
         elseif Distance < 150 then
-            Speed = 400
+            Speed = 300
         elseif Distance < 250 then
             Speed = 500
         elseif Distance < 500 then
@@ -3839,7 +3839,7 @@ local T = Library:AddTab("Teleport","4483345998")
 local S = Library:AddTab("Shop","4483345998")
 local D = Library:AddTab("Devil Fruit","4483345998")
 local Misc = Library:AddTab("Misc","4483345998")
---- ThÃ´ng Tin
+--- ไม่ต้องรู้หรอก
 NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.6)
+                        wait(a.length * 0.5)
                         a:Stop()
                     else
                         a:Play()
@@ -4006,9 +4006,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 5 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 180
-            CmrFwLib.activeController.focusStart = 1425503339.0980349
+            CmrFwLib.activeController.increment = 2 + 3 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 200
+            CmrFwLib.activeController.focusStart = 1125503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
@@ -4235,7 +4235,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+400
 							break
 						end
 					end
@@ -7257,14 +7257,14 @@ function two(gotoCFrame) --- Tween
           game.Players.LocalPlayer.Character.Humanoid.Sit = false
           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 210 then
           pcall(function() 
               tweenz:Cancel()
           end)
           game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
       else
           local tween_s = game:service"TweenService"
-          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/350, Enum.EasingStyle.Linear)
+          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/355, Enum.EasingStyle.Linear)
            tween, err = pcall(function()
               tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
               tweenz:Play()
@@ -7292,7 +7292,7 @@ spawn(function()
             if _G.BiirTrax then
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        wait(5) 
+                        wait(3) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
@@ -7304,7 +7304,7 @@ spawn(function()
                     {name = "Shark", variable = "bjirShark"},
                     {name = "Piranha", variable = "bjirPiranha"},
                     {name = "FishBoat", variable = "bjirFishBoat"}, 
-		            {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
+		    {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
                     {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
                 }
 
