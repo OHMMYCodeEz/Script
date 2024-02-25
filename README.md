@@ -7244,7 +7244,7 @@ end)
 if _G.BiirTrax then
 
 game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
-wait(5) 
+wait(1) 
 
 local args = {
     [1] = "BuyBoat",
@@ -7258,7 +7258,7 @@ function two(gotoCFrame) --- Tween
           game.Players.LocalPlayer.Character.Humanoid.Sit = false
           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 210 then
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
           pcall(function() 
               tweenz:Cancel()
           end)
@@ -7381,7 +7381,7 @@ spawn(function()
                     if targetModel then
                         local speed = 12.5
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
-                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 14
+                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
                         
                         while (targetModel.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             targetModel:SetPrimaryPartCFrame(targetModel.PrimaryPart.CFrame + forwardDirection * speed)
