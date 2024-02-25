@@ -3573,7 +3573,7 @@ end
     elseif Distance < 150 then
         Speed = 300
     elseif Distance < 250 then
-        Speed = 400
+        Speed = 350
     elseif Distance < 500 then
         Speed = 500
     elseif Distance < 750 then
@@ -3595,9 +3595,9 @@ end
         elseif Distance < 50 then
             Speed = 80
         elseif Distance < 150 then
-            Speed = 200
-        elseif Distance < 250 then
             Speed = 300
+        elseif Distance < 250 then
+            Speed = 350
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3619,9 +3619,9 @@ end
         elseif Distance < 50 then
             Speed = 80
         elseif Distance < 150 then
-            Speed = 200
-        elseif Distance < 250 then
             Speed = 300
+        elseif Distance < 250 then
+            Speed = 350
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3643,9 +3643,9 @@ end
         elseif Distance < 25 then
             Speed = 80
         elseif Distance < 50 then
-            Speed = 200
-        elseif Distance < 150 then
             Speed = 300
+        elseif Distance < 150 then
+            Speed = 350
         elseif Distance < 250 then
             Speed = 500
         elseif Distance < 500 then
@@ -4854,8 +4854,8 @@ end)
     Main:AddLabel("Pos Y High and low")
     Main:AddLabel("Pos Z Behind")
 
-    PosX = 5
-    Main:AddSlider("Pos X",0,50,5,function(value)
+    PosX = 1
+    Main:AddSlider("Pos X",0,50,1,function(value)
     PosX = value
     end)
 
