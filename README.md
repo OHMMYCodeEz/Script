@@ -13725,8 +13725,8 @@ Misc:AddButton("Kaitun Cap", function(value)
 		function formatNumber(v)
 			return tostring(v):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
 		end
-		game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0,800,60,0)
-		game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0,800,65,0)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0,800,0,50)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0,800,0,30)
 
 		local thieunang = game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Clone()
 		thieunang.Parent = game:GetService("Players").LocalPlayer.PlayerGui.BubbleChat
