@@ -4008,7 +4008,8 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
-            CmrFwLib.activeController.focusStart = 1125503339.0980349
+            CmrFwLib.activeController.focusStart = 420503339.0980349
+	    CmrFwLib.activeController.humanoid.AutoRotate = true
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
@@ -4854,18 +4855,18 @@ end)
     Main:AddLabel("Pos Y High and low")
     Main:AddLabel("Pos Z Behind")
 
-    PosX = 8
-    Main:AddSlider("Pos X",0,50,8,function(value)
+    PosX = 5
+    Main:AddSlider("Pos X",0,50,5,function(value)
     PosX = value
     end)
 
-    PosY = 32
-    Main:AddSlider("Pos Y",0,50,32,function(value)
+    PosY = 28
+    Main:AddSlider("Pos Y",0,50,28,function(value)
     PosY = value
     end)
 
-    PosZ = 10
-    Main:AddSlider("Pos Z",0,50,10,function(value)
+    PosZ = 5
+    Main:AddSlider("Pos Z",0,50,5,function(value)
     PosZ = value
     end)
     
