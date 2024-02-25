@@ -4005,6 +4005,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextAttack = -9e9
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
+	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
