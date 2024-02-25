@@ -3839,7 +3839,7 @@ local T = Library:AddTab("Teleport","4483345998")
 local S = Library:AddTab("Shop","4483345998")
 local D = Library:AddTab("Devil Fruit","4483345998")
 local Misc = Library:AddTab("Misc","4483345998")
---- ไม่ต้องรู้หรอก
+--- Hahetvny
 NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
