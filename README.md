@@ -4008,8 +4008,8 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
-            CmrFwLib.activeController.focusStart = 42050339.0980349
-	    CmrFwLib.activeController.humanoid.AutoRotate = true
+            CmrFwLib.activeController.focusStart = 220503339.0980349
+	   -- CmrFwLib.activeController.humanoid.AutoRotate = true
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
         end)
