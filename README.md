@@ -3990,7 +3990,7 @@ local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").
 local CmrFwLib = CombatFrameworkLib[2]
 local plr = game.Players.LocalPlayer
 for i = 1, 1 do
-    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},70)
+    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
     local cac = {}
     local hash = {}
     for k, v in pairs(bladehit) do
@@ -4008,7 +4008,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 200
-            CmrFwLib.activeController.focusStart = 420503339.0980349
+            CmrFwLib.activeController.focusStart = 42050339.0980349
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
@@ -6853,7 +6853,7 @@ spawn(function()
                                         v.Head.CanCollide = false 
                                         MakoriGayMag = false
                                         PosGay = v.HumanoidRootPart.CFrame
-                                        HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(2,70,2))
+                                        HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(2,60,2))
                                         game:GetService("VirtualUser"):CaptureController()
                                         game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                     until not _G.bjirShark or not v.Parent or v.Humanoid.Health <= 0
@@ -7243,8 +7243,8 @@ end)
 
 if _G.BiirTrax then
 
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906) 
-wait(0.5) 
+two(CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906) 
+wait(5) 
 
 local args = {
     [1] = "BuyBoat",
@@ -7379,9 +7379,9 @@ spawn(function()
                     local targetModel = workspace:FindFirstChild(targetModelName)
 
                     if targetModel then
-                        local speed = 11.7
+                        local speed = 12.5
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
-                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 18
+                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 14
                         
                         while (targetModel.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             targetModel:SetPrimaryPartCFrame(targetModel.PrimaryPart.CFrame + forwardDirection * speed)
