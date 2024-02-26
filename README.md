@@ -4007,8 +4007,8 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 3 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 200
+            CmrFwLib.activeController.increment = 2 + 3 + 1 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 100
             CmrFwLib.activeController.focusStart = 142050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
@@ -5441,7 +5441,7 @@ spawn(function()
                 wait(0.5) 
                 local model = workspace.Boats.PirateBrigade
                 if model then
-                    local speed = 11
+                    local speed = 12
                     local forwardDirection = model.PrimaryPart.CFrame.lookVector
                     local targetPosition = model.PrimaryPart.Position + forwardDirection * 10
                     while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
@@ -7017,7 +7017,7 @@ end)
 							wait(.2)
 							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
 							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(0.5)
+							wait(0.3)
 							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 								if v:IsA("Tool") then
 									if v.ToolTip == "Gun" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
@@ -7259,14 +7259,14 @@ function two(gotoCFrame) --- Tween
           game.Players.LocalPlayer.Character.Humanoid.Sit = false
           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 250 then
           pcall(function() 
               tweenz:Cancel()
           end)
           game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
       else
           local tween_s = game:service"TweenService"
-          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/355, Enum.EasingStyle.Linear)
+          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/360, Enum.EasingStyle.Linear)
            tween, err = pcall(function()
               tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
               tweenz:Play()
@@ -7294,7 +7294,7 @@ spawn(function()
             if _G.BiirTrax then
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        wait(3) 
+                        wait(1) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
@@ -7372,7 +7372,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                wait(0.8) 
+                wait(1.8) 
                 local targetModelNames = "PirateBrigade"
                 local models = workspace.Boats:GetChildren()
 
@@ -7382,7 +7382,7 @@ spawn(function()
                     if targetModel then
                         local speed = 12.5
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
-                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
+                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 18
                         
                         while (targetModel.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             targetModel:SetPrimaryPartCFrame(targetModel.PrimaryPart.CFrame + forwardDirection * speed)
