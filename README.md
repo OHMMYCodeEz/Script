@@ -3567,13 +3567,13 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 45
+        Speed = 40
     elseif Distance < 50 then
         Speed = 80
     elseif Distance < 150 then
         Speed = 300
     elseif Distance < 250 then
-        Speed = 350
+        Speed = 400
     elseif Distance < 500 then
         Speed = 500
     elseif Distance < 750 then
@@ -3591,13 +3591,13 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 45
+            Speed = 40
         elseif Distance < 50 then
             Speed = 80
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
-            Speed = 350
+            Speed = 400
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3615,13 +3615,13 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 45
+            Speed = 40
         elseif Distance < 50 then
             Speed = 80
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
-            Speed = 350
+            Speed = 400
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3639,7 +3639,7 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 45
+            Speed = 40
         elseif Distance < 25 then
             Speed = 80
         elseif Distance < 50 then
@@ -3647,7 +3647,7 @@ end
         elseif Distance < 150 then
             Speed = 350
         elseif Distance < 250 then
-            Speed = 360
+            Speed = 400
         elseif Distance < 500 then
             Speed = 500
         elseif Distance < 750 then
@@ -3673,7 +3673,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 300 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 250 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
