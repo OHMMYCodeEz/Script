@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.3)
+                        wait(a.length * 0.2)
                         a:Stop()
                     else
                         a:Play()
@@ -4007,9 +4007,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 3 + 1 + math.huge
+            CmrFwLib.activeController.increment = 2 + 1 + 4 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 100
-            CmrFwLib.activeController.focusStart = 142050339.0980349
+            CmrFwLib.activeController.focusStart = 172050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
