@@ -1917,7 +1917,7 @@ function Update:Window(text,logo,keybind)
 end
 return uitab
 end
----- Káº¿t KhÃºc Ui
+---- Farm Lavle Ui
 
 function intiAppleHub() 
 _G.antiscan = true
@@ -13853,7 +13853,7 @@ Misc:AddButton("Kaitun Cap", function(value)
             local t = w.Terrain
             t.WaterWaveSize = 0
             t.WaterWaveSpeed = 0
-            t.WaterReflectance = 1
+            t.WaterReflectance = 0
             t.WaterTransparency = 0
             l.GlobalShadows = false
             l.FogEnd = 9e9
@@ -13862,14 +13862,14 @@ Misc:AddButton("Kaitun Cap", function(value)
             for i, v in pairs(g:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
                     v.Material = "Plastic"
-                    v.Reflectance = 1
+                    v.Reflectance = 0
                 elseif v:IsA("Decal") or v:IsA("Texture") then
                     v.Transparency = 1
                 elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
                     v.Lifetime = NumberRange.new(0)
                 elseif v:IsA("Explosion") then
                     v.BlastPressure = 1
-                    v.BlastRadius = 1
+                    v.BlastRadius = 0
                 elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
                     v.Enabled = false
                 elseif v:IsA("MeshPart") then
