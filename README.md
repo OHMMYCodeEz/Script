@@ -13857,7 +13857,7 @@ Misc:AddButton("Kaitun Cap", function(value)
             t.WaterTransparency = 0
             l.GlobalShadows = false
             l.FogEnd = 9e9
-            l.Brightness = 0
+            l.Brightness = 100
             settings().Rendering.QualityLevel = "Level01"
             for i, v in pairs(g:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
