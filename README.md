@@ -7245,8 +7245,8 @@ end)
 
 if _G.BiirTrax then
 
----game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
-wait(.1) 
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
+wait(5) 
 
 local args = {
     [1] = "BuyBoat",
@@ -7260,14 +7260,14 @@ function two(gotoCFrame) --- Tween
           game.Players.LocalPlayer.Character.Humanoid.Sit = false
           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 250 then
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
           pcall(function() 
               tweenz:Cancel()
           end)
           game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
       else
           local tween_s = game:service"TweenService"
-          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/360, Enum.EasingStyle.Linear)
+          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/400, Enum.EasingStyle.Linear)
            tween, err = pcall(function()
               tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
               tweenz:Play()
