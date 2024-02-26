@@ -7238,6 +7238,7 @@ end)
         _G.BiirTrax = true
     else
         _G.BiirTrax = false
+	StopTween(_G.BiirTrax)
     end
 
 
