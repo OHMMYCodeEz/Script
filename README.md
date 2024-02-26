@@ -4012,6 +4012,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.focusStart = 172050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
+	    game.Players.LocalPlayer.Character.Stun.Value = 0
         end)
     end
 end
