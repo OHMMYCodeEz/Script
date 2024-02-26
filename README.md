@@ -4236,7 +4236,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+400
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1000
 							break
 						end
 					end
