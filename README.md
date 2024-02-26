@@ -7243,7 +7243,7 @@ end)
 
 if _G.BiirTrax then
 
-game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
+---game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
 wait(1) 
 
 local args = {
