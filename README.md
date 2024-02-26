@@ -7246,7 +7246,7 @@ end)
 if _G.BiirTrax then
 
 ---game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
-wait(1) 
+wait(.1) 
 
 local args = {
     [1] = "BuyBoat",
@@ -7373,7 +7373,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                wait(3) 
+                wait(5) 
                 local targetModelNames = "PirateBrigade"
                 local models = workspace.Boats:GetChildren()
 
