@@ -4007,12 +4007,13 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 1 + 4 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 80
+            CmrFwLib.activeController.increment = 2 + 1 + 3 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 360
             CmrFwLib.activeController.focusStart = 1742050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
 	    game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false
         end)
     end
 end
@@ -4222,7 +4223,7 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 600
+ _G.MagnitudeAdd = 1500
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
@@ -4237,7 +4238,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1000
 							break
 						end
 					end
