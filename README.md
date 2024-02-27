@@ -4009,16 +4009,21 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 1 + 3 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 90
-            CmrFwLib.activeController.focusStart = 1742050339.0980349
+            CmrFwLib.activeController.focusStart = 17420503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
-	    game.Players.LocalPlayer.Character.Stun.Value = 0
-            game.Players.LocalPlayer.Character.Busy.Value = false
         end)
     end
 end
 end
-
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack == true or _G.HyperSonic == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
+end)
 
 spawn(function()
 while wait(.01) do
