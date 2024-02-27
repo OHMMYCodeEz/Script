@@ -4008,10 +4008,10 @@ for i = 1, 1 do
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 1 + 4 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 100
-            CmrFwLib.activeController.focusStart = 172050339.0980349
+            CmrFwLib.activeController.hitboxMagnitude = 80
+            CmrFwLib.activeController.focusStart = 1742050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
-            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
+            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
 	    game.Players.LocalPlayer.Character.Stun.Value = 0
         end)
     end
@@ -4222,7 +4222,7 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 500
+ _G.MagnitudeAdd = 600
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
@@ -4237,7 +4237,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+1000
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
 							break
 						end
 					end
@@ -7279,7 +7279,7 @@ function two(gotoCFrame) --- Tween
       end
   
 end
-two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
+--two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
 for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
@@ -7295,7 +7295,7 @@ spawn(function()
             if _G.BiirTrax then
                 for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        wait(5) 
+                        wait(7) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
@@ -7373,7 +7373,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                wait(5) 
+                wait(.2) 
                 local targetModelNames = "PirateBrigade"
                 local models = workspace.Boats:GetChildren()
 
@@ -13858,24 +13858,24 @@ Misc:AddButton("Kaitun Cap", function(value)
             t.WaterTransparency = 0
             l.GlobalShadows = false
             l.FogEnd = 9e9
-            l.Brightness = 100
+            l.Brightness = 9e9
             settings().Rendering.QualityLevel = "Level01"
             for i, v in pairs(g:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
                     v.Material = "Plastic"
-                    v.Reflectance = 0
+                    v.Reflectance = 1
                 elseif v:IsA("Decal") or v:IsA("Texture") then
                     v.Transparency = 1
                 elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
                     v.Lifetime = NumberRange.new(0)
                 elseif v:IsA("Explosion") then
                     v.BlastPressure = 1
-                    v.BlastRadius = 0
+                    v.BlastRadius = 1
                 elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
                     v.Enabled = false
                 elseif v:IsA("MeshPart") then
                     v.Material = "Plastic"
-                    v.Reflectance = 0
+                    v.Reflectance = 1
                     v.TextureID = 10385902758728957
                 end
             end
@@ -13906,12 +13906,12 @@ end)
     
     Misc:AddToggle("Remove Damage",function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
-			if v.Name == "DamageCounter" then   
+			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
 		end
 		for i,v in pairs(game.Workspace:GetDescendants()) do
-			if v.Name == "DamageCounter" then   
+			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
 		end
