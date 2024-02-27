@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.4)
+                        wait(a.length * 0.7)
                         a:Stop()
                     else
                         a:Play()
@@ -4009,7 +4009,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 1 + math.huge + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 90
-            CmrFwLib.activeController.focusStart = 1420503339.0980349
+            CmrFwLib.activeController.focusStart = 1920503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4018,7 +4018,7 @@ end
 end
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
-        if _G.FastAttack == true or _G.HyperSonic == true then
+        if _G.FastAttack == true then
             game.Players.LocalPlayer.Character.Stun.Value = 0
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
@@ -13911,13 +13911,13 @@ end)
     end)
     
     Misc:AddToggle("Remove Damage",function()
-		for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
-			if v.Name == "DmgCounter" then   
+		for i,v in pairs(game.ReplicatedStorage.Effect.Container:GetDescendants()) do
+			if v.Name == "DamageCounter" then   
 				v:Destroy()
 			end
 		end
-		for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
-			if v.Name == "DmgCounter" then   
+		for i,v in pairs(game.ReplicatedStorage.Effect.Container:GetDescendants()) do
+			if v.Name == "DamageCounter" then   
 				v:Destroy()
 			end
 		end
