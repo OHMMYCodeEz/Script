@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.2)
+                        wait(a.length * 0.1)
                         a:Stop()
                     else
                         a:Play()
@@ -4008,10 +4008,10 @@ for i = 1, 1 do
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 2 + 1 + 3 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 360
+            CmrFwLib.activeController.hitboxMagnitude = 90
             CmrFwLib.activeController.focusStart = 1742050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
-            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
+            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
 	    game.Players.LocalPlayer.Character.Stun.Value = 0
             game.Players.LocalPlayer.Character.Busy.Value = false
         end)
@@ -4208,7 +4208,7 @@ spawn(function()
 				       	    PosMon = v.HumanoidRootPart.CFrame
 			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
 			            AutoFarmNearestMagnet = false
-			            Fastattack = false
+			            Fastattack = true
 			        end
 			    end
 			end
@@ -4767,8 +4767,8 @@ spawn(function()
             game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
             game:GetService("ReplicatedStorage").Util.Sound:Destroy()
             game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
-            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()        
+       ---     game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
+        ---   game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()        
         end
     end)
 end)
@@ -4862,8 +4862,8 @@ end)
     PosX = value
     end)
 
-    PosY = 32
-    Main:AddSlider("Pos Y",0,50,32,function(value)
+    PosY = 28
+    Main:AddSlider("Pos Y",0,50,28,function(value)
     PosY = value
     end)
 
