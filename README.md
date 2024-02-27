@@ -4213,7 +4213,7 @@ spawn(function()
 				       	    PosMon = v.HumanoidRootPart.CFrame
 			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
 			            AutoFarmNearestMagnet = false
-			            Fastattack = true
+			            Fastattack = false
 			        end
 			    end
 			end
@@ -4243,7 +4243,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+1000
+							_G.MagnitudeAdd = _G.MagnitudeAdd+500
 							break
 						end
 					end
