@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.1)
+                        wait(a.length * 0.4)
                         a:Stop()
                     else
                         a:Play()
@@ -4007,9 +4007,9 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 1 + 3 + math.huge
+            CmrFwLib.activeController.increment = 2 + 1 + math.huge + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 90
-            CmrFwLib.activeController.focusStart = 17420503339.0980349
+            CmrFwLib.activeController.focusStart = 1420503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -13863,8 +13863,8 @@ Misc:AddButton("Kaitun Cap", function(value)
             t.WaterReflectance = 0
             t.WaterTransparency = 0
             l.GlobalShadows = false
-            l.FogEnd = 9e9
-            l.Brightness = 9e9
+            l.FogEnd = 0
+            l.Brightness = 0
             settings().Rendering.QualityLevel = "Level01"
             for i, v in pairs(g:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
@@ -13911,12 +13911,12 @@ end)
     end)
     
     Misc:AddToggle("Remove Damage",function()
-		for i,v in pairs(game.Workspace:GetDescendants()) do
+		for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
 			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
 		end
-		for i,v in pairs(game.Workspace:GetDescendants()) do
+		for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
 			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
@@ -13953,7 +13953,7 @@ end)
 	t.WaterReflectance = 0
 	t.WaterTransparency = 0
 	l.GlobalShadows = false
-	l.FogEnd = 9e9
+	l.FogEnd = 0
 	l.Brightness = 0
 	settings().Rendering.QualityLevel = "Level01"
 	for i, v in pairs(g:GetDescendants()) do
