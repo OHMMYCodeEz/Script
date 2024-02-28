@@ -13305,9 +13305,9 @@ end
 
 Misc:AddToggle("Graphic",false,function(v)
 			if v then
-				getgenv().mode = "Autumn" -- Choose from Summer and Autumn
+				getgenv().mode = "Summer" -- Choose from Summer and Autumn
 				local a = game.Lighting
-				a.Ambient = Color3.fromRGB(33, 33, 33)
+				a.Ambient = Color3.fromRGB(66, 66, 66)
 				a.Brightness = 0.3
 				a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
 				a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
@@ -13326,7 +13326,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				b.Threshold = 0.915
 				local c = Instance.new("ColorCorrectionEffect", a)
 				c.Name = 'ColorCorrectionEffect1_Graphic'
-				c.Brightness = 0.176
+				c.Brightness = 0.576
 				c.Contrast = 0.39
 				c.Enabled = true
 				c.Saturation = 0.2
@@ -13340,8 +13340,8 @@ Misc:AddToggle("Graphic",false,function(v)
 				d.Name =  'DepthOfFieldEffect_Graphic'
 				d.Enabled = true
 				d.FarIntensity = 0.077
-				d.FocusDistance = 21.54
-				d.InFocusRadius = 20.77
+				d.FocusDistance = 11.54
+				d.InFocusRadius = 10.77
 				d.NearIntensity = 0.277
 				local e = Instance.new("ColorCorrectionEffect", a)
 				e.Name = 'ColorCorrectionEffect2_Graphic'
@@ -13353,7 +13353,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				local e2 = Instance.new("ColorCorrectionEffect", a)
 				e2.Name = 'ColorCorrectionEffect3_Graphic'
 				e2.Brightness = 0.2
-				e2.Contrast = 0.45
+				e2.Contrast = 0.25
 				e2.Saturation = -0.1
 				e2.Enabled = true
 				e2.TintColor = Color3.fromRGB(255, 255, 255)
