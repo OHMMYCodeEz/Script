@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.01,0.01,0.01)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.7)
+                        wait(a.length * 0.5)
                         a:Stop()
                     else
                         a:Play()
@@ -4206,11 +4206,10 @@ spawn(function()
 			                HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
 			                v.HumanoidRootPart.CanCollide = false
 			                Fastattack = true
-		                        StartMagnet = true
 			                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
 						    game:GetService("VirtualUser"):CaptureController()
 				       	    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672), game.Workspace.CurrentCamera.CFrame)
-				       	    AutoFarmNearestMagnet = true
+				       	    StartMagnet = true
 				       	    PosMon = v.HumanoidRootPart.CFrame
 			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
 			            StartMagnet = false
