@@ -7379,7 +7379,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                wait(.2) 
+                wait(2) 
                 local targetModelNames = "PirateBrigade"
                 local models = workspace.Boats:GetChildren()
 
@@ -7387,7 +7387,7 @@ spawn(function()
                     local targetModel = workspace:FindFirstChild(targetModelName)
 
                     if targetModel then
-                        local speed = 12.7
+                        local speed = 14.5
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
                         local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
                         
