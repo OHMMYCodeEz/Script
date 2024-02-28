@@ -14146,7 +14146,6 @@ _G.Remove_Effect = true
 spawn(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
-	    wait(10)
             for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
                 if v.Name == "Death" then
                     v:Destroy() 
