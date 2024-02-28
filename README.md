@@ -7256,7 +7256,7 @@ wait(5)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "PirateGuardian"
+    [2] = "PirateBrigade"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -7287,7 +7287,7 @@ function two(gotoCFrame) --- Tween
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
-for _,v in next, workspace.Boats.PirateGuardian:GetDescendants() do
+for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -7299,7 +7299,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                for _, v in next, workspace.Boats.PirateGuardian:GetDescendants() do
+                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(.2) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -7317,7 +7317,7 @@ spawn(function()
                     {name = "Seabaest", variable = "AutoFarmSeabaest"},
                 }
 
-                for _, v in next, workspace.Boats.PirateGuardian:GetDescendants() do
+                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -7380,14 +7380,14 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(.2) 
-                local targetModelNames = "PirateGuardian"
+                local targetModelNames = "PirateBrigade"
                 local models = workspace.Boats:GetChildren()
 
                 for _, targetModelName in ipairs(targetModelNames) do
                     local targetModel = workspace:FindFirstChild(targetModelName)
 
                     if targetModel then
-                        local speed = 12.5
+                        local speed = 12.7
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
                         local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
                         
