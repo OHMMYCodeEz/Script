@@ -4727,8 +4727,8 @@ spawn(function()
 end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
-        if _G.FastAttack == true or _G.HyperSonic == true then
-            game.Players.LocalPlayer.Character.Stun.Value = 0
+        if _G.FastAttack == true then
+            --game.Players.LocalPlayer.Character.Stun.Value = 0
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
     end)
