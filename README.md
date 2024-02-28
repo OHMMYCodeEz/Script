@@ -4771,13 +4771,7 @@ spawn(function()
         if _G.RemoveHit == true then
             game:GetService("ReplicatedStorage").Effect.Container:Destroy()
             game:GetService("ReplicatedStorage").Util.Sound:Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
             game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-	        end
-              end
-             end
-           end
         end
     end)
 end)
