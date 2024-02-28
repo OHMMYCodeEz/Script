@@ -13863,25 +13863,25 @@ Misc:AddButton("Kaitun Cap", function(value)
             t.WaterReflectance = 0
             t.WaterTransparency = 0
             l.GlobalShadows = false
-            l.FogEnd = 0
+            l.FogEnd = 9e9
             l.Brightness = 0
             settings().Rendering.QualityLevel = "Level01"
             for i, v in pairs(g:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
                     v.Material = "Plastic"
-                    v.Reflectance = 1
+                    v.Reflectance = 0
                 elseif v:IsA("Decal") or v:IsA("Texture") then
                     v.Transparency = 1
                 elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
                     v.Lifetime = NumberRange.new(0)
                 elseif v:IsA("Explosion") then
-                    v.BlastPressure = 1
+                    v.BlastPressure = 2
                     v.BlastRadius = 1
                 elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
                     v.Enabled = false
                 elseif v:IsA("MeshPart") then
                     v.Material = "Plastic"
-                    v.Reflectance = 1
+                    v.Reflectance = 0
                     v.TextureID = 10385902758728957
                 end
             end
@@ -14143,5 +14143,15 @@ end)
 
 _G.Remove_Effect = true
 
+spawn(function()
+    game:GetService('RunService').Stepped:Connect(function()
+        if _G.Remove_Effect then
+            for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
+                if v.Name == "Death" then
+		game:GetService("ReplicatedStorage").Effect.Container.Death = false
+                    v:Destroy() 
+                end
+            end
+        end
     end)
 end)
