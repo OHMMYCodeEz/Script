@@ -3569,7 +3569,7 @@ end
     if Distance < 25 then
         Speed = 40
     elseif Distance < 50 then
-        Speed = 80
+        Speed = 60
     elseif Distance < 150 then
         Speed = 300
     elseif Distance < 250 then
@@ -3593,7 +3593,7 @@ end
         if Distance < 25 then
             Speed = 40
         elseif Distance < 50 then
-            Speed = 80
+            Speed = 60
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
@@ -3617,7 +3617,7 @@ end
         if Distance < 25 then
             Speed = 40
         elseif Distance < 50 then
-            Speed = 80
+            Speed = 60
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
@@ -3641,7 +3641,7 @@ end
         if Distance < 10 then
             Speed = 40
         elseif Distance < 25 then
-            Speed = 80
+            Speed = 60
         elseif Distance < 50 then
             Speed = 300
         elseif Distance < 150 then
@@ -3673,7 +3673,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 250 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 200 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
@@ -4002,7 +4002,7 @@ for i = 1, 1 do
     bladehit = cac
     if #bladehit > 0 then
         pcall(function()
-            CmrFwLib.activeController.timeToNextAttack = -9e9
+            CmrFwLib.activeController.timeToNextAttack = -2
             CmrFwLib.activeController.attacking = false
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
@@ -14144,6 +14144,8 @@ end)
 _G.Remove_Effect = true
 
 spawn(function()
+    while wait() do
+    pcall(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
             for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
