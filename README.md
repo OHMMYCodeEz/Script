@@ -13305,9 +13305,9 @@ end
 
 Misc:AddToggle("Graphic",false,function(v)
 			if v then
-				getgenv().mode = "Summer" -- Choose from Summer and Autumn
+				getgenv().mode = "Autumn" -- Choose from Summer and Autumn
 				local a = game.Lighting
-				a.Ambient = Color3.fromRGB(66, 66, 66)
+				a.Ambient = Color3.fromRGB(5, 5, 5)
 				a.Brightness = 0.3
 				a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
 				a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
@@ -13316,7 +13316,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				a.GlobalShadows = true
 				a.OutdoorAmbient = Color3.fromRGB(51, 54, 67)
 				a.ShadowSoftness = 0.04
-				a.GeographicLatitude = -15.525
+				a.GeographicLatitude = -5.525
 				a.ExposureCompensation = 0.75
 				local b = Instance.new("BloomEffect", a)
 				b.Name = "BloomEffect_Graphic"
@@ -13326,8 +13326,8 @@ Misc:AddToggle("Graphic",false,function(v)
 				b.Threshold = 0.915
 				local c = Instance.new("ColorCorrectionEffect", a)
 				c.Name = 'ColorCorrectionEffect1_Graphic'
-				c.Brightness = 0.576
-				c.Contrast = 0.39
+				c.Brightness = 0.076
+				c.Contrast = 0.19
 				c.Enabled = true
 				c.Saturation = 0.2
 				c.TintColor = Color3.fromRGB(217, 145, 57)
@@ -13957,18 +13957,18 @@ end)
 	l.GlobalShadows = false
 	l.FogEnd = 0
 	l.Brightness = 0
-	settings().Rendering.QualityLevel = "Level01"
+	settings().Rendering.QualityLevel = "Level03"
 	for i, v in pairs(g:GetDescendants()) do
 		if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 			v.Material = "Plastic"
 			v.Reflectance = 0
 		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-			v.Transparency = 1
+			v.Transparency = 2
 		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
 			v.Lifetime = NumberRange.new(0)
 		elseif v:IsA("Explosion") then
-			v.BlastPressure = 1
-			v.BlastRadius = 1
+			v.BlastPressure = 2
+			v.BlastRadius = 9
 		elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
 			v.Enabled = false
 		elseif v:IsA("MeshPart") then
