@@ -4007,7 +4007,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 2 + 1 + math.huge + math.huge
+            CmrFwLib.activeController.increment = 1 + 1 + math.huge + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 90
             CmrFwLib.activeController.focusStart = 1920503339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
@@ -14146,8 +14146,8 @@ _G.Remove_Effect = true
 spawn(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
-            for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
-                if v.Name == "Death" then
+            for i, v in pairs(game:GetService("ReplicatedStorage").Effect:GetChildren()) do
+                if v.Name == "Container" then
                     v:Destroy() 
                 end
             end
