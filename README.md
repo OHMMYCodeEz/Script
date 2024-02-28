@@ -1919,7 +1919,7 @@ return uitab
 end
 ---- Farm Lavle Ui
 
-function intiUzakiHub() 
+function intiAppleHub() 
 _G.antiscan = true
 getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync
 getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
