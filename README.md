@@ -4209,10 +4209,10 @@ spawn(function()
 			                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
 						    game:GetService("VirtualUser"):CaptureController()
 				       	    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672), game.Workspace.CurrentCamera.CFrame)
-				       	    StartMagnet = true
+				       	    AutoFarmNearestMagnet = true
 				       	    PosMon = v.HumanoidRootPart.CFrame
 			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
-			            StartMagnet = false
+			            AutoFarmNearestMagnet = false
 			            Fastattack = false
 			        end
 			    end
