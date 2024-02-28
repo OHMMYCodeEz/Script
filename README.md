@@ -13961,19 +13961,19 @@ end)
 	for i, v in pairs(g:GetDescendants()) do
 		if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 0
+			v.Reflectance = 1.7
 		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-			v.Transparency = 2
+			v.Transparency = 0.7
 		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
 			v.Lifetime = NumberRange.new(0)
 		elseif v:IsA("Explosion") then
-			v.BlastPressure = 2
-			v.BlastRadius = 9
+			v.BlastPressure = 0.7
+			v.BlastRadius = 0
 		elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
 			v.Enabled = false
 		elseif v:IsA("MeshPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 0
+			v.Reflectance = 1
 			v.TextureID = 10385902758728957
 		end
 	end
