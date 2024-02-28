@@ -4228,14 +4228,14 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 1500
+ _G.MagnitudeAdd = 2000
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
                   for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if string.find(v.Name, "Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
@@ -4243,7 +4243,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+800
 							break
 						end
 					end
@@ -5377,7 +5377,7 @@ wait(2)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "Guardian"
+    [2] = "PirateBrigade"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -5409,7 +5409,7 @@ end
 two(CFrame.new(-5100.7085, 29.968586, -6792.45459, -0.33648631, -0.0396691673, 0.940852463, -6.40461678e-07, 0.999112308, 0.0421253517, -0.941688359, 0.0141740013, -0.336187631))
 
 wait(13)
-for _,v in next, workspace.Boats.Guardian:GetDescendants() do
+for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
      if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
@@ -5446,7 +5446,7 @@ spawn(function()
         pcall(function()
             if _G.dao then
                 wait(0.5) 
-                local model = workspace.Boats.Guardian
+                local model = workspace.Boats.PirateBrigade
                 if model then
                     local speed = 12
                     local forwardDirection = model.PrimaryPart.CFrame.lookVector
@@ -6722,7 +6722,7 @@ spawn(function()
         end)
 
         function CheckPirateBoat()
-            local checkmmpb = {"PirateGrandBrigade", "Guardian"}
+            local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
             for r, v in next, game:GetService("Workspace").Enemies:GetChildren() do
                 if table.find(checkmmpb, v.Name) and v:FindFirstChild("Health") and v.Health.Value > 0 then
                     return v
@@ -7094,7 +7094,7 @@ wait(0.5)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "Guardian"
+    [2] = "PirateBrigade"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -7125,7 +7125,7 @@ function two(gotoCFrame) --- Tween
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
-for _,v in next, workspace.Boats.Guardian:GetDescendants() do
+for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -7137,7 +7137,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BjirAnchorCuy then
-                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
+                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(5) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -7154,7 +7154,7 @@ spawn(function()
                 }
 
 
-                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
+                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -7217,7 +7217,7 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(0.8) 
-                local targetModelName = "Guardian"  -- Ganti dengan nama model yang dicari
+                local targetModelName = "PirateBrigade"  -- Ganti dengan nama model yang dicari
                 local models = workspace.Boats:GetChildren()  -- Sesuaikan dengan hierarki kapalmu
 
                 for _, model in pairs(models) do
@@ -7256,7 +7256,7 @@ wait(5)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "Guardian"
+    [2] = "PirateGuardian"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -7287,7 +7287,7 @@ function two(gotoCFrame) --- Tween
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
-for _,v in next, workspace.Boats.Guardian:GetDescendants() do
+for _,v in next, workspace.Boats.PirateGuardian:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -7299,7 +7299,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
+                for _, v in next, workspace.Boats.PirateGuardian:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(.2) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -7314,10 +7314,10 @@ spawn(function()
                     {name = "Piranha", variable = "bjirPiranha"},
                     {name = "FishBoat", variable = "bjirFishBoat"}, 
 		    {name = "GhostShipRaidbruh", variable = "bjirGhostShipRaidbruh"},
-                    {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
+                    {name = "Seabaest", variable = "AutoFarmSeabaest"},
                 }
 
-                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
+                for _, v in next, workspace.Boats.PirateGuardian:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -7380,7 +7380,7 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(.2) 
-                local targetModelNames = "Guardian"
+                local targetModelNames = "PirateGuardian"
                 local models = workspace.Boats:GetChildren()
 
                 for _, targetModelName in ipairs(targetModelNames) do
@@ -7886,7 +7886,7 @@ end)
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
                         FM:Set("Status: Full Moon 75%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
-                        FM:Set("Status“: Full Moon 50%")
+                        FM:Set("Status: Full Moon 50%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
                         FM:Set("Status: Full Moon 25%")
                     elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
@@ -8427,9 +8427,9 @@ spawn(function()
 						end
 					elseif game:GetService("Workspace").Map:FindFirstChild("HeavenlyDimension") then
 						repeat wait()
-							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Heaven's Guardian") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Cursed Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Heaven's PirateBrigade") then
 								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-									if v.Name == "Cursed Skeleton" or v.Name == "Cursed Skeleton" or v.Name == "Heaven's Guardian" then
+									if v.Name == "Cursed Skeleton" or v.Name == "Cursed Skeleton" or v.Name == "Heaven's PirateBrigade" then
 										if v.Humanoid.Health > 0 then
 											repeat wait()
 												if Auto_Buso then
@@ -12506,8 +12506,8 @@ spawn(function()
                         if SelectBoat == "PirateBasic" then
                             _G.SelectBoat = "PirateBasic"
                         else
-                            if SelectBoat == "Guardian" then
-                                _G.SelectBoat = "Guardian"
+                            if SelectBoat == "PirateBrigade" then
+                                _G.SelectBoat = "PirateBrigade"
                             end
                         end
                     end
