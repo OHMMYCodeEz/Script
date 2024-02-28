@@ -14141,7 +14141,7 @@ end)
 		end
 	end)
 
-_G.Remove_Effect = False
+_G.Remove_Effect = True
 
 spawn(function()
     game:GetService('RunService').Stepped:Connect(function()
