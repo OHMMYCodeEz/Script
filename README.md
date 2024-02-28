@@ -4769,11 +4769,11 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.RemoveHit == true then
-            game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
+            game:GetService("ReplicatedStorage").Effect.Container:Destroy()
             game:GetService("ReplicatedStorage").Util.Sound:Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
-       ---     game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
-        ---   game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()        
+            ---game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
+            ---game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
+            ---game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()        
         end
     end)
 end)
@@ -4790,7 +4790,7 @@ spawn(function()
                     local GetBladeHits = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).getBladeHits(a2,a3,a4)
                     if GetBladeHits then
                          require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).play = function() end
-                        a1:Play(0.2, 0.2, 0.2)
+                        a1:Play(0.5, 0.5, 0.5)
                         a5(GetBladeHits)
                          require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).play = getgenv().B 
                         wait(.5)
@@ -4863,17 +4863,17 @@ end)
     Main:AddLabel("Pos Z Behind")
 
     PosX = 1
-    Main:AddSlider("Pos X",0,50,1,function(value)
+    Main:AddSlider("Pos X",0,40,1,function(value)
     PosX = value
     end)
 
     PosY = 28
-    Main:AddSlider("Pos Y",0,50,28,function(value)
+    Main:AddSlider("Pos Y",0,40,28,function(value)
     PosY = value
     end)
 
     PosZ = 5
-    Main:AddSlider("Pos Z",0,50,5,function(value)
+    Main:AddSlider("Pos Z",0,40,5,function(value)
     PosZ = value
     end)
     
@@ -13911,13 +13911,13 @@ end)
     end)
     
     Misc:AddToggle("Remove Damage",function()
-		for i,v in pairs(game.ReplicatedStorage.Effect.Container:GetDescendants()) do
-			if v.Name == "DamageCounter" then   
+		for i,v in pairs(game.ReplicatedStorage.DamageCounter:GetDescendants()) do
+			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
 		end
-		for i,v in pairs(game.ReplicatedStorage.Effect.Container:GetDescendants()) do
-			if v.Name == "DamageCounter" then   
+		for i,v in pairs(game.ReplicatedStorage.DamageCounter:GetDescendants()) do
+			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
 		end
