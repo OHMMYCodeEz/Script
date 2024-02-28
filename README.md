@@ -1919,7 +1919,7 @@ return uitab
 end
 ---- Farm Lavle Ui
 
-function intiAppleHub() 
+function intiUzakiHub() 
 _G.antiscan = true
 getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync
 getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
@@ -14144,10 +14144,9 @@ end)
 _G.Remove_Effect = true
 
 spawn(function()
-    while wait() do
-    pcall(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
+	    wait(10)
             for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
                 if v.Name == "Death" then
                     v:Destroy() 
