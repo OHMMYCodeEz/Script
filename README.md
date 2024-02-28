@@ -14151,10 +14151,8 @@ spawn(function()
             for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
                 if v.Name == "Death" then
                     v:Destroy()
-		    wait(.5)
                 end
             end
         end
     end)
-end)
 end)
