@@ -4634,7 +4634,7 @@ Main:AddToggle("Bring Mob",true,function(Mag)
                     CheckQuest()
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                            v.HumanoidRootPart.Size = Vector3.new(50,60,50)
+                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.CFrame = PosMon
                             v.Humanoid:ChangeState(14)
                             v.HumanoidRootPart.CanCollide = false
@@ -4670,11 +4670,11 @@ spawn(function()
         if _G.BringMode then
             pcall(function()
                 if _G.BringMode == "Low" then
-                    _G.BringMode = 150
+                    _G.BringMode = 200
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 250
-                elseif _G.BringMode == "Super Bring" then
                     _G.BringMode = 300
+                elseif _G.BringMode == "Super Bring" then
+                    _G.BringMode = 370
                 end
             end)
         end
@@ -5377,7 +5377,7 @@ wait(2)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "PirateBrigade"
+    [2] = "Guardian"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -5409,7 +5409,7 @@ end
 two(CFrame.new(-5100.7085, 29.968586, -6792.45459, -0.33648631, -0.0396691673, 0.940852463, -6.40461678e-07, 0.999112308, 0.0421253517, -0.941688359, 0.0141740013, -0.336187631))
 
 wait(13)
-for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+for _,v in next, workspace.Boats.Guardian:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
      if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
@@ -5446,7 +5446,7 @@ spawn(function()
         pcall(function()
             if _G.dao then
                 wait(0.5) 
-                local model = workspace.Boats.PirateBrigade
+                local model = workspace.Boats.Guardian
                 if model then
                     local speed = 12
                     local forwardDirection = model.PrimaryPart.CFrame.lookVector
@@ -6722,7 +6722,7 @@ spawn(function()
         end)
 
         function CheckPirateBoat()
-            local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
+            local checkmmpb = {"PirateGrandBrigade", "Guardian"}
             for r, v in next, game:GetService("Workspace").Enemies:GetChildren() do
                 if table.find(checkmmpb, v.Name) and v:FindFirstChild("Health") and v.Health.Value > 0 then
                     return v
@@ -7094,7 +7094,7 @@ wait(0.5)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "PirateBrigade"
+    [2] = "Guardian"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -7125,7 +7125,7 @@ function two(gotoCFrame) --- Tween
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
-for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+for _,v in next, workspace.Boats.Guardian:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -7137,7 +7137,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BjirAnchorCuy then
-                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(5) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -7154,7 +7154,7 @@ spawn(function()
                 }
 
 
-                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -7217,7 +7217,7 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(0.8) 
-                local targetModelName = "PirateBrigade"  -- Ganti dengan nama model yang dicari
+                local targetModelName = "Guardian"  -- Ganti dengan nama model yang dicari
                 local models = workspace.Boats:GetChildren()  -- Sesuaikan dengan hierarki kapalmu
 
                 for _, model in pairs(models) do
@@ -7256,7 +7256,7 @@ wait(5)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "PirateBrigade"
+    [2] = "Guardian"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -7287,7 +7287,7 @@ function two(gotoCFrame) --- Tween
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
-for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+for _,v in next, workspace.Boats.Guardian:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -7299,7 +7299,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(.2) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -7317,7 +7317,7 @@ spawn(function()
                     {name = "AutoFarmSeabaest", variable = "AutoFarmSeabaest"},
                 }
 
-                for _, v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+                for _, v in next, workspace.Boats.Guardian:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -7380,7 +7380,7 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(.2) 
-                local targetModelNames = "PirateBrigade"
+                local targetModelNames = "Guardian"
                 local models = workspace.Boats:GetChildren()
 
                 for _, targetModelName in ipairs(targetModelNames) do
@@ -12506,8 +12506,8 @@ spawn(function()
                         if SelectBoat == "PirateBasic" then
                             _G.SelectBoat = "PirateBasic"
                         else
-                            if SelectBoat == "PirateBrigade" then
-                                _G.SelectBoat = "PirateBrigade"
+                            if SelectBoat == "Guardian" then
+                                _G.SelectBoat = "Guardian"
                             end
                         end
                     end
