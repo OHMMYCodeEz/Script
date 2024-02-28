@@ -4206,14 +4206,14 @@ spawn(function()
 			                HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
 			                v.HumanoidRootPart.CanCollide = false
 			                Fastattack = true
-		                        AutoFarmNearestMagnet = true
+		                        StartMagnet = true
 			                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
 						    game:GetService("VirtualUser"):CaptureController()
 				       	    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672), game.Workspace.CurrentCamera.CFrame)
 				       	    AutoFarmNearestMagnet = true
 				       	    PosMon = v.HumanoidRootPart.CFrame
 			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
-			            AutoFarmNearestMagnet = false
+			            StartMagnet = false
 			            Fastattack = false
 			        end
 			    end
@@ -14147,7 +14147,7 @@ _G.Remove_Effect = True
 spawn(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
-            for i, v in pairs(game.ReplicatedStorage.Effect.Container:GetChildren()) do
+            for i, v in pairs(GetService:"ReplicatedStorage".Effect.Container:GetChildren()) do
                 if v.Name == "Death" then
                     v:Destroy() 
                 end
