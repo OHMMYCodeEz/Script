@@ -13955,15 +13955,15 @@ end)
 	t.WaterReflectance = 0
 	t.WaterTransparency = 0
 	l.GlobalShadows = false
-	l.FogEnd = 9e9
-	l.Brightness = 0.7
+	l.FogEnd = -9e9
+	l.Brightness = 0.1
 	settings().Rendering.QualityLevel = "Level01"
 	for i, v in pairs(g:GetDescendants()) do
 		if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 10.7
+			v.Reflectance = 0
 		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-			v.Transparency = 0.7
+			v.Transparency = 30.7
 		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
 			v.Lifetime = NumberRange.new(0)
 		elseif v:IsA("Explosion") then
@@ -13973,7 +13973,7 @@ end)
 			v.Enabled = false
 		elseif v:IsA("MeshPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 20.9
+			v.Reflectance = 0.7
 			v.TextureID = 10385902758728957
 		end
 	end
