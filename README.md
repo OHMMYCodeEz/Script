@@ -3958,7 +3958,7 @@ spawn(function()
                 if Hits then
                     if _G.FastAttack or _G.HyperSonic then
                         STOP.play = function() end
-                        a:Play(0.1,0.1,0.1)
+                        a:Play(0.2,0.2,0.2)
                         func(Hits)
                         STOP.play = shared.cpc
                         wait(a.length * 0.5)
@@ -4670,9 +4670,9 @@ spawn(function()
         if _G.BringMode then
             pcall(function()
                 if _G.BringMode == "Low" then
-                    _G.BringMode = 180
+                    _G.BringMode = 200
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 260
+                    _G.BringMode = 270
                 elseif _G.BringMode == "Super Bring" then
                     _G.BringMode = 350
                 end
