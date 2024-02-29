@@ -4007,7 +4007,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.blocking = false
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
-            CmrFwLib.activeController.increment = 1 + math.huge + math.huge
+            CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 60
             CmrFwLib.activeController.focusStart = 142050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
@@ -4672,7 +4672,7 @@ spawn(function()
                 if _G.BringMode == "Low" then
                     _G.BringMode = 200
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 270
+                    _G.BringMode = 250
                 elseif _G.BringMode == "Super Bring" then
                     _G.BringMode = 350
                 end
