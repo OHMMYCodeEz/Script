@@ -13974,13 +13974,13 @@ end)
 			v.Enabled = false
 		elseif v:IsA("MeshPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 0.7
+			v.Reflectance = 0
 			v.TextureID = 10385902758728957
 		end
 	end
 	for i, e in pairs(l:GetChildren()) do
 		if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
-			e.Enabled = true
+			e.Enabled = false
 		end
 	end
     end)
