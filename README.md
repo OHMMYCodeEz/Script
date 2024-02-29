@@ -13963,17 +13963,17 @@ end)
 			v.Material = "Plastic"
 			v.Reflectance = 0
 		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-			v.Transparency = 30.7
+			v.Transparency = 0.7
 		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
 			v.Lifetime = NumberRange.new(0)
 		elseif v:IsA("Explosion") then
-			v.BlastPressure = 0.4
-			v.BlastRadius = 0.2
+			v.BlastPressure = 0.7
+			v.BlastRadius = 0
 		elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
 			v.Enabled = false
 		elseif v:IsA("MeshPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 0.7
+			v.Reflectance = 0.3
 			v.TextureID = 10385902758728957
 		end
 	end
