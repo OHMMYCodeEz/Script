@@ -14121,11 +14121,11 @@ end)
     spawn(function()
         while wait() do
             if sethiddenproperty then
-                sethiddenproperty(game.Players.LocalBoats,"SimulationRadius",100)
+                sethiddenproperty(game.Players.LocalBoats,"SimulationRadius",0)
             end
             if setscriptable then
                 setscriptable(game.Players.LocalBoats, "SimulationRadius", true)
-                game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge, math.huge * math.huge * 0 / 0 * 0 / 0 * 0 / 0 * 0 / 0 * 0 / 0
+                game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge, math.huge * math.huge * 0 / 0 * 0 
             end
         end
     end)
