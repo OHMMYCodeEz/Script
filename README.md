@@ -7390,6 +7390,7 @@ spawn(function()
 
                     if targetModel then
                         local speed = 15.5
+			local noclip = true
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
                         local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
                         
