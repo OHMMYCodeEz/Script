@@ -13309,7 +13309,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				getgenv().mode = "Autumn" -- Choose from Summer and Autumn
 				local a = game.Lighting
 				a.Ambient = Color3.fromRGB(5, 5, 5)
-				a.Brightness = 0.7
+				a.Brightness = 0.3
 				a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
 				a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
 				a.EnvironmentDiffuseScale = 0.105
@@ -13374,7 +13374,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				a.GlobalShadows = false
 				a.OutdoorAmbient = Color3.fromRGB(127, 127, 127)
 				a.ShadowSoftness = 0
-				a.GeographicLatitude = 99
+				a.GeographicLatitude = 66
 				a.ExposureCompensation = 0.2
 				game:GetService("Lighting")["BloomEffect_Graphic"]:Destroy()
 				game:GetService("Lighting")["ColorCorrectionEffect1_Graphic"]:Destroy()
@@ -13866,7 +13866,7 @@ Misc:AddButton("Kaitun Cap", function(value)
             t.WaterReflectance = 0
             t.WaterTransparency = 0
             l.GlobalShadows = false
-            l.FogEnd = 9e9
+            l.FogEnd = 0
             l.Brightness = 0
             settings().Rendering.QualityLevel = "Level01"
             for i, v in pairs(g:GetDescendants()) do
@@ -13874,12 +13874,12 @@ Misc:AddButton("Kaitun Cap", function(value)
                     v.Material = "Plastic"
                     v.Reflectance = 0
                 elseif v:IsA("Decal") or v:IsA("Texture") then
-                    v.Transparency = 1
+                    v.Transparency = 0.7
                 elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
                     v.Lifetime = NumberRange.new(0)
                 elseif v:IsA("Explosion") then
-                    v.BlastPressure = 2
-                    v.BlastRadius = 1
+                    v.BlastPressure = 0.7
+                    v.BlastRadius = 0
                 elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
                     v.Enabled = false
                 elseif v:IsA("MeshPart") then
@@ -13895,7 +13895,7 @@ Misc:AddButton("Kaitun Cap", function(value)
             end
             for i, v in pairs(game:GetService("Workspace").Camera:GetDescendants()) do
                 if v.Name == ("Water;") then
-                    v.Transparency = 1
+                    v.Transparency = 0.7
                     v.Material = "Plastic"
                 end
             end
