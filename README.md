@@ -7251,7 +7251,7 @@ end)
 
 if _G.BiirTrax then
 
---game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
+game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
 --game.Players.LocalPlayer.Character.Head:Destroy()
 --game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
 wait(3) 
@@ -14121,10 +14121,10 @@ end)
     spawn(function()
         while wait() do
             if sethiddenproperty then
-                sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",100)
+                sethiddenproperty(game.Players.LocalBoats,"SimulationRadius",100)
             end
             if setscriptable then
-                setscriptable(game.Players.LocalPlayer, "SimulationRadius", true)
+                setscriptable(game.Players.LocalBoats, "SimulationRadius", true)
                 game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge, math.huge * math.huge * 0 / 0 * 0 / 0 * 0 / 0 * 0 / 0 * 0 / 0
             end
         end
