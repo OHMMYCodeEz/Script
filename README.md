@@ -4644,7 +4644,7 @@ Main:AddToggle("Bring Mob",true,function(Mag)
                             end
                             sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
                         elseif _G.AutoFarm and StartMagnet and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.BringMode then
-                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                            v.HumanoidRootPart.Size = Vector3.new(50,60,50)
                             v.HumanoidRootPart.CFrame = PosMon
                             v.Humanoid:ChangeState(14)
                             v.HumanoidRootPart.CanCollide = false
@@ -4670,11 +4670,11 @@ spawn(function()
         if _G.BringMode then
             pcall(function()
                 if _G.BringMode == "Low" then
-                    _G.BringMode = 150
+                    _G.BringMode = 180
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 250
+                    _G.BringMode = 280
                 elseif _G.BringMode == "Super Bring" then
-                    _G.BringMode = 300
+                    _G.BringMode = 320
                 end
             end)
         end
