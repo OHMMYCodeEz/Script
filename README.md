@@ -13308,7 +13308,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				getgenv().mode = "Autumn" -- Choose from Summer and Autumn
 				local a = game.Lighting
 				a.Ambient = Color3.fromRGB(5, 5, 5)
-				a.Brightness = 0.3
+				a.Brightness = 0.7
 				a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
 				a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
 				a.EnvironmentDiffuseScale = 0.105
@@ -13316,17 +13316,17 @@ Misc:AddToggle("Graphic",false,function(v)
 				a.GlobalShadows = true
 				a.OutdoorAmbient = Color3.fromRGB(51, 54, 67)
 				a.ShadowSoftness = 0.01
-				a.GeographicLatitude = -50.525
+				a.GeographicLatitude = -1.525
 				a.ExposureCompensation = 0.75
 				local b = Instance.new("BloomEffect", a)
 				b.Name = "BloomEffect_Graphic"
 				b.Enabled = true
 				b.Intensity = 0.04
-				b.Size = 1000
+				b.Size = 100
 				b.Threshold = 0.415
 				local c = Instance.new("ColorCorrectionEffect", a)
 				c.Name = 'ColorCorrectionEffect1_Graphic'
-				c.Brightness = 0.036
+				c.Brightness = 0.076
 				c.Contrast = 0.19
 				c.Enabled = true
 				c.Saturation = 0.2
@@ -13340,8 +13340,8 @@ Misc:AddToggle("Graphic",false,function(v)
 				d.Name =  'DepthOfFieldEffect_Graphic'
 				d.Enabled = true
 				d.FarIntensity = 0.077
-				d.FocusDistance = 31.54
-				d.InFocusRadius = 30.77
+				d.FocusDistance = 5.54
+				d.InFocusRadius = 8.77
 				d.NearIntensity = 0.277
 				local e = Instance.new("ColorCorrectionEffect", a)
 				e.Name = 'ColorCorrectionEffect2_Graphic'
@@ -13373,7 +13373,7 @@ Misc:AddToggle("Graphic",false,function(v)
 				a.GlobalShadows = false
 				a.OutdoorAmbient = Color3.fromRGB(127, 127, 127)
 				a.ShadowSoftness = 0
-				a.GeographicLatitude = 33
+				a.GeographicLatitude = 99
 				a.ExposureCompensation = 0.2
 				game:GetService("Lighting")["BloomEffect_Graphic"]:Destroy()
 				game:GetService("Lighting")["ColorCorrectionEffect1_Graphic"]:Destroy()
