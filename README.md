@@ -4228,7 +4228,7 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 2000
+ _G.MagnitudeAdd = 4000
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
@@ -4243,7 +4243,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+800
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1800
 							break
 						end
 					end
