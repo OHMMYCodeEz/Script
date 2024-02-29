@@ -13913,12 +13913,12 @@ end)
     end)
     
     Misc:AddToggle("Remove Damage",function()
-		for i,v in pairs(game.ReplicatedStorage.DamageCounter:GetDescendants()) do
+		for i,v in pairs(game.GetService("ReplicatedStorage").DamageCounter:GetDescendants()) do
 			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
 		end
-		for i,v in pairs(game.ReplicatedStorage.DamageCounter:GetDescendants()) do
+		for i,v in pairs(game.GetService("ReplicatedStorage").DamageCounter:GetDescendants()) do
 			if v.Name == "DmgCounter" then   
 				v:Destroy()
 			end
@@ -13955,31 +13955,31 @@ end)
 	t.WaterReflectance = 0
 	t.WaterTransparency = 0
 	l.GlobalShadows = false
-	l.FogEnd = 9e9
-	l.Brightness = 0.057
+	l.FogEnd = 0
+	l.Brightness = 0
 	settings().Rendering.QualityLevel = "Level01"
 	for i, v in pairs(g:GetDescendants()) do
 		if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 			v.Material = "Plastic"
 			v.Reflectance = 0
 		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-			v.Transparency = 0.3
+			v.Transparency = 0.2
 		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
 			v.Lifetime = NumberRange.new(0)
 		elseif v:IsA("Explosion") then
-			v.BlastPressure = 0.3
+			v.BlastPressure = 0.2
 			v.BlastRadius = 0
 		elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
 			v.Enabled = false
 		elseif v:IsA("MeshPart") then
 			v.Material = "Plastic"
-			v.Reflectance = 0.3
+			v.Reflectance = 0.2
 			v.TextureID = 10385902758728957
 		end
 	end
 	for i, e in pairs(l:GetChildren()) do
 		if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
-			e.Enabled = false
+			e.Enabled = true
 		end
 	end
     end)
