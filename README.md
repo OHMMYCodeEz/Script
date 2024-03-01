@@ -4670,9 +4670,9 @@ spawn(function()
         if _G.BringMode then
             pcall(function()
                 if _G.BringMode == "Low" then
-                    _G.BringMode = 200
+                    _G.BringMode = 250
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 240
+                    _G.BringMode = 300
                 elseif _G.BringMode == "Super Bring" then
                     _G.BringMode = 350
                 end
