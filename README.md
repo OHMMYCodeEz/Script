@@ -3567,9 +3567,9 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 40
-    elseif Distance < 50 then
         Speed = 60
+    elseif Distance < 50 then
+        Speed = 100
     elseif Distance < 150 then
         Speed = 300
     elseif Distance < 250 then
@@ -3591,9 +3591,9 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 40
-        elseif Distance < 50 then
             Speed = 60
+        elseif Distance < 50 then
+            Speed = 100
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
@@ -3615,9 +3615,9 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 40
-        elseif Distance < 50 then
             Speed = 60
+        elseif Distance < 50 then
+            Speed = 100
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
@@ -3639,9 +3639,9 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 40
-        elseif Distance < 25 then
             Speed = 60
+        elseif Distance < 25 then
+            Speed = 100
         elseif Distance < 50 then
             Speed = 300
         elseif Distance < 150 then
