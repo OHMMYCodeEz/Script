@@ -4394,7 +4394,7 @@ end)
                                     end
                                 else
                                     MagnetDought = false
-                                    ---HyperCahaya(CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375))
+                                    HyperCahaya(CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375))
                                     if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
                                         HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                     else
@@ -4672,7 +4672,7 @@ spawn(function()
                 if _G.BringMode == "Low" then
                     _G.BringMode = 200
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 250
+                    _G.BringMode = 255
                 elseif _G.BringMode == "Super Bring" then
                     _G.BringMode = 350
                 end
