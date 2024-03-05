@@ -3958,7 +3958,7 @@ spawn(function()
                 if Hits then
                     if _G.FastAttack or _G.HyperSonic then
                         STOP.play = function() end
-                        a:Play(0.4,0.4,0.4)
+                        a:Play(0.6,0.6,0.6)
                         func(Hits)
                         STOP.play = shared.cpc
                         wait(a.length * 0.5)
@@ -4008,8 +4008,8 @@ for i = 1, 1 do
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 60
-            CmrFwLib.activeController.focusStart = 142050339.0980349
+            CmrFwLib.activeController.hitboxMagnitude = 90
+            CmrFwLib.activeController.focusStart = 12050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
