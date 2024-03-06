@@ -4008,7 +4008,7 @@ for i = 1, 1 do
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 90
+            CmrFwLib.activeController.hitboxMagnitude = 50
             CmrFwLib.activeController.focusStart = 12050339.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
@@ -4235,7 +4235,7 @@ spawn(function()
                   for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if string.find(v.Name, "Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 550+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
