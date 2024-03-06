@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.6,0.6,0.6)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.5)
+                        wait(a.length * 0.3)
                         a:Stop()
                     else
                         a:Play()
@@ -4228,7 +4228,7 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 1000
+ _G.MagnitudeAdd = 0
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
@@ -4243,7 +4243,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+500
 							break
 						end
 					end
@@ -4355,7 +4355,7 @@ end)
                                         AutoHaki()
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
+                                        v.Humanoid.WalkSpeed = 30
                                         v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                         HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
                                         game:GetService("VirtualUser"):CaptureController()
