@@ -4376,7 +4376,7 @@ end)
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                         if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
                                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                                repeat task.wait(0.5)
+                                                repeat task.wait()
                                                     AutoHaki()
                                                     EquipWeapon(_G.SelectWeapon)
                                                     v.HumanoidRootPart.CanCollide = false
@@ -4672,9 +4672,9 @@ spawn(function()
                 if _G.BringMode == "Low" then
                     _G.BringMode = 200
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 255
+                    _G.BringMode = 300
                 elseif _G.BringMode == "Super Bring" then
-                    _G.BringMode = 350
+                    _G.BringMode = 380
                 end
             end)
         end
