@@ -4019,7 +4019,7 @@ end
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.FastAttack == true then
-            game.Players.LocalPlayer.Character.Stun.Value = 50
+            game.Players.LocalPlayer.Character.Stun.Value = false
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
     end)
