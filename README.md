@@ -3958,10 +3958,10 @@ spawn(function()
                 if Hits then
                     if _G.FastAttack or _G.HyperSonic then
                         STOP.play = function() end
-                        a:Play(0.6,0.6,0.6)
+                        a:Play(0.5,0.5,0.5)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.2)
+                        wait(a.length * 0.6)
                         a:Stop()
                     else
                         a:Play()
@@ -4019,7 +4019,7 @@ end
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.FastAttack == true then
-            game.Players.LocalPlayer.Character.Stun.Value = false
+            game.Players.LocalPlayer.Character.Stun.Value = 0
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
     end)
@@ -4398,6 +4398,7 @@ end)
                                     if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
                                         HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                     else
+				    task.wait(.5)
                                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
                                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                         else
@@ -4672,9 +4673,9 @@ spawn(function()
                 if _G.BringMode == "Low" then
                     _G.BringMode = 200
                 elseif _G.BringMode == "Normal" then
-                    _G.BringMode = 300
+                    _G.BringMode = 250
                 elseif _G.BringMode == "Super Bring" then
-                    _G.BringMode = 380
+                    _G.BringMode = 300
                 end
             end)
         end
