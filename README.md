@@ -4398,13 +4398,15 @@ end)
                                     if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
                                         HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                     else
-				    task.wait(.5)
+				    task.wait(5)
                                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
                                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                         else
+					task.wait(5)
                                             if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
                                                 HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                             else
+					    task.wait(5)
                                                 if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
                                                     HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                                 end
