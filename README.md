@@ -3567,13 +3567,13 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 300
+        Speed = 350
     elseif Distance < 50 then
-        Speed = 300
+        Speed = 350
     elseif Distance < 150 then
-        Speed = 300
+        Speed = 350
     elseif Distance < 250 then
-        Speed = 400
+        Speed = 350
     elseif Distance < 500 then
         Speed = 300
     elseif Distance < 750 then
@@ -3591,13 +3591,13 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 50 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 150 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 250 then
-            Speed = 400
+            Speed = 350
         elseif Distance < 500 then
             Speed = 300
         elseif Distance < 750 then
@@ -3615,13 +3615,13 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 50 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 150 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 250 then
-            Speed = 400
+            Speed = 350
         elseif Distance < 500 then
             Speed = 300
         elseif Distance < 750 then
@@ -3639,15 +3639,15 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 25 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 50 then
-            Speed = 300
+            Speed = 350
         elseif Distance < 150 then
             Speed = 350
         elseif Distance < 250 then
-            Speed = 400
+            Speed = 350
         elseif Distance < 500 then
             Speed = 300
         elseif Distance < 750 then
@@ -3958,10 +3958,10 @@ spawn(function()
                 if Hits then
                     if _G.FastAttack or _G.HyperSonic then
                         STOP.play = function() end
-                        a:Play(0.5,0.5,0.5)
+                        a:Play(0.8,0.8,0.8)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.6)
+                        wait(a.length * 0.4)
                         a:Stop()
                     else
                         a:Play()
@@ -4009,7 +4009,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 50
-            CmrFwLib.activeController.focusStart = 12050339.0980349
+            CmrFwLib.activeController.focusStart = 12050339.0780349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4019,7 +4019,7 @@ end
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.FastAttack == true then
-            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Stun.Value = 50
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
     end)
@@ -11603,7 +11603,7 @@ spawn(function()
             for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                     pcall(function()
-                        repeat wait(.1)
+                        repeat wait(.01)
                             v.Humanoid.Health = 0
                             v.HumanoidRootPart.CanCollide = false
                             sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
@@ -13914,14 +13914,14 @@ end)
     end
     end)
     
-    Misc:AddToggle("Remove Damage",function()
-		for i,v in pairs(game.GetService("ReplicatedStorage").DamageCounter:GetDescendants()) do
-			if v.Name == "DmgCounter" then   
+    Misc:AddToggle("Remove Damage",true,function()
+		for i,v in pairs(game.GetService("ReplicatedStorage").DamageCounter.DmgCounter:GetDescendants()) do
+			if v.Name == "Text" then   
 				v:Destroy()
 			end
 		end
-		for i,v in pairs(game.GetService("ReplicatedStorage").DamageCounter:GetDescendants()) do
-			if v.Name == "DmgCounter" then   
+		for i,v in pairs(game.GetService("ReplicatedStorage").DamageCounter.DmgCounter:GetDescendants()) do
+			if v.Name == "Text" then   
 				v:Destroy()
 			end
 		end
