@@ -3567,15 +3567,15 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 60
+        Speed = 300
     elseif Distance < 50 then
-        Speed = 100
+        Speed = 300
     elseif Distance < 150 then
         Speed = 300
     elseif Distance < 250 then
         Speed = 400
     elseif Distance < 500 then
-        Speed = 500
+        Speed = 300
     elseif Distance < 750 then
         Speed = 400
     elseif Distance >= 1000 then
@@ -3591,15 +3591,15 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 60
+            Speed = 300
         elseif Distance < 50 then
-            Speed = 100
+            Speed = 300
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
             Speed = 400
         elseif Distance < 500 then
-            Speed = 500
+            Speed = 300
         elseif Distance < 750 then
             Speed = 400
         elseif Distance >= 1000 then
@@ -3615,15 +3615,15 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 60
+            Speed = 300
         elseif Distance < 50 then
-            Speed = 100
+            Speed = 300
         elseif Distance < 150 then
             Speed = 300
         elseif Distance < 250 then
             Speed = 400
         elseif Distance < 500 then
-            Speed = 500
+            Speed = 300
         elseif Distance < 750 then
             Speed = 400
         elseif Distance >= 1000 then
@@ -3639,9 +3639,9 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 60
+            Speed = 300
         elseif Distance < 25 then
-            Speed = 100
+            Speed = 300
         elseif Distance < 50 then
             Speed = 300
         elseif Distance < 150 then
@@ -3649,7 +3649,7 @@ end
         elseif Distance < 250 then
             Speed = 400
         elseif Distance < 500 then
-            Speed = 500
+            Speed = 300
         elseif Distance < 750 then
             Speed = 400
         elseif Distance >= 1000 then
@@ -4243,7 +4243,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+1000
+							_G.MagnitudeAdd = _G.MagnitudeAdd+500
 							break
 						end
 					end
@@ -4355,7 +4355,7 @@ end)
                                         AutoHaki()
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 30
+                                        v.Humanoid.WalkSpeed = 0
                                         v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                         HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
                                         game:GetService("VirtualUser"):CaptureController()
@@ -4376,7 +4376,7 @@ end)
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                         if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
                                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                                repeat task.wait()
+                                                repeat task.wait(0.5)
                                                     AutoHaki()
                                                     EquipWeapon(_G.SelectWeapon)
                                                     v.HumanoidRootPart.CanCollide = false
