@@ -3567,7 +3567,7 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
-        Speed = 350
+        Speed = 3500
     elseif Distance < 50 then
         Speed = 350
     elseif Distance < 150 then
@@ -3591,7 +3591,7 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 350
+            Speed = 3500
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3615,7 +3615,7 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 25 then
-            Speed = 350
+            Speed = 3500
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3639,7 +3639,7 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 350
+            Speed = 3500
         elseif Distance < 25 then
             Speed = 350
         elseif Distance < 50 then
@@ -4009,7 +4009,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 50
-            CmrFwLib.activeController.focusStart = 12050339.0780349
+            CmrFwLib.activeController.focusStart = 16050339.0780349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
