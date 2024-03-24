@@ -3961,7 +3961,7 @@ spawn(function()
                         a:Play(0.8,0.8,0.8)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.4)
+                        wait(a.length * 0.3)
                         a:Stop()
                     else
                         a:Play()
@@ -3990,7 +3990,7 @@ local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").
 local CmrFwLib = CombatFrameworkLib[2]
 local plr = game.Players.LocalPlayer
 for i = 1, 1 do
-    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},55)
     local cac = {}
     local hash = {}
     for k, v in pairs(bladehit) do
@@ -4004,12 +4004,12 @@ for i = 1, 1 do
         pcall(function()
             CmrFwLib.activeController.timeToNextAttack = -9e9
             CmrFwLib.activeController.attacking = false
-            CmrFwLib.activeController.blocking = false
+            CmrFwLib.activeController.blocking = true
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 50
-            CmrFwLib.activeController.focusStart = 16050339.0780349
+            CmrFwLib.activeController.focusStart = 160050339.0780349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4402,7 +4402,7 @@ end)
                                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
                                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                         else
-					task.wait(5)
+					task.wait(15)
                                             if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
                                                 HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                             else
