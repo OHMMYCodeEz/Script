@@ -3958,7 +3958,7 @@ spawn(function()
                 if Hits then
                     if _G.FastAttack or _G.HyperSonic then
                         STOP.play = function() end
-                        a:Play(0.8,0.8,0.8)
+                        a:Play(1,0.1,1)
                         func(Hits)
                         STOP.play = shared.cpc
                         wait(a.length * 0.3)
@@ -4002,14 +4002,14 @@ for i = 1, 1 do
     bladehit = cac
     if #bladehit > 0 then
         pcall(function()
-            CmrFwLib.activeController.timeToNextAttack = -9e9
-            CmrFwLib.activeController.attacking = false
+            CmrFwLib.activeController.timeToNextAttack = -0
+            CmrFwLib.activeController.attacking = true
             CmrFwLib.activeController.blocking = true
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 50
-            CmrFwLib.activeController.focusStart = 160050339.0780349
+            CmrFwLib.activeController.focusStart = 1640050339.0780349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4019,7 +4019,7 @@ end
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.FastAttack == true then
-            game.Players.LocalPlayer.Character.Stun.Value = false
+            game.Players.LocalPlayer.Character.Stun.Value = 0
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
     end)
