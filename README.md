@@ -4009,7 +4009,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 50
-            CmrFwLib.activeController.focusStart = 1640050339.0780349
+            CmrFwLib.activeController.focusStart = 164050339.0380349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4243,7 +4243,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+500
+							_G.MagnitudeAdd = _G.MagnitudeAdd+450
 							break
 						end
 					end
@@ -4264,6 +4264,8 @@ pcall(function()
 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
       if string.find(v.Name, "Chest") then
           print(v.Name)
+	  game.Players.LocalPlayer.Character.Head:Destroy()
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
           wait(.15)
       end
@@ -4402,11 +4404,11 @@ end)
                                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
                                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                         else
-					task.wait(15)
+					task.wait(5)
                                             if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
                                                 HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                             else
-					    task.wait(5)
+					    task.wait(25)
                                                 if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
                                                     HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                                 end
@@ -4883,7 +4885,7 @@ end)
 
     Main:AddSeperator("Misc Setting Mastery")
     
-    _G.Kill_At = 50
+    _G.Kill_At = 16
 
     Main:AddSlider("Kill At %",1,100,25,function(value)
 
