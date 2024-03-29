@@ -3557,7 +3557,7 @@ end)
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 		task.wait()
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500
+	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1700
 end
 
 function TelePPlayer(P)
@@ -3566,8 +3566,10 @@ end
     
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance < 25 then
-        Speed = 3500
+    if Distance< 10 then
+	    Speed = 6000
+	elseif Distance < 25 then
+            Speed = 3500
     elseif Distance < 50 then
         Speed = 350
     elseif Distance < 150 then
@@ -3590,7 +3592,9 @@ end
 
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-        if Distance < 25 then
+        if Distance< 10 then
+	    Speed = 6000
+	elseif Distance < 25 then
             Speed = 3500
         elseif Distance < 50 then
             Speed = 350
@@ -3614,7 +3618,9 @@ end
 
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-        if Distance < 25 then
+        if Distance< 10 then
+	    Speed = 6000
+	elseif Distance < 25 then
             Speed = 3500
         elseif Distance < 50 then
             Speed = 350
@@ -4235,7 +4241,7 @@ spawn(function()
                   for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if string.find(v.Name, "Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
-						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= math.random(1,1000)+_G.MagnitudeAdd then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= math.random(1,600)+_G.MagnitudeAdd then
 							repeat wait()
 								if game:GetService("Workspace"):FindFirstChild(v.Name) then
 									HyperCahaya(v.CFrame)
@@ -4400,7 +4406,7 @@ end)
                                     if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
                                         HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                     else
-				    task.wait(5)
+				    task.wait(25)
                                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
                                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                         else
@@ -4408,7 +4414,7 @@ end)
                                             if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
                                                 HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                             else
-					    task.wait(25)
+					    task.wait(5)
                                                 if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
                                                     HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                                 end
