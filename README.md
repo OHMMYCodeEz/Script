@@ -4234,7 +4234,7 @@ Main:AddToggle("Farm Chest | Safe ",_G.AutoFarmChest,function(value)
  StopTween(_G.AutoFarmChest)
  end)
  
- _G.MagnitudeAdd = 400
+ _G.MagnitudeAdd = 40
 spawn(function()
 	while wait() do 
 		if _G.AutoFarmChest then
@@ -4271,7 +4271,6 @@ for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
       if string.find(v.Name, "Chest") then
           print(v.Name)
 	  game.Players.LocalPlayer.Character.Head:Destroy()
-          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
           wait(.15)
       end
