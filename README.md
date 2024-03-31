@@ -4014,8 +4014,8 @@ for i = 1, 1 do
 	    CmrFwLib.activeController.humanoid.AutoRotate = true
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
-            CmrFwLib.activeController.hitboxMagnitude = 50
-            CmrFwLib.activeController.focusStart = 164050339.0380349
+            CmrFwLib.activeController.hitboxMagnitude = 60
+            CmrFwLib.activeController.focusStart = 1640503399.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4249,7 +4249,7 @@ spawn(function()
 								end
 							until _G.AutoFarmChest == false or not v.Parent
 							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-							_G.MagnitudeAdd = _G.MagnitudeAdd+450
+							_G.MagnitudeAdd = _G.MagnitudeAdd+850
 							break
 						end
 					end
@@ -4270,9 +4270,9 @@ pcall(function()
 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
       if string.find(v.Name, "Chest") then
           print(v.Name)
-	  game.Players.LocalPlayer.Character.Head:Destroy()
           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-          wait(.15)
+          game.Players.LocalPlayer.Character.Head:Destroy()
+	  wait(.15)
       end
   end
   game.Players.LocalPlayer.Character.Head:Destroy()
