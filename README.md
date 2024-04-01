@@ -3679,7 +3679,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 200 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 240 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
@@ -3713,9 +3713,9 @@ getgenv().HyperCahayas = function(p)
                                 end
                             end)
                         end)
-                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude >= 10 and(game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 20 then 
+                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude >= 20 and(game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 20 then 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
-                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 10 then 
+                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 20 then 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
                     end
                 end)
@@ -4015,7 +4015,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 60
-            CmrFwLib.activeController.focusStart = 1640503399.0980349
+            CmrFwLib.activeController.focusStart = 164053399.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4271,7 +4271,6 @@ for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
       if string.find(v.Name, "Chest") then
           print(v.Name)
           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-          game.Players.LocalPlayer.Character.Head:Destroy()
 	  wait(.15)
       end
   end
@@ -4413,7 +4412,7 @@ end)
                                             if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
                                                 HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                             else
-					    task.wait(5)
+					    task.wait(15)
                                                 if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
                                                     HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                                                 end
