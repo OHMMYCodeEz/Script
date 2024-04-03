@@ -3557,7 +3557,7 @@ end)
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 		task.wait()
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1700
+	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 170
 end
 
 function TelePPlayer(P)
@@ -3679,7 +3679,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 200 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 100 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
