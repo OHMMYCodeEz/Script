@@ -7398,10 +7398,10 @@ spawn(function()
                     local targetModel = workspace:FindFirstChild(targetModelName)
 
                     if targetModel then
-                        local speed = 10.5
+                        local speed = 8.5
 			local noclip = true
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
-                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
+                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 1
                         
                         while (targetModel.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             targetModel:SetPrimaryPartCFrame(targetModel.PrimaryPart.CFrame + forwardDirection * speed)
