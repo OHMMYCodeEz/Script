@@ -3679,7 +3679,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 240 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 200 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
@@ -3706,7 +3706,7 @@ getgenv().HyperCahayas = function(p)
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude >= 20 then 
                         spawn(function()
                             pcall(function()
-                                if (game.Players.LocalPlayer.Character.Root.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 150 then 
+                                if (game.Players.LocalPlayer.Character.Root.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 100 then 
                                     game.Players.LocalPlayer.Character.Root.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                                 else 
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game.Players.LocalPlayer.Character.Root.CFrame
@@ -7398,7 +7398,7 @@ spawn(function()
                     local targetModel = workspace:FindFirstChild(targetModelName)
 
                     if targetModel then
-                        local speed = 15.5
+                        local speed = 10.5
 			local noclip = true
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
                         local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 10
