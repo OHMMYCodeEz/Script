@@ -3567,9 +3567,9 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance< 10 then
-	    Speed = 4000
+	    Speed = 1000
 	elseif Distance < 25 then
-            Speed = 3500
+            Speed = 2500
     elseif Distance < 50 then
         Speed = 350
     elseif Distance < 150 then
@@ -3593,9 +3593,9 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance< 10 then
-	    Speed = 4000
+	    Speed = 1000
 	elseif Distance < 25 then
-            Speed = 3500
+            Speed = 2500
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3619,9 +3619,9 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance< 10 then
-	    Speed = 4000
+	    Speed = 1000
 	elseif Distance < 25 then
-            Speed = 3500
+            Speed = 2500
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3645,7 +3645,7 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 3500
+            Speed = 2500
         elseif Distance < 25 then
             Speed = 350
         elseif Distance < 50 then
@@ -3679,7 +3679,7 @@ end
 getgenv().HyperCahayas = function(p)
     task.spawn(function()
         pcall(function()
-            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 200 then 
+            if game:GetService("Players").LocalPlayer:DistanceFromCharacter(p.Position) <= 150 then 
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = p
             elseif not game.Players.LocalPlayer.Character:FindFirstChild("Root")then 
                 local K = Instance.new("Part",game.Players.LocalPlayer.Character)
