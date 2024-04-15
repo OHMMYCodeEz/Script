@@ -4910,7 +4910,7 @@ end)
         _G.SkillC = value
     end)
     
-     Main:AddToggle("Skill V",true,function(value)
+     Main:AddToggle("Skill V",function(value)
         _G.SkillV = value
     end)
     
