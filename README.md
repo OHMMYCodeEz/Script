@@ -4015,7 +4015,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 60
-            CmrFwLib.activeController.focusStart = 142053399.0980349
+            CmrFwLib.activeController.focusStart = 1420253399.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
