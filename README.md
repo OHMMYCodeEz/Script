@@ -4913,6 +4913,10 @@ end)
      Main:AddToggle("Skill V",function(value)
         _G.SkillV = value
     end)
+
+     Main:AddToggle("Skill F",true,function(value)
+        _G.SkillF = value
+    end)
     
     M:AddSeperator("World")
 
