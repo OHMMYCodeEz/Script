@@ -3567,7 +3567,7 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance< 10 then
-	    Speed = 6000
+	    Speed = 4000
 	elseif Distance < 25 then
             Speed = 3500
     elseif Distance < 50 then
@@ -3593,7 +3593,7 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance< 10 then
-	    Speed = 6000
+	    Speed = 4000
 	elseif Distance < 25 then
             Speed = 3500
         elseif Distance < 50 then
@@ -3619,7 +3619,7 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance< 10 then
-	    Speed = 6000
+	    Speed = 4000
 	elseif Distance < 25 then
             Speed = 3500
         elseif Distance < 50 then
@@ -3706,7 +3706,7 @@ getgenv().HyperCahayas = function(p)
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude >= 10 then 
                         spawn(function()
                             pcall(function()
-                                if (game.Players.LocalPlayer.Character.Root.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 100 then 
+                                if (game.Players.LocalPlayer.Character.Root.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then 
                                     game.Players.LocalPlayer.Character.Root.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                                 else 
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game.Players.LocalPlayer.Character.Root.CFrame
@@ -3715,7 +3715,7 @@ getgenv().HyperCahayas = function(p)
                         end)
                     elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude >= 10 and(game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 10 then 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
-                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 20 then 
+                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-p.Position).Magnitude < 10 then 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
                     end
                 end)
@@ -3967,7 +3967,7 @@ spawn(function()
                         a:Play(1,0.1,1)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 0.3)
+                        wait(a.length * 1)
                         a:Stop()
                     else
                         a:Play()
@@ -4015,7 +4015,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 60
-            CmrFwLib.activeController.focusStart = 164053399.0980349
+            CmrFwLib.activeController.focusStart = 14053399.0980349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -7401,7 +7401,7 @@ spawn(function()
                         local speed = 8.5
 			local noclip = true
                         local forwardDirection = targetModel.PrimaryPart.CFrame.lookVector
-                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 1
+                        local targetPosition = targetModel.PrimaryPart.Position + forwardDirection * 4
                         
                         while (targetModel.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             targetModel:SetPrimaryPartCFrame(targetModel.PrimaryPart.CFrame + forwardDirection * speed)
