@@ -7231,9 +7231,9 @@ spawn(function()
 
                 for _, model in pairs(models) do
                     if model.Name == targetModelName then
-                        local speed = 11.5
+                        local speed = 10.5
                         local forwardDirection = model.PrimaryPart.CFrame.lookVector
-                        local targetPosition = model.PrimaryPart.Position + forwardDirection * 10
+                        local targetPosition = model.PrimaryPart.Position + forwardDirection * 4
                         
                         while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
                             model:SetPrimaryPartCFrame(model.PrimaryPart.CFrame + forwardDirection * speed)
