@@ -3850,7 +3850,7 @@ NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
 NguyenTien:AddLabel("Donate For Update ")
-NguyenTien:AddLabel("Truemoney & Wallet : 0624877667")
+NguyenTien:AddLabel("Truemoney & Wallet : Null")
 
 NguyenTien:AddSeperator("Social Network")
 NguyenTien:AddButton("Discord Sever",function()
