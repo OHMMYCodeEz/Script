@@ -3567,9 +3567,9 @@ end
     function TP(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance< 10 then
-	    Speed = 1000
+	    Speed = 250
 	elseif Distance < 25 then
-            Speed = 2500
+            Speed = 200
     elseif Distance < 50 then
         Speed = 350
     elseif Distance < 150 then
@@ -3593,9 +3593,9 @@ end
     function TP1(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance< 10 then
-	    Speed = 1000
+	    Speed = 250
 	elseif Distance < 25 then
-            Speed = 2500
+            Speed = 200
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3619,9 +3619,9 @@ end
     function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance< 10 then
-	    Speed = 1000
+	    Speed = 200
 	elseif Distance < 25 then
-            Speed = 2500
+            Speed = 250
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3645,9 +3645,9 @@ end
     function HyperCahaya(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
-            Speed = 2500
+            Speed = 200
         elseif Distance < 25 then
-            Speed = 350
+            Speed = 250
         elseif Distance < 50 then
             Speed = 350
         elseif Distance < 150 then
@@ -3943,8 +3943,8 @@ spawn(function()
                     _G.FastAttackDelay = 0.18
                 elseif _G.FastAttackDelay == "0.185" then
                     _G.FastAttackDelay = 0.185
-                elseif _G.FastAttackDelay == "0.001" then
-                    _G.FastAttackDelay = 0.001
+                elseif _G.FastAttackDelay == "0.01" then
+                    _G.FastAttackDelay = 0.01
                 end
             end)
         end
