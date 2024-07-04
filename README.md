@@ -4350,7 +4350,7 @@ end)
     end)
     
     spawn(function()
-        while wait() do
+        while wait(5) do
             if _G.AutoDoughtBoss then
                 pcall(function()
                     if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
