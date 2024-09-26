@@ -4763,7 +4763,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.Remove_trct == true then
-            game:GetService("ReplicatedStorage").Notification:Destroy()        
+            game:GetService("ReplicatedStorage").DamageCounter:Destroy()        
         end
     end)
 end)
