@@ -4756,7 +4756,7 @@ Main:AddToggle("Auto Click",false,function(value)
 _G.AutoClick = value
 end)
 
-Main:AddToggle("Remove Notifications Text",false,function(Uzaki)
+Main:AddToggle("Remove Notifications Text",true,function(Uzaki)
 _G.Remove_trct = Uzaki
 end)
 
@@ -14160,7 +14160,7 @@ spawn(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
             for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
-                if v.Name == "Death Beam" then
+                if v.Name == "Death" then
                     v:Destroy()
                 end
             end
