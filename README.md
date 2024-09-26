@@ -3791,7 +3791,7 @@ getgenv().HyperCahayas = function(p)
         if _G.AutoClick or Fastattack then
              pcall(function()
                 game:GetService'VirtualUser':CaptureController()
-			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,1))
+			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,1,1))
             end)
         end
     end)
@@ -3964,7 +3964,7 @@ spawn(function()
                 if Hits then
                     if _G.FastAttack or _G.HyperSonic then
                         STOP.play = function() end
-                        a:Play(1,0.1,1)
+                        a:Play(1,0.5,1)
                         func(Hits)
                         STOP.play = shared.cpc
                         wait(a.length * 1)
@@ -4744,7 +4744,7 @@ spawn(function()
 while wait(.1) do
     if _G.HyperSonic then
         pcall(function()
-            repeat task.wait(0,09)
+            repeat task.wait(0,9)
                 AttackHit()
             until not _G.HyperSonic
         end)
@@ -4756,8 +4756,8 @@ Main:AddToggle("Auto Click",false,function(value)
 _G.AutoClick = value
 end)
 
-Main:AddToggle("Remove Notifications Text",false,function(NamfonGay)
-_G.Remove_trct = NamfonGay
+Main:AddToggle("Remove Notifications Text",false,function(Uzaki)
+_G.Remove_trct = Uzaki
 end)
 
 spawn(function()
@@ -4874,7 +4874,7 @@ end)
     end)
 
     PosY = 28
-    Main:AddSlider("Pos Y",0,40,28,function(value)
+    Main:AddSlider("Pos Y",0,40,20,function(value)
     PosY = value
     end)
 
