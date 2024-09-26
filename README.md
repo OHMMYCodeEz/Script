@@ -14159,8 +14159,8 @@ _G.Remove_Effect = true
 spawn(function()
     game:GetService('RunService').Stepped:Connect(function()
         if _G.Remove_Effect then
-            for i, v in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
-                if v.Name == "Death" then
+            for i, v in pairs(game:GetService("ReplicatedStorage").Fx.EngeyBalls:GetChildren()) do
+                if v.Name == "Death Beam" then
                     v:Destroy()
                 end
             end
