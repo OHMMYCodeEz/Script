@@ -3967,7 +3967,7 @@ spawn(function()
                         a:Play(1,0.5,1)
                         func(Hits)
                         STOP.play = shared.cpc
-                        wait(a.length * 1)
+                        wait(a.length * 1 * 1 * 1)
                         a:Stop()
                     else
                         a:Play()
