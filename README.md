@@ -4756,30 +4756,111 @@ Main:AddToggle("Auto Click",false,function(value)
 _G.AutoClick = value
 end)
 
-Main:AddToggle("Remove Notifications Text",true,function(Uzaki)
-_G.Remove_trct = Uzaki
+-- Add Toggle for Removing Notifications Text
+Main:AddToggle("Remove Notifications Text", true, function(Uzaki)
+    _G.Remove_trct = Uzaki
+    if _G.Remove_trct then
+        -- Only destroy if toggle is ON
+        local damageCounter = game:GetService("ReplicatedStorage"):FindFirstChild("DamageCounter")
+        if damageCounter then
+            damageCounter:Destroy()
+        end
+    end
 end)
 
+-- Add Toggle for Removing Hit Sound and Level Up
+Main:AddToggle("Remove Hit Sound And Level Up", false, function(Remo)
+    _G.RemoveHit = Remo
+    if _G.RemoveHit then
+        -- Only destroy if toggle is ON
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+
+        -- Check and destroy LevelUp effects
+        local levelUp = replicatedStorage.Effect.Container:FindFirstChild("LevelUp")
+        if levelUp then
+            levelUp:Destroy()
+        end
+
+        local sound = replicatedStorage.Util.Sound:FindFirstChild("LevelUp")
+        if sound then
+            sound:Destroy()
+        end
+
+        local levelUpProxy = replicatedStorage.Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy")
+        if levelUpProxy then
+            levelUpProxy:Destroy()
+        end
+
+        local respawn = replicatedStorage.Effect.Container:FindFirstChild("Respawn")
+        if respawn then
+            respawn:Destroy()
+        end
+    end
+end)
+
+-- Optionally, check in RenderStepped for continuous monitoring (less efficient but works)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
+        -- Remove Notifications if toggle is on
         if _G.Remove_trct == true then
-            game:GetService("ReplicatedStorage").DamageCounter:Destroy()        
+            local damageCounter = game:GetService("ReplicatedStorage"):FindFirstChild("DamageCounter")
+            if damageCounter then
+                damageCounter:Destroy()
+            end
+        end
+        
+        -- Remove Hit Sound and Level Up if toggle is on
+        if _G.RemoveHit == true then
+            local replicatedStorage = game:GetService("ReplicatedStorage")
+            local levelUp = replicatedStorage.Effect.Container:FindFirstChild("LevelUp")
+            if levelUp then
+                levelUp:Destroy()
+            end
+
+            local sound = replicatedStorage.Util.Sound:FindFirstChild("LevelUp")
+            if sound then
+                sound:Destroy()
+            end
+
+            local levelUpProxy = replicatedStorage.Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy")
+            if levelUpProxy then
+                levelUpProxy:Destroy()
+            end
+
+            local respawn = replicatedStorage.Effect.Container:FindFirstChild("Respawn")
+            if respawn then
+                respawn:Destroy()
+            end
         end
     end)
 end)
 
-Main:AddToggle("Remove Hit Sound And Level Up",false,function(Remo)
-_G.RemoveHit = Remo
-end)
-
+-- Use RenderStepped for frequent checks but be more efficient
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.RemoveHit == true then
-            game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound:Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
-            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
-            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()        
+            local replicatedStorage = game:GetService("ReplicatedStorage")
+
+            -- Check for existence before destroying
+            local levelUp = replicatedStorage.Effect.Container:FindFirstChild("LevelUp")
+            if levelUp then
+                levelUp:Destroy()
+            end
+
+            local sound = replicatedStorage.Util.Sound:FindFirstChild("LevelUp")
+            if sound then
+                sound:Destroy()
+            end
+
+            local levelUpProxy = replicatedStorage.Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy")
+            if levelUpProxy then
+                levelUpProxy:Destroy()
+            end
+
+            local respawn = replicatedStorage.Effect.Container:FindFirstChild("Respawn")
+            if respawn then
+                respawn:Destroy()
+            end
         end
     end)
 end)
