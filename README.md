@@ -4015,7 +4015,7 @@ for i = 1, 1 do
             CmrFwLib.activeController.timeToNextBlock = 0
             CmrFwLib.activeController.increment = 1 + math.huge
             CmrFwLib.activeController.hitboxMagnitude = 60
-            CmrFwLib.activeController.focusStart = 14203399.0680349
+            CmrFwLib.activeController.focusStart = 12203399.0680349
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 1, "")
         end)
@@ -4105,7 +4105,7 @@ Main:AddToggle("Fast Attack ",true,function(value)
                     if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                         StartMagnet = false
                         if BypassTP then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 1500 then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 150 then
 						BTP(CFrameQuest)
 						elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 1500 then
 						TP1(CFrameQuest)
@@ -4214,7 +4214,7 @@ spawn(function()
 			                Fastattack = true
 			                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
 						    game:GetService("VirtualUser"):CaptureController()
-				       	    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672), game.Workspace.CurrentCamera.CFrame)
+				       	    game:GetService("VirtualUser"):Button1Down(Vector2.new(318, 286), game.Workspace.CurrentCamera.CFrame)
 				       	    AutoFarmNearestMagnet = true
 				       	    PosMon = v.HumanoidRootPart.CFrame
 			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
