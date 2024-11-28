@@ -3791,7 +3791,7 @@ getgenv().HyperCahayas = function(p)
         if _G.AutoClick or Fastattack then
              pcall(function()
                 game:GetService'VirtualUser':CaptureController()
-			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,1,1))
+			    game:GetService'VirtualUser':Button1Down(Vector2.new(289, 80))
             end)
         end
     end)
