@@ -3832,7 +3832,7 @@ getgenv().HyperCahayas = function(p)
     end)
     
 
-local Library = Update:Window("Hee หมาดอทคอม","",Enum.KeyCode.RightControl);
+local Library = Update:Window("Uzaki EiEi","",Enum.KeyCode.RightControl);
 
 local NguyenTien = Library:AddTab("Information","4483345998")
 local Main = Library:AddTab("Main","4483345998")
@@ -3849,8 +3849,8 @@ local Misc = Library:AddTab("Misc","4483345998")
 NguyenTien:AddSeperator("Information Developer")
 NguyenTien:AddLabel("Crack By : ohmmycode")
 NguyenTien:AddLabel("Uzaki Shop in BF")
-NguyenTien:AddLabel("Donate For Update ")
-NguyenTien:AddLabel("Truemoney & Wallet : Null")
+NguyenTien:AddLabel(" ")
+NguyenTien:AddLabel("")
 
 NguyenTien:AddSeperator("Social Network")
 NguyenTien:AddButton("Discord Sever",function()
@@ -3862,7 +3862,7 @@ setclipboard("https://www.youtube.com/@ohmmycode")
 Notif.New("Copying To Clipboard Done", 3)
 end)
 NguyenTien:AddButton("Facebook Official Owner",function()
-setclipboard("https://www.facebook.com/OHMMY.HUB")
+setclipboard("")
 Notif.New("Copying To Clipboard Done", 3)
 end)
 ---- Trang Chá»§
