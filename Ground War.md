@@ -68,7 +68,7 @@ function attackEnemies()
                             [1] = {
                                 ["shellMaxDist"] = 0,
                                 ["origin"] = localPlayer.Character and localPlayer.Character:GetPivot().Position or Vector3.new(0, 0, 0),
-                                ["weaponName"] = "AWM",
+                                ["weaponName"] = "Knife",
                                 ["bulletID"] = "Bullet_" .. tostring(math.random(100000, 999999)),
                                 ["currentPenetrationCount"] = 1,
                                 ["shellSpeed"] = 0,
