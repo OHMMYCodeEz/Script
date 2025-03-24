@@ -61,7 +61,7 @@ WeaponButton.TextSize = 16
 WeaponButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 WeaponButton.Text = "Weapon: Knife"
 
-local weapons = {"Knife", "Pistol", "Rifle", "Shotgun"} -- รายการอาวุธที่เลือกได้
+local weapons = {"Knife", "HK416", "AWM", "RPG", "Intervention"} -- รายการอาวุธที่เลือกได้
 local dropdownVisible = false
 local DropdownFrame
 
