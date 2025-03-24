@@ -27,7 +27,7 @@ Title.BackgroundTransparency = 1
 Title.Font = Enum.Font.SourceSansBold
 Title.TextSize = 20
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Text = "👳🏿‍♂️ Maru-Shop.gay 🤰"
+Title.Text = "👳🏿‍♂️ Maru Hub private 🤰"
 Title.TextScaled = true
 
 local Checkbox = Instance.new("TextButton")
