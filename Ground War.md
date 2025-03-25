@@ -29,7 +29,7 @@ local function bypassWalkSpeed()
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
             if b == "WalkSpeed" then
-                return 16
+                return getgenv().Speed
             end
             return oldindex(self, b)
         end)
