@@ -301,7 +301,7 @@ UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
     if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
         local mousePos = UserInputService:GetMouseLocation()
         local mouseX = mousePos.X - SpeedSliderBar.AbsolutePosition.X
-        local clampedX = math.clamp(mouseX - SpeedSliderKnob.Size.X.Offset / 2, 0, SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)
+        local clampedX = math.clamp(mouseX - SpeedSliderKnob.Size.X.Offset / 4, 0, SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)
         
         -- Tween การเคลื่อนที่ของ Knob
         local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
@@ -310,11 +310,11 @@ UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
         
         -- Tween การปรับขนาดของ Fill Bar
         local fillScale = clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)
-        local tweenFill = TweenService:Create(SpeedSliderFill, tweenInfo, {Size = UDim2.new(fillScale, 0, 1, 0)})
+        local tweenFill = TweenService:Create(SpeedSliderFill, tweenInfo, {Size = UDim2.new(fillScale, 0, 2, 0)})
         tweenFill:Play()
         
         -- คำนวณและอัปเดตค่า Speed
-        local speedValue = math.floor((clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)) * 1000) + 16 -- ช่วง 16-216
+        local speedValue = math.floor((clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)) * 500) + 160 -- ช่วง 16-216
         getgenv().Speed = speedValue
         SpeedValue.Text = tostring(speedValue)
     end
