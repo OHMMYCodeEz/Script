@@ -314,7 +314,7 @@ UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
         tweenFill:Play()
         
         -- คำนวณและอัปเดตค่า Speed
-        local speedValue = math.floor((clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)) * 200) + 16 -- ช่วง 16-216
+        local speedValue = math.floor((clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)) * 1000) + 16 -- ช่วง 16-216
         getgenv().Speed = speedValue
         SpeedValue.Text = tostring(speedValue)
     end
