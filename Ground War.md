@@ -1,4 +1,26 @@
--- ตั้งค่าเริ่มต้น
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Fluent " .. Fluent.Version,
+    SubTitle = "by dawid",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+-- ฟังก์ชันตั้งค่าเริ่มต้น
 shared.AutoAttack = false
 shared.SelectedWeapon = nil
 getgenv().Speed = 50 -- ความเร็วเริ่มต้น
@@ -112,111 +134,81 @@ function attackEnemies()
     end
 end
 
--- เรียกใช้ Fluent UI
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
-local Window = Fluent:CreateWindow({
-    Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by dawid",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
-})
-
--- Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
-
--- ฟังก์ชัน Toggle Auto Attack
-local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", {
-    Title = "Auto Attack",
-    Default = false,  -- เริ่มต้นคือปิด
-})
-
-autoAttackToggle:OnChanged(function(state)
-    shared.AutoAttack = state
+-- ฟังก์ชันการควบคุม AutoAttack, เปลี่ยนอาวุธ, Speed Hack
+local autoAttackToggle = Tabs.Main:AddToggle("Auto Attack", {Title = "Auto Attack", Default = shared.AutoAttack})
+autoAttackToggle:OnChanged(function()
+    shared.AutoAttack = autoAttackToggle.Value
     if shared.AutoAttack then
-        print("Auto Attack Enabled")
-        attackEnemies()  -- เรียกฟังก์ชันโจมตีอัตโนมัติ
-    else
-        print("Auto Attack Disabled")
+        attackEnemies()
     end
 end)
 
--- ฟังก์ชัน Toggle Speed Hack
-local speedHackToggle = Tabs.Main:AddToggle("SpeedHackToggle", {
-    Title = "Speed Hack",
-    Default = false,  -- เริ่มต้นคือปิด
-})
-
-speedHackToggle:OnChanged(function(state)
-    getgenv().Enabled = state
-    if getgenv().Enabled then
-        print("Speed Hack Enabled")
-    else
-        print("Speed Hack Disabled")
-    end
-end)
-
--- ฟังก์ชันเปลี่ยนอาวุธ
-local weaponDropdown = Tabs.Main:AddDropdown("WeaponDropdown", {
+local weaponDropdown = Tabs.Main:AddDropdown("Weapon Selector", {
     Title = "Select Weapon",
-    Values = weapons,
-    Default = shared.SelectedWeapon,
+    Values = getWeaponsFromBackpack(),
+    Default = 1,
+    Callback = function(Value)
+        shared.SelectedWeapon = Value
+    end
 })
 
-weaponDropdown:OnChanged(function(selectedWeapon)
-    shared.SelectedWeapon = selectedWeapon
-    print("Selected Weapon: " .. shared.SelectedWeapon)
-end)
-
--- ฟังก์ชันปรับความเร็ว
-local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
+local speedSlider = Tabs.Main:AddSlider("Speed", {
     Title = "Speed",
-    Min = 10,
+    Min = 0,
     Max = 200,
     Default = getgenv().Speed,
-    Rounding = 1,
-})
-
-speedSlider:OnChanged(function(value)
-    getgenv().Speed = value
-    print("Speed set to: " .. getgenv().Speed)
-end)
-
--- ปุ่มซ่อน/แสดง UI
-local hideUIButton = Tabs.Main:AddButton({
-    Title = "M",
-    Description = "Click to hide or show the UI",
-    Callback = function()
-        Window:ToggleVisible() -- ปุ่มนี้จะซ่อนหรือแสดง UI
+    Rounding = 0,
+    Callback = function(Value)
+        getgenv().Speed = Value
+        bypassWalkSpeed()
     end
 })
 
--- คุณสามารถปรับแต่งเพิ่มเติมเกี่ยวกับฟังก์ชันนี้หรือตั้งค่าผู้ใช้ต่างๆ
-Fluent:Notify({
-    Title = "Maru Hub",
-    Content = "The Maru script has been loaded.",
-    Duration = 8
-})
+-- สร้างปุ่มซ่อน/แสดง UI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = players.LocalPlayer:WaitForChild("PlayerGui")
 
--- สร้าง Interface Manager และ Save Manager
+local hideUIButton = Instance.new("TextButton")
+hideUIButton.Size = UDim2.new(0, 200, 0, 50)
+hideUIButton.Position = UDim2.new(0.5, -100, 0.9, -25)
+hideUIButton.Text = " M "
+hideUIButton.TextSize = 24
+hideUIButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+hideUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+hideUIButton.Parent = screenGui
+
+local uiVisible = true
+
+hideUIButton.MouseButton1Click:Connect(function()
+    if uiVisible then
+        Window.Enabled = false
+        hideUIButton.Text = "Show UI"
+    else
+        Window.Enabled = true
+        hideUIButton.Text = "Hide UI"
+    end
+    uiVisible = not uiVisible
+end)
+
+-- Hand the library over to our managers
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
+
 SaveManager:IgnoreThemeSettings()
 SaveManager:SetIgnoreIndexes({})
+
 InterfaceManager:SetFolder("FluentScriptHub")
 SaveManager:SetFolder("FluentScriptHub/specific-game")
+
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 SaveManager:BuildConfigSection(Tabs.Settings)
 
 Window:SelectTab(1)
 
--- การโหลดการตั้งค่าที่บันทึกไว้
+Fluent:Notify({
+    Title = "Maru Hub",
+    Content = "The script has been loaded.",
+    Duration = 8
+})
+
 SaveManager:LoadAutoloadConfig()
