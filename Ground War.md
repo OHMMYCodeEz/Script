@@ -181,8 +181,8 @@ local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
     Description = "Set your walking speed",
     Default = 50,
     Min = 0,
-    Max = 200,
-    Rounding = 1,
+    Max = 1000,
+    Rounding = 2,
     Callback = function(Value)
         getgenv().Speed = Value
     end
