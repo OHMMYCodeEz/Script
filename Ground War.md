@@ -11,30 +11,6 @@ local isGuiVisible = true
 getgenv().Speed = 50
 getgenv().Enabled = false
 
--- WalkSpeed Bypass (same as before)
-local players = game:GetService("Players")
-local function bypassWalkSpeed()
-    if not getgenv().executed then
-        getgenv().executed = true
-        local mt = getrawmetatable(game)
-        setreadonly(mt, false)
-        local oldindex = mt.__index
-        mt.__index = newcclosure(function(self, b)
-            if b == "WalkSpeed" then return getgenv().Speed end
-            return oldindex(self, b)
-        end)
-    end
-end
-bypassWalkSpeed()
-players.LocalPlayer.CharacterAdded:Connect(bypassWalkSpeed)
-spawn(function()
-    while wait() do
-        if getgenv().Enabled and players.LocalPlayer.Character then
-            players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = getgenv().Speed
-        end
-    end
-end)
-
 -- UI Library
 local UI = {
     Colors = {
@@ -68,7 +44,8 @@ end
 local ScreenGui = Create("ScreenGui", {
     Name = "AutoAttackGUI",
     ResetOnSpawn = false,
-    ZIndexBehavior = Enum.ZIndexBehavior.Global
+    ZIndexBehavior = Enum.ZIndexBehavior.Global,
+    Parent = game.CoreGui
 })
 
 local MainContainer = Create("Frame", {
@@ -143,6 +120,7 @@ local ContentFrame = Create("Frame", {
     Size = UDim2.new(1, -20, 1, -60),
     Position = UDim2.new(0, 10, 0, 50),
     BackgroundTransparency = 1,
+    ClipsDescendants = true,
     Parent = MainContainer
 })
 
@@ -175,6 +153,7 @@ local AttackToggle = Create("TextButton", {
     Text = "✗ OFF",
     Font = UI.Fonts.Body,
     TextSize = 14,
+    AutoButtonColor = false,
     Parent = AttackSection
 })
 
@@ -191,6 +170,7 @@ local WeaponBtn = Create("TextButton", {
     Text = "SELECT WEAPON",
     Font = UI.Fonts.Body,
     TextSize = 14,
+    AutoButtonColor = false,
     Parent = AttackSection
 })
 
@@ -227,6 +207,7 @@ local SpeedToggle = Create("TextButton", {
     Text = "✗ OFF",
     Font = UI.Fonts.Body,
     TextSize = 14,
+    AutoButtonColor = false,
     Parent = SpeedSection
 })
 
@@ -314,11 +295,18 @@ end
 -- Dropdown Menu
 local DropdownFrame
 local function CreateDropdown()
-    if DropdownFrame then DropdownFrame:Destroy() end
+    if DropdownFrame then 
+        DropdownFrame:Destroy() 
+        DropdownFrame = nil
+        return
+    end
     
     local weapons = {}
-    for _, item in pairs(players.LocalPlayer.Backpack:GetChildren()) do
-        if item:IsA("Tool") then table.insert(weapons, item.Name) end
+    local backpack = game:GetService("Players").LocalPlayer:FindFirstChild("Backpack")
+    if backpack then
+        for _, item in pairs(backpack:GetChildren()) do
+            if item:IsA("Tool") then table.insert(weapons, item.Name) end
+        end
     end
     
     if #weapons == 0 then table.insert(weapons, "No weapons found") end
@@ -355,10 +343,12 @@ local function CreateDropdown()
             Text = weapon,
             Font = UI.Fonts.Body,
             TextSize = 14,
+            AutoButtonColor = false,
             Parent = ScrollFrame
         })
         
         Create("UICorner", {CornerRadius = UDim.new(0, 6), Parent = btn})
+        Create("UIStroke", {Color = UI.Colors.Darker, Thickness = 1, Parent = btn})
         
         btn.MouseButton1Click:Connect(function()
             if weapon ~= "No weapons found" then
@@ -366,6 +356,7 @@ local function CreateDropdown()
                 WeaponBtn.Text = "WEAPON: "..weapon:upper()
             end
             DropdownFrame:Destroy()
+            DropdownFrame = nil
         end)
     end
 end
@@ -378,8 +369,11 @@ end)
 -- Refresh Weapons Function
 local function RefreshWeapons()
     local weapons = {}
-    for _, item in pairs(players.LocalPlayer.Backpack:GetChildren()) do
-        if item:IsA("Tool") then table.insert(weapons, item.Name) end
+    local backpack = game:GetService("Players").LocalPlayer:FindFirstChild("Backpack")
+    if backpack then
+        for _, item in pairs(backpack:GetChildren()) do
+            if item:IsA("Tool") then table.insert(weapons, item.Name) end
+        end
     end
     
     if #weapons > 0 then
@@ -387,6 +381,11 @@ local function RefreshWeapons()
         WeaponBtn.Text = "WEAPON: "..weapons[1]:upper()
     else
         WeaponBtn.Text = "SELECT WEAPON"
+        shared.SelectedWeapon = nil
+    end
+    
+    if DropdownFrame then
+        CreateDropdown() -- Refresh dropdown if open
     end
 end
 
@@ -407,11 +406,10 @@ local function ToggleAutoAttack()
     
     if shared.AutoAttack then
         spawn(function()
-            while shared.AutoAttack do
+            while shared.AutoAttack and task.wait() do
                 if shared.SelectedWeapon then
                     -- Your attack code here
                 end
-                task.wait()
             end
         end)
     end
@@ -528,13 +526,9 @@ CloseBtn.MouseButton1Click:Connect(function()
         {Size = UDim2.new(0, 280, 0, 0)}
     ):Play()
     
-    wait(0.3)
+    task.wait(0.3)
     ScreenGui:Destroy()
 end)
-
--- Initialization
-RefreshWeapons()
-ScreenGui.Parent = game:GetService("CoreGui")
 
 -- Hover Effects
 local function SetupHoverEffect(button)
@@ -555,8 +549,23 @@ local function SetupHoverEffect(button)
     end)
 end
 
+-- Apply hover effects to all buttons
 for _, button in pairs(MainContainer:GetDescendants()) do
     if button:IsA("TextButton") and button.Name ~= "SpeedKnob" then
         SetupHoverEffect(button)
     end
+end
+
+-- Initialization
+RefreshWeapons()
+
+-- Fix for mobile viewport
+if isMobile then
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if MainContainer.AbsoluteSize.Y > 100 then
+            ContentFrame.Visible = true
+        else
+            ContentFrame.Visible = false
+        end
+    end)
 end
