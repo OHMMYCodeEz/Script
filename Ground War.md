@@ -3,8 +3,8 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Maru Hub - Private Script hee-" .. Fluent.Version,
-    SubTitle = "",
+    Title = "Maru Hub - Private abc-" .. Fluent.Version,
+    SubTitle = "by ohmmy69",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true,
@@ -83,15 +83,47 @@ end
 -- ฟังก์ชันรีเฟรชรายการอาวุธ
 local function refreshWeapons()
     local weapons = getWeaponsFromBackpack()
-    weaponDropdown:SetValues(weapons)
-    shared.SelectedWeapon = weapons[1] or "Knife"  -- เลือกอาวุธแรกจากรายการ
+
+    -- รีเฟรชค่าของ Dropdown ด้วยรายการอาวุธใหม่
+    if weaponDropdown then
+        weaponDropdown:SetValues(weapons)
+        
+        -- หากรายการอาวุธไม่ว่าง, ให้เลือกอาวุธแรก
+        if #weapons > 0 then
+            shared.SelectedWeapon = weapons[1]
+            weaponDropdown:SetValue(weapons[1])  -- ตั้งค่าให้ Dropdown แสดงอาวุธแรก
+        else
+            shared.SelectedWeapon = nil  -- หากไม่มีอาวุธ, ให้ตั้งค่าเป็น nil
+        end
+    end
 end
 
 -- ตั้งค่าอาวุธเริ่มต้น
 local weapons = getWeaponsFromBackpack()
 shared.SelectedWeapon = weapons[1] or "Knife"
 
--- ฟังก์ชันสำหรับ Auto Attack
+-- ตั้งค่า Dropdown อาวุธเริ่มต้น
+local weaponDropdown = Tabs.Main:AddDropdown("WeaponDropdown", {
+    Title = "Select Weapon",
+    Values = weapons,
+    Multi = false,
+    Default = 1,  -- เลือกอาวุธแรก
+})
+
+weaponDropdown:OnChanged(function(Value)
+    shared.SelectedWeapon = Value
+end)
+
+-- เพิ่มปุ่มรีเฟรชรายการอาวุธ
+local refreshButton = Tabs.Main:AddButton({
+    Title = "Refresh Weapons",
+    Description = "Refresh weapon list from backpack",
+    Callback = function()
+        refreshWeapons()  -- เรียกฟังก์ชันรีเฟรชอาวุธ
+    end
+})
+
+-- ฟังก์ชัน Auto Attack
 function attackEnemies()
     local players = game:GetService("Players")
     local localPlayer = players.LocalPlayer
@@ -138,8 +170,6 @@ function attackEnemies()
     end
 end
 
--- Add UI Elements to Fluent
-
 -- ตั้งค่า Speed Hack
 local speedToggle = Tabs.Main:AddToggle("SpeedHackToggle", { Title = "Enable Speed Hack", Default = false })
 speedToggle:OnChanged(function()
@@ -151,7 +181,7 @@ local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
     Description = "Set your walking speed",
     Default = 50,
     Min = 0,
-    Max = 1000,
+    Max = 200,
     Rounding = 1,
     Callback = function(Value)
         getgenv().Speed = Value
@@ -167,27 +197,6 @@ autoAttackToggle:OnChanged(function()
     end
 end)
 
--- ตัวเลือกอาวุธ
-local weaponDropdown = Tabs.Main:AddDropdown("WeaponDropdown", {
-    Title = "Select Weapon",
-    Values = weapons,
-    Multi = false,
-    Default = 1,
-})
-
-weaponDropdown:OnChanged(function(Value)
-    shared.SelectedWeapon = Value
-end)
-
--- เพิ่มปุ่มรีเฟรชรายการอาวุธ
-local refreshButton = Tabs.Main:AddButton({
-    Title = "Refresh Weapons",
-    Description = "Refresh weapon list from backpack",
-    Callback = function()
-        refreshWeapons()
-    end
-})
-
 -- การตั้งค่า SaveManager และ InterfaceManager
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
@@ -202,9 +211,12 @@ SaveManager:LoadAutoloadConfig()
 
 -- แจ้งเตือนเมื่อโหลดสคริปต์
 Fluent:Notify({
-    Title = "Maru Hub",
-    Content = "The Maru script has been loaded.",
+    Title = "Fluent",
+    Content = "The script has been loaded.",
     Duration = 8
 })
 
 Window:SelectTab(1)
+
+-- เรียกใช้ฟังก์ชันรีเฟรชเมื่อเริ่มต้น
+refreshWeapons()
