@@ -1,29 +1,23 @@
--- สร้าง ScreenGui และปุ่มซ่อน/แสดง UI
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
-local toggleUIButton = Instance.new("TextButton")
-toggleUIButton.Size = UDim2.new(0, 200, 0, 50)
-toggleUIButton.Position = UDim2.new(0.5, -100, 0.9, -25)
-toggleUIButton.Text = "Hide UI"
-toggleUIButton.TextSize = 24
-toggleUIButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-toggleUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-toggleUIButton.Parent = screenGui
+local Window = Fluent:CreateWindow({
+    Title = "Maru Hub - Private Script" .. Fluent.Version,
+    SubTitle = "",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
 
-local uiVisible = true  -- ตัวแปรในการเช็คสถานะของ UI
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
 
--- ฟังก์ชันซ่อน/แสดง UI
-toggleUIButton.MouseButton1Click:Connect(function()
-    if uiVisible then
-        Window.Enabled = false   -- ซ่อน UI
-        toggleUIButton.Text = "Show UI"   -- เปลี่ยนข้อความของปุ่ม
-    else
-        Window.Enabled = true    -- แสดง UI
-        toggleUIButton.Text = "Hide UI"   -- เปลี่ยนข้อความของปุ่ม
-    end
-    uiVisible = not uiVisible  -- สลับสถานะการแสดง UI
-end)
+local Options = Fluent.Options
 
 -- ฟังก์ชันตั้งค่าเริ่มต้น
 shared.AutoAttack = false
@@ -56,8 +50,6 @@ local function bypassWalkSpeed()
     end
 end
 
-bypassWalkSpeed()
-
 -- อัปเดต WalkSpeed เมื่อตัวละครเกิดใหม่
 players.LocalPlayer.CharacterAdded:Connect(function(char)
     bypassWalkSpeed()
@@ -78,14 +70,21 @@ local function getWeaponsFromBackpack()
     local player = game:GetService("Players").LocalPlayer
     local backpack = player:WaitForChild("Backpack")
     local weapons = {}
-    
+
     for _, item in pairs(backpack:GetChildren()) do
         if item:IsA("Tool") then
             table.insert(weapons, item.Name)
         end
     end
-    
+
     return weapons
+end
+
+-- ฟังก์ชันรีเฟรชรายการอาวุธ
+local function refreshWeapons()
+    local weapons = getWeaponsFromBackpack()
+    weaponDropdown:SetValues(weapons)
+    shared.SelectedWeapon = weapons[1] or "Knife"  -- เลือกอาวุธแรกจากรายการ
 end
 
 -- ตั้งค่าอาวุธเริ่มต้น
@@ -139,77 +138,73 @@ function attackEnemies()
     end
 end
 
--- เรียกใช้ Fluent UI
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+-- Add UI Elements to Fluent
 
-local Window = Fluent:CreateWindow({
-    Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by dawid",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+-- ตั้งค่า Speed Hack
+local speedToggle = Tabs.Main:AddToggle("SpeedHackToggle", { Title = "Enable Speed Hack", Default = false })
+speedToggle:OnChanged(function()
+    getgenv().Enabled = Options.SpeedHackToggle.Value
+end)
+
+local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
+    Title = "Speed",
+    Description = "Set your walking speed",
+    Default = 50,
+    Min = 0,
+    Max = 400,
+    Rounding = 1,
+    Callback = function(Value)
+        getgenv().Speed = Value
+    end
 })
 
--- ฟังก์ชัน Toggle Auto Attack
-local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", {
-    Title = "Auto Attack",
-    Default = false,  -- เริ่มต้นคือปิด
-})
-
-autoAttackToggle:OnChanged(function(state)
-    shared.AutoAttack = state
+-- ฟังก์ชัน Auto Attack
+local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", { Title = "Enable Auto Attack", Default = false })
+autoAttackToggle:OnChanged(function()
+    shared.AutoAttack = Options.AutoAttackToggle.Value
     if shared.AutoAttack then
-        print("Auto Attack Enabled")
-        attackEnemies()  -- เรียกฟังก์ชันโจมตีอัตโนมัติ
-    else
-        print("Auto Attack Disabled")
+        attackEnemies()  -- เริ่มการโจมตีอัตโนมัติ
     end
 end)
 
--- ฟังก์ชัน Toggle Speed Hack
-local speedHackToggle = Tabs.Main:AddToggle("SpeedHackToggle", {
-    Title = "Speed Hack",
-    Default = false,  -- เริ่มต้นคือปิด
-})
-
-speedHackToggle:OnChanged(function(state)
-    getgenv().Enabled = state
-    if getgenv().Enabled then
-        print("Speed Hack Enabled")
-    else
-        print("Speed Hack Disabled")
-    end
-end)
-
--- ฟังก์ชันเปลี่ยนอาวุธ
+-- ตัวเลือกอาวุธ
 local weaponDropdown = Tabs.Main:AddDropdown("WeaponDropdown", {
     Title = "Select Weapon",
     Values = weapons,
-    Default = shared.SelectedWeapon,
+    Multi = false,
+    Default = 1,
 })
 
-weaponDropdown:OnChanged(function(selectedWeapon)
-    shared.SelectedWeapon = selectedWeapon
-    print("Selected Weapon: " .. shared.SelectedWeapon)
+weaponDropdown:OnChanged(function(Value)
+    shared.SelectedWeapon = Value
 end)
 
--- ฟังก์ชันปรับความเร็ว
-local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
-    Title = "Speed",
-    Min = 10,
-    Max = 200,
-    Default = getgenv().Speed,
-    Rounding = 1,
+-- เพิ่มปุ่มรีเฟรชรายการอาวุธ
+local refreshButton = Tabs.Main:AddButton({
+    Title = "Refresh Weapons",
+    Description = "Refresh weapon list from backpack",
+    Callback = function()
+        refreshWeapons()
+    end
 })
 
-speedSlider:OnChanged(function(value)
-    getgenv().Speed = value
-    print("Speed set to: " .. getgenv().Speed)
-end)
+-- การตั้งค่า SaveManager และ InterfaceManager
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+SaveManager:IgnoreThemeSettings()
+InterfaceManager:SetFolder("FluentScriptHub")
+SaveManager:SetFolder("FluentScriptHub/specific-game")
 
--- การโหลดการตั้งค่าที่บันทึกไว้
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
+
 SaveManager:LoadAutoloadConfig()
+
+-- แจ้งเตือนเมื่อโหลดสคริปต์
+Fluent:Notify({
+    Title = "Maru Hub",
+    Content = "The Maru script has been loaded.",
+    Duration = 8
+})
+
+Window:SelectTab(1)
