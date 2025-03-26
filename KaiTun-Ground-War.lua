@@ -61,7 +61,7 @@ print("LocalPlayer found: " .. LocalPlayer.Name)
 
 -- Wait for PlayerGui to be available
 print("Waiting for PlayerGui...")
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 10)
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 1)
 if not PlayerGui then
     warn("PlayerGui not found after waiting 10 seconds, script cannot run")
     return
@@ -75,7 +75,7 @@ local function updateWeaponList()
         local player = LocalPlayer
         
         -- รอให้ Backpack พร้อม (เพิ่มการรอคอยที่นี่)
-        local backpack = player:WaitForChild("Backpack", 5)
+        local backpack = player:WaitForChild("Backpack", 1)
         if not backpack then
             warn("Backpack not found after waiting")
             return false
