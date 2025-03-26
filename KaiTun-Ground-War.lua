@@ -24,11 +24,13 @@ local Settings = {
     AutoTeleport = true,
     TeleportInterval = 1,
     TeleportLocations = {
-        Vector3.new(10, 35, 20),
-        Vector3.new(30, 35, -15),
-        Vector3.new(-25, 35, 10),
-        Vector3.new(15, 35, 40),
-        Vector3.new(-10, 35, -30)
+        Vector3.new(1000, 75, 2000),
+        Vector3.new(300, 75, -15),
+        Vector3.new(-25, 75, 10000),
+        Vector3.new(150, 75, 400),
+        Vector3.new(-300005, 75, 10),
+        Vector3.new(150, 750, 40),
+        Vector3.new(-10999, 75, -30)
     }
 }
 
@@ -41,16 +43,14 @@ local TeleportService = game:GetService("TeleportService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local UserInputService = game:GetService("UserInputService")
 
--- Wait for LocalPlayer to be available
+-- Wait for LocalPlayer
 print("Waiting for LocalPlayer...")
 local LocalPlayer
 local maxWaitTime = 5
 local startTime = tick()
 while not LocalPlayer and (tick() - startTime) < maxWaitTime do
     LocalPlayer = Players.LocalPlayer
-    if not LocalPlayer then
-        task.wait(0.5)
-    end
+    task.wait(0.5)
 end
 
 if not LocalPlayer then
@@ -59,44 +59,86 @@ if not LocalPlayer then
 end
 print("LocalPlayer found: " .. LocalPlayer.Name)
 
--- Wait for PlayerGui to be available
+-- Wait for PlayerGui
 print("Waiting for PlayerGui...")
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 1)
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 10)
 if not PlayerGui then
     warn("PlayerGui not found after waiting 10 seconds, script cannot run")
     return
 end
 print("PlayerGui found")
 
--- Weapon System (แก้ไขแล้ว)
+-- Weapon System (ปรับเงื่อนไขให้เข้มงวดขึ้น)
 local function updateWeaponList()
     local success, result = pcall(function()
         _G.AutofarmScript.Weapons = {}
         local player = LocalPlayer
         
-        -- รอให้ Backpack พร้อม (เพิ่มการรอคอยที่นี่)
-        local backpack = player:WaitForChild("Backpack", 1)
+        local backpack = player:WaitForChild("Backpack", 10)
         if not backpack then
-            warn("Backpack not found after waiting")
+            warn("Backpack not found after waiting 10 seconds")
             return false
         end
         
-        -- ตรวจสอบทั้งใน Backpack และ Character
-        local locationsToCheck = {backpack}
-        local character = player.Character
-        if character then
-            table.insert(locationsToCheck, character)
+        local character = player.Character or player.CharacterAdded:Wait()
+        if not character then
+            warn("Character not found after waiting")
+            return false
         end
         
-        -- ตรวจสอบทุกตำแหน่งที่อาจมีอาวุธ
-        for _, location in ipairs(locationsToCheck) do
-            for _, item in pairs(location:GetChildren()) do
-                if item:IsA("Tool") then
-                    -- ตรวจสอบว่าเป็นอาวุธจริงๆ (อาจเพิ่มเงื่อนไขเพิ่มเติมตามเกม)
-                    table.insert(_G.AutofarmScript.Weapons, item.Name)
-                    print("Found weapon: " .. item.Name)
+        print("Checking Character for potential weapons...")
+        for _, item in pairs(character:GetChildren()) do
+            print("Character item: " .. item.Name .. " (Class: " .. item.ClassName .. ")")
+            if item:IsA("Tool") then
+                table.insert(_G.AutofarmScript.Weapons, item)
+                shared.SelectedWeapon = item
+                local humanoid = character:FindFirstChild("Humanoid")
+                if humanoid and item.Parent ~= character then
+                    humanoid:EquipTool(item)
+                end
+                print("Found and using equipped Tool immediately: " .. item.Name)
+                return true
+            elseif item:IsA("Accessory") or item:IsA("Model") then
+                -- ปรับเงื่อนไขให้เข้มงวดขึ้น
+                local isWeapon = (item:FindFirstChild("Handle") or item.Name:lower():match("sword") or item.Name:lower():match("gun") or item.Name:lower():match("weapon"))
+                    and not item.Name:lower():match("hair") -- ข้ามไอเทมที่เป็น "Hair"
+                    and not item.Name:lower():match("hat") -- ข้ามไอเทมที่เป็น "Hat"
+                if isWeapon then
+                    table.insert(_G.AutofarmScript.Weapons, item)
+                    shared.SelectedWeapon = item
+                    print("Found potential weapon (Accessory/Model): " .. item.Name)
+                    local humanoid = character:FindFirstChild("Humanoid")
+                    if humanoid and item:IsA("Tool") and item.Parent ~= character then
+                        humanoid:EquipTool(item)
+                    end
+                    return true
+                else
+                    print("Skipped non-weapon item: " .. item.Name)
                 end
             end
+        end
+        
+        print("Checking Backpack for potential weapons...")
+        for _, item in pairs(backpack:GetChildren()) do
+            print("Backpack item: " .. item.Name .. " (Class: " .. item.ClassName .. ")")
+            if item:IsA("Tool") then
+                table.insert(_G.AutofarmScript.Weapons, item)
+                print("Found Tool in backpack: " .. item.Name)
+            elseif item:IsA("Accessory") or item:IsA("Model") then
+                local isWeapon = (item:FindFirstChild("Handle") or item.Name:lower():match("sword") or item.Name:lower():match("gun") or item.Name:lower():match("weapon"))
+                    and not item.Name:lower():match("hair")
+                    and not item.Name:lower():match("hat")
+                if isWeapon then
+                    table.insert(_G.AutofarmScript.Weapons, item)
+                    print("Found potential weapon (Accessory/Model) in backpack: " .. item.Name)
+                else
+                    print("Skipped non-weapon item in backpack: " .. item.Name)
+                end
+            end
+        end
+        
+        if #_G.AutofarmScript.Weapons == 0 then
+            warn("No weapons (Tool, Accessory, or Model) found in Character or Backpack")
         end
         
         return #_G.AutofarmScript.Weapons > 0
@@ -120,17 +162,34 @@ local function selectNextWeapon()
             return false
         end
         
-        _G.AutofarmScript.currentWeaponIndex = (_G.AutofarmScript.currentWeaponIndex % #_G.AutofarmScript.Weapons) + 1
+        if shared.SelectedWeapon and shared.SelectedWeapon.Parent == LocalPlayer.Character then
+            if _G.AutofarmScript.UIElements then
+                _G.AutofarmScript.UIElements.Weapon.Text = "Weapon: " .. shared.SelectedWeapon.Name .. " (Equipped)"
+                _G.AutofarmScript.UIElements.Weapon.TextColor3 = Color3.fromRGB(0, 255, 0)
+            end
+            return true
+        end
         
+        _G.AutofarmScript.currentWeaponIndex = (_G.AutofarmScript.currentWeaponIndex % #_G.AutofarmScript.Weapons) + 1
         shared.SelectedWeapon = _G.AutofarmScript.Weapons[_G.AutofarmScript.currentWeaponIndex]
+        
+        local character = LocalPlayer.Character
+        if character then
+            local humanoid = character:FindFirstChild("Humanoid")
+            if humanoid and shared.SelectedWeapon:IsA("Tool") then
+                humanoid:UnequipTools()
+                humanoid:EquipTool(shared.SelectedWeapon)
+            end
+        end
+        
         if _G.AutofarmScript.UIElements then
-            _G.AutofarmScript.UIElements.Weapon.Text = "Weapon: " .. shared.SelectedWeapon 
+            _G.AutofarmScript.UIElements.Weapon.Text = "Weapon: " .. shared.SelectedWeapon.Name 
                 .. " (" .. _G.AutofarmScript.currentWeaponIndex .. "/" .. #_G.AutofarmScript.Weapons .. ")"
             _G.AutofarmScript.UIElements.Weapon.TextColor3 = Color3.fromRGB(255, 255, 0)
             task.wait(0.5)
             _G.AutofarmScript.UIElements.Weapon.TextColor3 = Color3.fromRGB(255, 255, 255)
         end
-        print("Selected weapon: " .. shared.SelectedWeapon .. " (Index: " .. _G.AutofarmScript.currentWeaponIndex .. ")")
+        print("Selected weapon: " .. shared.SelectedWeapon.Name)
         return true
     end)
 
@@ -139,6 +198,23 @@ local function selectNextWeapon()
         return false
     end
     return result
+end
+
+-- Auto Weapon Switch (เพิ่มฟังก์ชันที่ขาดหายไป)
+local function autoWeaponSwitch()
+    local success, result = pcall(function()
+        print("Starting auto weapon switch...")
+        while Settings.AutoWeaponSwitch and task.wait(Settings.SwitchInterval) do
+            selectNextWeapon()
+            if _G.AutofarmScript.UIElements then
+                _G.AutofarmScript.UIElements.NextSwitch.Text = "Next Switch: " .. Settings.SwitchInterval .. "s"
+            end
+        end
+    end)
+
+    if not success then
+        warn("Error in autoWeaponSwitch: " .. tostring(result))
+    end
 end
 
 -- Teleport System
@@ -153,15 +229,12 @@ local function randomTeleport()
         if hrp and #Settings.TeleportLocations > 0 then
             local randomPoint = Settings.TeleportLocations[math.random(1, #Settings.TeleportLocations)]
             hrp.CFrame = CFrame.new(randomPoint)
-            
             if _G.AutofarmScript.UIElements then
                 _G.AutofarmScript.UIElements.Teleport.Text = "Teleport: Active (" .. math.floor(randomPoint.X) .. "," .. math.floor(randomPoint.Z) .. ")"
                 _G.AutofarmScript.UIElements.Teleport.TextColor3 = Color3.fromRGB(0, 255, 255)
                 task.wait(1)
                 _G.AutofarmScript.UIElements.Teleport.TextColor3 = Color3.fromRGB(200, 200, 255)
             end
-        else
-            warn("Cannot teleport: HumanoidRootPart not found or no teleport locations")
         end
     end)
 
@@ -170,48 +243,73 @@ local function randomTeleport()
     end
 end
 
+-- Auto Teleport System (เพิ่มฟังก์ชันที่ขาดหายไป)
+local function autoTeleportSystem()
+    local success, result = pcall(function()
+        print("Starting auto teleport system...")
+        while Settings.AutoTeleport and task.wait(Settings.TeleportInterval) do
+            randomTeleport()
+            if _G.AutofarmScript.UIElements then
+                _G.AutofarmScript.UIElements.NextTeleport.Text = "Next Teleport: " .. Settings.TeleportInterval .. "s"
+            end
+        end
+    end)
+
+    if not success then
+        warn("Error in autoTeleportSystem: " .. tostring(result))
+    end
+end
+
 -- Attack System
 local function attackEnemies()
     local success, result = pcall(function()
-        local localPlayer = LocalPlayer
-        local remoteEvent = ReplicatedStorage:FindFirstChild("ACS_Engine") and 
-                           ReplicatedStorage.ACS_Engine:FindFirstChild("Events") and 
-                           ReplicatedStorage.ACS_Engine.Events:FindFirstChild("Damage")
+        local remoteEvent = ReplicatedStorage:WaitForChild("ACS_Engine"):WaitForChild("Events"):WaitForChild("Damage")
         
-        if not remoteEvent then 
-            warn("Damage remote event not found")
-            return 
-        end
-
-        while Settings.AutoAttack and task.wait() do
-            if not shared.SelectedWeapon and not selectNextWeapon() then
-                task.wait(1)
+        while Settings.AutoAttack and task.wait(0.1) do
+            if not shared.SelectedWeapon then
+                selectNextWeapon()
+                task.wait(0.5)
                 continue
             end
-
+            
+            local character = LocalPlayer.Character
+            if not character or not character:FindFirstChild("Humanoid") or not character:FindFirstChild("HumanoidRootPart") then
+                task.wait(0.5)
+                continue
+            end
+            
+            local humanoid = character:FindFirstChild("Humanoid")
+            if shared.SelectedWeapon:IsA("Tool") and shared.SelectedWeapon.Parent ~= character then
+                humanoid:EquipTool(shared.SelectedWeapon)
+            end
+            
             for _, player in pairs(Players:GetPlayers()) do
-                if player ~= localPlayer and player.Team ~= localPlayer.Team then
+                if player ~= LocalPlayer and player.Team ~= LocalPlayer.Team then
                     local target = player.Character
                     if target and target:FindFirstChild("HumanoidRootPart") then
                         local head = target:FindFirstChild("Head")
-                        local humanoid = target:FindFirstChild("Humanoid")
-
-                        if head and humanoid and humanoid.Health > 0 then
+                        local targetHumanoid = target:FindFirstChild("Humanoid")
+                        
+                        if head and targetHumanoid and targetHumanoid.Health > 0 then
                             pcall(function()
+                                local weaponName = shared.SelectedWeapon.Name
+                                if not shared.SelectedWeapon:IsA("Tool") then
+                                    weaponName = "CustomWeapon_" .. weaponName
+                                end
                                 remoteEvent:InvokeServer({
-                                    shellMaxDist = 1000,
-                                    origin = localPlayer.Character and localPlayer.Character:GetPivot().Position or Vector3.zero,
-                                    weaponName = shared.SelectedWeapon,
+                                    shellMaxDist = 10000,
+                                    origin = character:GetPivot().Position,
+                                    weaponName = weaponName,
                                     bulletID = "Bullet_" .. math.random(100000, 999999),
-                                    currentPenetrationCount = 5,
-                                    shellSpeed = 100,
+                                    currentPenetrationCount = 50,
+                                    shellSpeed = 1000,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
                                     registeredParts = {[head] = true},
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, humanoid, 100000, 1, head)
+                                }, targetHumanoid, 100000, 1, head)
                             end)
                         end
                     end
@@ -225,7 +323,7 @@ local function attackEnemies()
     end
 end
 
--- UI System with Draggable Functionality
+-- UI System
 local function createUI()
     local success, result = pcall(function()
         print("Creating UI...")
@@ -295,11 +393,7 @@ local function createUI()
             _G.AutofarmScript.UIElements[name] = label
         end
 
-        -- Make the UI draggable
-        local dragging = false
-        local dragStart = nil
-        local startPos = nil
-
+        local dragging, dragStart, startPos
         mainFrame.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 dragging = true
@@ -318,12 +412,7 @@ local function createUI()
             if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
                 if not input.Position or not dragStart then return end
                 local delta = input.Position - dragStart
-                mainFrame.Position = UDim2.new(
-                    startPos.X.Scale,
-                    startPos.X.Offset + delta.X,
-                    startPos.Y.Scale,
-                    startPos.Y.Offset + delta.Y
-                )
+                mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
             end
         end)
         print("UI created successfully")
@@ -334,126 +423,117 @@ local function createUI()
     end
 end
 
--- Auto Systems
-local function autoTeleportSystem()
-    local success, result = pcall(function()
-        print("Starting autoTeleportSystem...")
-        while Settings.AutoTeleport and task.wait(1) do
-            local timer = Settings.TeleportInterval
-            while timer > 0 and Settings.AutoTeleport do
-                if _G.AutofarmScript.UIElements then
-                    _G.AutofarmScript.UIElements.NextTeleport.Text = "Next Teleport: " .. timer .. "s"
-                end
-                task.wait(1)
-                timer -= 1
-            end
-            if Settings.AutoTeleport then
-                randomTeleport()
-            end
-        end
-    end)
-
-    if not success then
-        warn("Error in autoTeleportSystem: " .. tostring(result))
-    end
-end
-
-local function autoWeaponSwitch()
-    local success, result = pcall(function()
-        print("Starting autoWeaponSwitch...")
-        while Settings.AutoWeaponSwitch and task.wait(1) do
-            local timer = Settings.SwitchInterval
-            while timer > 0 and Settings.AutoWeaponSwitch do
-                if _G.AutofarmScript.UIElements then
-                    _G.AutofarmScript.UIElements.NextSwitch.Text = "Next Switch: " .. timer .. "s"
-                end
-                task.wait(1)
-                timer -= 1
-            end
-            if Settings.AutoWeaponSwitch then
-                selectNextWeapon()
-            end
-        end
-    end)
-
-    if not success then
-        warn("Error in autoWeaponSwitch: " .. tostring(result))
-    end
-end
-
 -- Deploy System
 local function attemptDeploy()
     local success = false
     local maxAttempts = 1e99
     local delayBetweenAttempts = 1
-
-    local touchX = 471.50885009765625
-    local touchY = 412.12939453125
+    local baseX = 700
+    local baseY = 650
+    local randomRange = 30
 
     print("Waiting for UI to load before attempting deploy...")
-    task.wait(5)
+    task.wait(10)
 
-    local deployButton
-    for _, gui in pairs(PlayerGui:GetChildren()) do
-        if gui:IsA("ScreenGui") then
-            for _, frame in pairs(gui:GetDescendants()) do
-                if frame:IsA("TextButton") and frame.Text:upper() == "DEPLOY" then
-                    deployButton = frame
-                    break
-                end
-            end
-        end
-        if deployButton then break end
-    end
-
-    if not deployButton then
-        warn("DEPLOY button not found in PlayerGui, cannot deploy")
-        return false
-    end
-
-    for attempt = 1, maxAttempts do
-        local s, e = pcall(function()
-            print("Attempting to touch at position: (" .. touchX .. ", " .. touchY .. ")")
-            VirtualInputManager:SendTouchEvent(1, Enum.UserInputState.Begin, touchX, touchY, game)
-            task.wait(0.2)
-            VirtualInputManager:SendTouchEvent(1, Enum.UserInputState.End, touchX, touchY, game)
-            success = true
-        end)
-
-        if success then
-            print("Successfully touched at position on attempt " .. attempt)
-            task.wait(1)
-            deployButton = nil
-            for _, gui in pairs(PlayerGui:GetChildren()) do
-                if gui:IsA("ScreenGui") then
-                    for _, frame in pairs(gui:GetDescendants()) do
-                        if frame:IsA("TextButton") and frame.Text:upper() == "DEPLOY" then
-                            deployButton = frame
-                            break
-                        end
+    print("Checking for DEPLOY button in UI...")
+    local deployButton = nil
+    for attempt = 1, 3 do
+        for _, gui in pairs(PlayerGui:GetChildren()) do
+            if gui:IsA("ScreenGui") then
+                for _, frame in pairs(gui:GetDescendants()) do
+                    if frame:IsA("TextButton") and frame.Text:upper() == "DEPLOY" and frame.Visible then
+                        deployButton = frame
+                        print("Found DEPLOY button at attempt " .. attempt)
+                        break
                     end
                 end
-                if deployButton then break end
             end
-
-            if deployButton and deployButton.Parent and deployButton.Visible then
-                warn("DEPLOY button is still visible after touching, deploy might have failed")
-                success = false
-            else
-                success = true
-                break
-            end
-        else
-            warn("Deploy attempt " .. attempt .. " failed: " .. tostring(e))
+            if deployButton then break end
         end
+        if deployButton then break end
+        warn("DEPLOY button not found on attempt " .. attempt .. ", retrying in 2 seconds...")
+        task.wait(2)
+    end
 
-        if attempt < maxAttempts then
-            task.wait(delayBetweenAttempts)
+    if deployButton then
+        local buttonPos = deployButton.AbsolutePosition + deployButton.AbsoluteSize / 2
+        for attempt = 1, maxAttempts do
+            local s, e = pcall(function()
+                print("Attempting to click DEPLOY button at position: (" .. buttonPos.X .. ", " .. buttonPos.Y .. ")")
+                VirtualInputManager:SendMouseButtonEvent(buttonPos.X, buttonPos.Y, 0, true, game, 1)
+                task.wait(0.2)
+                VirtualInputManager:SendMouseButtonEvent(buttonPos.X, buttonPos.Y, 0, false, game, 1)
+                success = true
+            end)
+
+            if success then
+                print("Successfully clicked DEPLOY button on attempt " .. attempt)
+                task.wait(1)
+                if deployButton.Parent and deployButton.Visible then
+                    warn("DEPLOY button still visible after click, deploy might have failed")
+                    success = false
+                else
+                    success = true
+                    break
+                end
+            else
+                warn("Click attempt " .. attempt .. " failed: " .. tostring(e))
+            end
+
+            if attempt < maxAttempts then
+                task.wait(delayBetweenAttempts)
+            end
+        end
+    else
+        warn("DEPLOY button not found in UI, falling back to random click around (" .. baseX .. ", " .. baseY .. ")...")
+        for attempt = 1, maxAttempts do
+            local clickX = baseX + math.random(-randomRange, randomRange)
+            local clickY = baseY + math.random(-randomRange, randomRange)
+            
+            local s, e = pcall(function()
+                print("Attempting to click at random position: (" .. clickX .. ", " .. clickY .. ")")
+                VirtualInputManager:SendMouseButtonEvent(clickX, clickY, 0, true, game, 1)
+                task.wait(0.2)
+                VirtualInputManager:SendMouseButtonEvent(clickX, clickY, 0, false, game, 1)
+                success = true
+            end)
+
+            if success then
+                print("Successfully clicked at random position on attempt " .. attempt)
+                task.wait(1)
+                local deployButtonCheck = nil
+                for _, gui in pairs(PlayerGui:GetChildren()) do
+                    if gui:IsA("ScreenGui") then
+                        for _, frame in pairs(gui:GetDescendants()) do
+                            if frame:IsA("TextButton") and frame.Text:upper() == "DEPLOY" and frame.Visible then
+                                deployButtonCheck = frame
+                                break
+                            end
+                        end
+                    end
+                    if deployButtonCheck then break end
+                end
+
+                if deployButtonCheck then
+                    warn("DEPLOY button still visible after click, deploy might have failed")
+                    success = false
+                else
+                    success = true
+                    break
+                end
+            else
+                warn("Click attempt " .. attempt .. " failed: " .. tostring(e))
+            end
+
+            if attempt < maxAttempts then
+                task.wait(delayBetweenAttempts)
+            end
         end
     end
 
-    if not success then
-        warn("Failed to deploy after " .. maxAttempts .. " attempts")
+    if _G.AutofarmScript.UIElements then
+        _G.AutofarmScript.UIElements.Status.Text = success and "Status: Deployed" or "Status: Deploy Failed"
+        _G.AutofarmScript.UIElements.Status.TextColor3 = success and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 165, 0)
     end
 
     return success
@@ -597,7 +677,6 @@ local function setupAntiAFK()
     end
 end
 
--- Auto Refresh Weapons System (เพิ่มใหม่)
 local function autoRefreshWeapons()
     while task.wait(10) do
         updateWeaponList()
@@ -612,38 +691,20 @@ local function initialize()
     local success, result = pcall(function()
         print("Initializing script...")
         
-        print("Step 1: Setting up walk speed...")
         setupWalkSpeed()
-        
-        print("Step 2: Creating UI...")
         createUI()
-        
-        print("Step 3: Setting up auto respawn...")
         setupAutoRespawn()
-        
-        print("Step 4: Setting up anti-AFK...")
         setupAntiAFK()
-        
-        print("Step 5: Selecting initial weapon...")
         selectNextWeapon()
         
-        print("Step 6: Starting attack system...")
         task.spawn(attackEnemies)
-        
-        print("Step 7: Starting weapon switch system...")
         task.spawn(autoWeaponSwitch)
-        
-        print("Step 8: Starting teleport system...")
         task.spawn(autoTeleportSystem)
-        
-        print("Step 9: Starting player count check...")
         task.spawn(checkPlayerCount)
-        
-        print("Step 10: Starting auto refresh weapons system...")
         task.spawn(autoRefreshWeapons)
         
         if Settings.AutoStart then
-            print("Step 11: Attempting initial deploy...")
+            print("Attempting initial deploy...")
             task.wait(3)
             local deployed = attemptDeploy()
             if not deployed and _G.AutofarmScript.UIElements then
