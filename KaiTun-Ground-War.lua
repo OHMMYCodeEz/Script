@@ -426,11 +426,11 @@ end
 -- Deploy System
 local function attemptDeploy()
     local success = false
-    local maxAttempts = 5
+    local maxAttempts = 1e99
     local delayBetweenAttempts = 1
     local baseX = 700
     local baseY = 650
-    local randomRange = 30
+    local randomRange = 10
 
     print("Waiting for UI to load before attempting deploy...")
     task.wait(10)
@@ -443,6 +443,8 @@ local function attemptDeploy()
                 for _, frame in pairs(gui:GetDescendants()) do
                     if frame:IsA("TextButton") and frame.Text:upper() == "DEPLOY" and frame.Visible then
                         deployButton = frame
+                        VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+                        VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
                         print("Found DEPLOY button at attempt " .. attempt)
                         break
                     end
@@ -452,7 +454,7 @@ local function attemptDeploy()
         end
         if deployButton then break end
         warn("DEPLOY button not found on attempt " .. attempt .. ", retrying in 2 seconds...")
-        task.wait(2)
+        task.wait(1)
     end
 
     if deployButton then
