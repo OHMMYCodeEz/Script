@@ -24,13 +24,13 @@ local Settings = {
     AutoTeleport = true,
     TeleportInterval = 1,
     TeleportLocations = {
-        Vector3.new(100, 75, 200),
-        Vector3.new(300, 75, -15),
-        Vector3.new(-25, 75, 100),
-        Vector3.new(150, 75, 400),
-        Vector3.new(-305, 75, 10),
-        Vector3.new(150, 70, 40),
-        Vector3.new(-109, 75, -30)
+        Vector3.new(100, 175, 200),
+        Vector3.new(300, 175, -15),
+        Vector3.new(-25, 175, 100),
+        Vector3.new(150, 175, 400),
+        Vector3.new(-305, 175, 10),
+        Vector3.new(150, 170, 40),
+        Vector3.new(-109, 175, -30)
     }
 }
 
@@ -74,9 +74,9 @@ local function updateWeaponList()
         _G.AutofarmScript.Weapons = {}
         local player = LocalPlayer
         
-        local backpack = player:WaitForChild("Backpack", 10)
+        local backpack = player:WaitForChild("Backpack", 5)
         if not backpack then
-            warn("Backpack not found after waiting 10 seconds")
+            warn("Backpack not found after waiting 5 seconds")
             return false
         end
         
@@ -300,9 +300,9 @@ local function attackEnemies()
                                     shellMaxDist = 10000,
                                     origin = character:GetPivot().Position,
                                     weaponName = weaponName,
-                                    bulletID = "Bullet_" .. math.random(100000, 999999),
-                                    currentPenetrationCount = 50,
-                                    shellSpeed = 1000,
+                                    bulletID = "Bullet_" .. math.random(10000000, 99999999),
+                                    currentPenetrationCount = 10,
+                                    shellSpeed = 0,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
                                     registeredParts = {[head] = true},
@@ -461,8 +461,10 @@ local function attemptDeploy()
             local s, e = pcall(function()
                 print("Attempting to click DEPLOY button at position: (" .. buttonPos.X .. ", " .. buttonPos.Y .. ")")
                 VirtualInputManager:SendMouseButtonEvent(buttonPos.X, buttonPos.Y, 0, true, game, 1)
+                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
                 task.wait(0.2)
                 VirtualInputManager:SendMouseButtonEvent(buttonPos.X, buttonPos.Y, 0, false, game, 1)
+                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
                 success = true
             end)
 
