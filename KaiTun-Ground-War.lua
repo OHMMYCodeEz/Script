@@ -710,6 +710,8 @@ local function initialize()
         task.spawn(autoRefreshWeapons)
         
         if Settings.AutoStart then
+            VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
             print("Attempting initial deploy...")
             task.wait(3)
             local deployed = attemptDeploy()
