@@ -493,8 +493,10 @@ local function attemptDeploy()
             local s, e = pcall(function()
                 print("Attempting to click at random position: (" .. clickX .. ", " .. clickY .. ")")
                 VirtualInputManager:SendMouseButtonEvent(clickX, clickY, 0, true, game, 1)
+                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
                 task.wait(0.2)
                 VirtualInputManager:SendMouseButtonEvent(clickX, clickY, 0, false, game, 1)
+                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
                 success = true
             end)
 
@@ -564,7 +566,7 @@ local function setupAutoRespawn()
             end
             
             if Settings.AutoStart then
-                task.wait(5)
+                task.wait(2)
                 local deployed = attemptDeploy()
                 if not deployed and _G.AutofarmScript.UIElements then
                     _G.AutofarmScript.UIElements.Status.Text = "Status: Deploy Failed"
