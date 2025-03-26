@@ -206,7 +206,7 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 Window:SelectTab(1)
 
 Fluent:Notify({
-    Title = "Maru Hub",
+    Title = "Maru Hub Private",
     Content = "The script has been loaded.",
     Duration = 8
 })
