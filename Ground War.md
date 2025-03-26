@@ -73,7 +73,7 @@ Title.BackgroundTransparency = 1
 Title.Font = Enum.Font.SourceSansBold
 Title.TextSize = 20
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Text = "👳🏿‍♂️ Maru Hub Private"
+Title.Text = "👳🏿‍♂️ Maru Hub Private  "
 Title.TextScaled = true
 
 local Checkbox = Instance.new("TextButton")
@@ -104,7 +104,6 @@ WeaponButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 WeaponButton.Font = Enum.Font.SourceSans
 WeaponButton.TextSize = 16
 WeaponButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-WeaponButton.Text = "Select Weapon"
 
 local RefreshButton = Instance.new("TextButton")
 RefreshButton.Parent = MainFrame
@@ -139,7 +138,7 @@ SpeedLabel.Text = "Speed:"
 
 local SpeedValue = Instance.new("TextLabel")
 SpeedValue.Parent = MainFrame
-SpeedValue.Size = UDim2.new(0, 85, 0, 20)
+SpeedValue.Size = UDim2.new(0, 85, -0.10, 20)
 SpeedValue.Position = UDim2.new(0, 100, 0, 150)
 SpeedValue.BackgroundTransparency = 1
 SpeedValue.Font = Enum.Font.SourceSans
@@ -169,6 +168,28 @@ SpeedSliderKnob.Position = UDim2.new((getgenv().Speed - 16) / 200, 0, 0, -4) -- 
 SpeedSliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SpeedSliderKnob.BorderSizePixel = 0
 SpeedSliderKnob.Text = ""
+
+-- ปุ่มพับ/ขยาย GUI
+local FoldButton = Instance.new("TextButton")
+FoldButton.Parent = MainFrame
+FoldButton.Size = UDim2.new(0, 20, 0, 20)
+FoldButton.Position = UDim2.new(1, -0, 0, 0)
+FoldButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+FoldButton.Font = Enum.Font.SourceSansBold
+FoldButton.TextSize = 16
+FoldButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+FoldButton.Text = "−"
+
+-- ปุ่มซ่อน/แสดง GUI
+local HideButton = Instance.new("TextButton")
+HideButton.Parent = ScreenGui
+HideButton.Size = UDim2.new(0, 40, 0, 40)
+HideButton.Position = UDim2.new(0.95, -40, 0, 0)
+HideButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+HideButton.Font = Enum.Font.SourceSansBold
+HideButton.TextSize = 20
+HideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+HideButton.Text = "✖"
 
 -- ฟังก์ชันดึงรายการอาวุธจาก Backpack
 local function getWeaponsFromBackpack()
@@ -257,7 +278,7 @@ end)
 
 -- Speed Toggle และ Slider Logic
 local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("User InputService")
+local UserInputService = game:GetService("UserInputService")
 
 SpeedToggle.MouseButton1Click:Connect(function()
     getgenv().Enabled = not getgenv().Enabled
@@ -270,13 +291,13 @@ SpeedSliderKnob.MouseButton1Down:Connect(function()
     dragging = true
 end)
 
-User InputService.InputEnded:Connect(function(input, gameProcessedEvent)
+UserInputService.InputEnded:Connect(function(input, gameProcessedEvent)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = false
     end
 end)
 
-User InputService.InputChanged:Connect(function(input, gameProcessedEvent)
+UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
     if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
         local mousePos = UserInputService:GetMouseLocation()
         local mouseX = mousePos.X - SpeedSliderBar.AbsolutePosition.X
@@ -307,6 +328,12 @@ local function toggleFold()
     local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
     local tween = TweenService:Create(MainFrame, tweenInfo, {Size = targetSize})
     tween:Play()
+    FoldButton.Text = isGuiExpanded and "−" or "+"
+    
+    if not isGuiExpanded and DropdownFrame then
+        DropdownFrame:Destroy()
+        dropdownVisible = false
+    end
     
     Checkbox.Visible = isGuiExpanded
     Label.Visible = isGuiExpanded
@@ -320,6 +347,8 @@ local function toggleFold()
     SpeedSliderFill.Visible = isGuiExpanded
 end
 
+FoldButton.MouseButton1Click:Connect(toggleFold)
+
 -- ฟังก์ชันซ่อน/แสดง GUI
 local function toggleHide()
     isGuiVisible = not isGuiVisible
@@ -327,18 +356,29 @@ local function toggleHide()
     local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
     local tween = TweenService:Create(MainFrame, tweenInfo, {Position = targetPosition})
     tween:Play()
+    HideButton.Text = isGuiVisible and "✖" or "✔"
+    
+    if isGuiVisible and not isGuiExpanded then
+        isGuiExpanded = true
+        MainFrame.Size = UDim2.new(0, 200, 0, 180)
+        FoldButton.Text = "−"
+        Checkbox.Visible = true
+        Label.Visible = true
+        WeaponButton.Visible = true
+        RefreshButton.Visible = true
+        SpeedToggle.Visible = true
+        SpeedLabel.Visible = true
+        SpeedValue.Visible = true
+        SpeedSliderBar.Visible = true
+        SpeedSliderKnob.Visible = true
+        SpeedSliderFill.Visible = true
+    end
+    
+    if not isGuiVisible and DropdownFrame then
+        DropdownFrame:Destroy()
+        dropdownVisible = false
+    end
 end
-
--- ปุ่มซ่อน/แสดง GUI
-local HideButton = Instance.new("TextButton")
-HideButton.Parent = ScreenGui
-HideButton.Size = UDim2.new(0, 40, 0, 40)
-HideButton.Position = UDim2.new(0.95, -40, 0, 0)
-HideButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-HideButton.Font = Enum.Font.SourceSansBold
-HideButton.TextSize = 20
-HideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-HideButton.Text = "✖"
 
 HideButton.MouseButton1Click:Connect(toggleHide)
 
