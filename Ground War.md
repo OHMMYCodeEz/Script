@@ -6,7 +6,8 @@ local Window = Fluent:CreateWindow({
     Title = "Maru Hub - Private abc-" .. Fluent.Version,
     SubTitle = " ",
     TabWidth = 130,
-    Size = UDim2.fromOffset(480, 360),
+    Size = UDim2.fromScale(0.4, 0.4),  -- ปรับขนาดให้ยืดหยุ่นตามขนาดหน้าจอ
+    Position = UDim2.fromScale(0.1, 0.2),  -- ให้ UI เริ่มจากตำแหน่งที่เหมาะสมบนหน้าจอ
     Acrylic = true,
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl
@@ -186,7 +187,7 @@ local shellSpeedSlider = Tabs.Main:AddSlider("ShellSpeedSlider", {
     Default = 100,
     Min = 0,
     Max = 1000,
-    Rounding = 5,
+    Rounding = 2,
     Callback = function(Value)
         getgenv().ShellSpeed = Value
     end
@@ -198,7 +199,7 @@ local currentPenetrationCountSlider = Tabs.Main:AddSlider("CurrentPenetrationCou
     Default = 5,
     Min = 1,
     Max = 1000,
-    Rounding = 5,
+    Rounding = 0,
     Callback = function(Value)
         getgenv().CurrentPenetrationCount = Value
     end
@@ -210,7 +211,7 @@ local shellMaxDistSlider = Tabs.Main:AddSlider("ShellMaxDistSlider", {
     Default = 100,
     Min = 10,
     Max = 1000,
-    Rounding = 5,
+    Rounding = 2,
     Callback = function(Value)
         getgenv().ShellMaxDist = Value
     end
@@ -218,12 +219,12 @@ local shellMaxDistSlider = Tabs.Main:AddSlider("ShellMaxDistSlider", {
 
 -- เพิ่มสไลเดอร์สำหรับ Attack Value (ตำแหน่ง [3])
 local attackValueSlider = Tabs.Main:AddSlider("AttackValueSlider", {
-    Title = "Attack Value (ตำแหน่ง [3])",
+    Title = "Attack Damage (ตำแหน่ง [3])",
     Description = "Set the attack value (ตำแหน่ง [3])",
     Default = 10,
     Min = 1,
     Max = 1000,
-    Rounding = 5,
+    Rounding = 0,
     Callback = function(Value)
         getgenv().AttackValue = Value
     end
@@ -241,7 +242,7 @@ local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
     Default = 50,
     Min = 0,
     Max = 1000,
-    Rounding = 5,
+    Rounding = 2,
     Callback = function(Value)
         getgenv().Speed = Value
     end
