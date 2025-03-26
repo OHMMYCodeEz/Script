@@ -57,139 +57,233 @@ end)
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "AutoAttackGUI"
 ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+-- สไตล์สี
+local colors = {
+    background = Color3.fromRGB(25, 25, 30),
+    primary = Color3.fromRGB(40, 40, 50),
+    secondary = Color3.fromRGB(60, 60, 70),
+    accent = Color3.fromRGB(0, 170, 255),
+    text = Color3.fromRGB(240, 240, 240),
+    success = Color3.fromRGB(0, 200, 0),
+    danger = Color3.fromRGB(200, 0, 0)
+}
+
+-- ฟังก์ชันสร้าง UI Elements
+local function createButton(name, parent, size, position, text)
+    local button = Instance.new("TextButton")
+    button.Name = name
+    button.Parent = parent
+    button.Size = size
+    button.Position = position
+    button.BackgroundColor3 = colors.primary
+    button.TextColor3 = colors.text
+    button.Font = Enum.Font.GothamMedium
+    button.TextSize = 14
+    button.Text = text
+    button.AutoButtonColor = true
+    button.BorderSizePixel = 0
+    button.ZIndex = 2
+    
+    -- เอฟเฟกต์เมื่อโฮเวอร์
+    button.MouseEnter:Connect(function()
+        game:GetService("TweenService"):Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = colors.secondary}
+        ):Play()
+    end)
+    
+    button.MouseLeave:Connect(function()
+        game:GetService("TweenService"):Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = colors.primary}
+        ):Play()
+    end)
+    
+    return button
+end
+
+local function createLabel(name, parent, size, position, text)
+    local label = Instance.new("TextLabel")
+    label.Name = name
+    label.Parent = parent
+    label.Size = size
+    label.Position = position
+    label.BackgroundTransparency = 1
+    label.TextColor3 = colors.text
+    label.Font = Enum.Font.Gotham
+    label.TextSize = 14
+    label.Text = text
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.ZIndex = 2
+    return label
+end
+
+local function createToggle(name, parent, size, position, default)
+    local toggle = Instance.new("TextButton")
+    toggle.Name = name
+    toggle.Parent = parent
+    toggle.Size = size
+    toggle.Position = position
+    toggle.BackgroundColor3 = default and colors.success or colors.danger
+    toggle.TextColor3 = Color3.new(1,1,1)
+    toggle.Font = Enum.Font.GothamBold
+    toggle.TextSize = 14
+    toggle.Text = default and "✓" or "✗"
+    toggle.AutoButtonColor = false
+    toggle.BorderSizePixel = 0
+    toggle.ZIndex = 2
+    
+    -- เอฟเฟกต์เมื่อโฮเวอร์
+    toggle.MouseEnter:Connect(function()
+        game:GetService("TweenService"):Create(
+            toggle,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundTransparency = 0.3}
+        ):Play()
+    end)
+    
+    toggle.MouseLeave:Connect(function()
+        game:GetService("TweenService"):Create(
+            toggle,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundTransparency = 0}
+        ):Play()
+    end)
+    
+    return toggle
+end
+
+local function createSlider(name, parent, size, position, min, max, default)
+    local slider = Instance.new("Frame")
+    slider.Name = name
+    slider.Parent = parent
+    slider.Size = size
+    slider.Position = position
+    slider.BackgroundColor3 = colors.secondary
+    slider.BorderSizePixel = 0
+    slider.ZIndex = 2
+    
+    local fill = Instance.new("Frame")
+    fill.Name = "Fill"
+    fill.Parent = slider
+    fill.Size = UDim2.new((default - min)/(max - min), 0, 1, 0)
+    fill.Position = UDim2.new(0, 0, 0, 0)
+    fill.BackgroundColor3 = colors.accent
+    fill.BorderSizePixel = 0
+    fill.ZIndex = 3
+    
+    local knob = Instance.new("TextButton")
+    knob.Name = "Knob"
+    knob.Parent = slider
+    knob.Size = UDim2.new(0, 10, 1.5, 0)
+    knob.Position = UDim2.new((default - min)/(max - min), -5, 0, -3)
+    knob.BackgroundColor3 = Color3.new(1,1,1)
+    knob.Text = ""
+    knob.AutoButtonColor = false
+    knob.BorderSizePixel = 0
+    knob.ZIndex = 4
+    
+    local valueLabel = createLabel("Value", parent, UDim2.new(0, 40, 0, 20), 
+        UDim2.new(position.X.Scale + size.X.Scale + 0.02, 0, position.Y.Scale, 0), tostring(default))
+    valueLabel.TextXAlignment = Enum.TextXAlignment.Right
+    
+    return slider, fill, knob, valueLabel
+end
+
+-- Main Frame
 local MainFrame = Instance.new("Frame")
 MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-MainFrame.Size = UDim2.new(0, 200, 0, 180)
-MainFrame.Position = UDim2.new(0.5, -100, 0.2, 0)
+MainFrame.BackgroundColor3 = colors.background
+MainFrame.Size = UDim2.new(0, 250, 0, 220)
+MainFrame.Position = UDim2.new(0.5, -125, 0.2, 0)
 MainFrame.Active = true
 MainFrame.Draggable = true
+MainFrame.ClipsDescendants = true
+MainFrame.ZIndex = 1
 
-local Title = Instance.new("TextLabel")
-Title.Parent = MainFrame
-Title.Size = UDim2.new(1, 0, 0, 30)
-Title.BackgroundTransparency = 1
-Title.Font = Enum.Font.SourceSansBold
-Title.TextSize = 20
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Text = "👳🏿‍♂️ Maru Hub Private  "
-Title.TextScaled = true
+-- Corner Radius
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 8)
+corner.Parent = MainFrame
 
-local Checkbox = Instance.new("TextButton")
-Checkbox.Parent = MainFrame
-Checkbox.Size = UDim2.new(0, 20, 0, 20)
-Checkbox.Position = UDim2.new(0, 10, 0, 40)
-Checkbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Checkbox.Font = Enum.Font.SourceSansBold
-Checkbox.TextSize = 16
-Checkbox.TextColor3 = Color3.fromRGB(255, 255, 255)
-Checkbox.Text = "❌"
+-- Title Bar
+local titleBar = Instance.new("Frame")
+titleBar.Parent = MainFrame
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.Position = UDim2.new(0, 0, 0, 0)
+titleBar.BackgroundColor3 = colors.primary
+titleBar.ZIndex = 2
 
-local Label = Instance.new("TextLabel")
-Label.Parent = MainFrame
-Label.Size = UDim2.new(1, -40, 0, 20)
-Label.Position = UDim2.new(0, 35, 0, 40)
-Label.BackgroundTransparency = 1
-Label.Font = Enum.Font.SourceSans
-Label.TextSize = 18
-Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-Label.Text = "Enable DamageAura"
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 8)
+titleCorner.Parent = titleBar
 
-local WeaponButton = Instance.new("TextButton")
-WeaponButton.Parent = MainFrame
-WeaponButton.Size = UDim2.new(0, 180, 0, 30)
-WeaponButton.Position = UDim2.new(0, 10, 0, 70)
-WeaponButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-WeaponButton.Font = Enum.Font.SourceSans
-WeaponButton.TextSize = 16
-WeaponButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+local title = createLabel("Title", titleBar, UDim2.new(0.7, 0, 1, 0), UDim2.new(0.05, 0, 0, 0), "👳🏿‍♂️ Maru Hub Private")
+title.Font = Enum.Font.GothamBold
+title.TextSize = 16
+title.TextXAlignment = Enum.TextXAlignment.Left
 
-local RefreshButton = Instance.new("TextButton")
-RefreshButton.Parent = MainFrame
-RefreshButton.Size = UDim2.new(0, 180, 0, 30)
-RefreshButton.Position = UDim2.new(0, 10, 0, 110)
-RefreshButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-RefreshButton.Font = Enum.Font.SourceSans
-RefreshButton.TextSize = 16
-RefreshButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-RefreshButton.Text = "Refresh Weapons"
+-- Close Button
+local closeBtn = createButton("Close", titleBar, UDim2.new(0, 30, 0, 30), UDim2.new(1, -30, 0, 0), "×")
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 18
+closeBtn.BackgroundColor3 = colors.danger
+closeBtn.TextColor3 = Color3.new(1,1,1)
 
--- Speed Toggle และ Slider
-local SpeedToggle = Instance.new("TextButton")
-SpeedToggle.Parent = MainFrame
-SpeedToggle.Size = UDim2.new(0, 20, 0, 20)
-SpeedToggle.Position = UDim2.new(0, 10, 0, 155)
-SpeedToggle.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-SpeedToggle.Font = Enum.Font.SourceSansBold
-SpeedToggle.TextSize = 16
-SpeedToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-SpeedToggle.Text = "❌"
+-- Minimize Button
+local minimizeBtn = createButton("Minimize", titleBar, UDim2.new(0, 30, 0, 30), UDim2.new(1, -60, 0, 0), "-")
+minimizeBtn.Font = Enum.Font.GothamBold
+minimizeBtn.TextSize = 18
 
-local SpeedLabel = Instance.new("TextLabel")
-SpeedLabel.Parent = MainFrame
-SpeedLabel.Size = UDim2.new(0, 60, 0, 25)
-SpeedLabel.Position = UDim2.new(0, 40, 0, 150)
-SpeedLabel.BackgroundTransparency = 1
-SpeedLabel.Font = Enum.Font.SourceSans
-SpeedLabel.TextSize = 18
-SpeedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-SpeedLabel.Text = "Speed:"
+-- Content Frame
+local contentFrame = Instance.new("Frame")
+contentFrame.Parent = MainFrame
+contentFrame.Size = UDim2.new(1, -20, 1, -50)
+contentFrame.Position = UDim2.new(0, 10, 0, 40)
+contentFrame.BackgroundTransparency = 1
+contentFrame.ZIndex = 2
 
-local SpeedValue = Instance.new("TextLabel")
-SpeedValue.Parent = MainFrame
-SpeedValue.Size = UDim2.new(0, 85, -0.10, 20)
-SpeedValue.Position = UDim2.new(0, 100, 0, 150)
-SpeedValue.BackgroundTransparency = 1
-SpeedValue.Font = Enum.Font.SourceSans
-SpeedValue.TextSize = 18
-SpeedValue.TextColor3 = Color3.fromRGB(255, 255, 255)
-SpeedValue.Text = tostring(getgenv().Speed)
+-- Auto Attack Toggle
+local attackLabel = createLabel("AttackLabel", contentFrame, UDim2.new(0.7, 0, 0, 25), UDim2.new(0, 0, 0, 0), "Enable Damage Aura")
+local attackToggle = createToggle("AttackToggle", contentFrame, UDim2.new(0, 50, 0, 25), UDim2.new(0.8, 0, 0, 0), false)
 
-local SpeedSliderBar = Instance.new("Frame")
-SpeedSliderBar.Parent = MainFrame
-SpeedSliderBar.Size = UDim2.new(0, 100, 0, 7)
-SpeedSliderBar.Position = UDim2.new(0, 97, 0, 161)
-SpeedSliderBar.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-SpeedSliderBar.BorderSizePixel = 0
+-- Weapon Selection
+local weaponLabel = createLabel("WeaponLabel", contentFrame, UDim2.new(1, 0, 0, 25), UDim2.new(0, 0, 0, 30), "Weapon: None")
+local weaponBtn = createButton("WeaponBtn", contentFrame, UDim2.new(1, 0, 0, 30), UDim2.new(0, 0, 0, 55), "Select Weapon")
+local refreshBtn = createButton("RefreshBtn", contentFrame, UDim2.new(1, 0, 0, 25), UDim2.new(0, 0, 0, 90), "Refresh Weapons")
 
--- เพิ่ม Fill Bar เพื่อแสดงส่วนที่เติม
-local SpeedSliderFill = Instance.new("Frame")
-SpeedSliderFill.Parent = SpeedSliderBar
-SpeedSliderFill.Size = UDim2.new((getgenv().Speed - 16) / 200, 0, 1, 0) -- ตั้งขนาดเริ่มต้นตาม Speed
-SpeedSliderFill.Position = UDim2.new(0, 0, 0, 0)
-SpeedSliderFill.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- สีขาวเหมือนในภาพ
-SpeedSliderFill.BorderSizePixel = 0
+-- Speed Hack
+local speedLabel = createLabel("SpeedLabel", contentFrame, UDim2.new(0.7, 0, 0, 25), UDim2.new(0, 0, 0, 120), "Speed Hack")
+local speedToggle = createToggle("SpeedToggle", contentFrame, UDim2.new(0, 50, 0, 25), UDim2.new(0.8, 0, 0, 120), false)
 
-local SpeedSliderKnob = Instance.new("TextButton")
-SpeedSliderKnob.Parent = SpeedSliderBar
-SpeedSliderKnob.Size = UDim2.new(0, 10, 0, 14)
-SpeedSliderKnob.Position = UDim2.new((getgenv().Speed - 16) / 200, 0, 0, -4) -- ตั้งตำแหน่งเริ่มต้นตาม Speed
-SpeedSliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SpeedSliderKnob.BorderSizePixel = 0
-SpeedSliderKnob.Text = ""
+-- Speed Slider
+local sliderLabel = createLabel("SliderLabel", contentFrame, UDim2.new(1, 0, 0, 20), UDim2.new(0, 0, 0, 150), "WalkSpeed: 50")
+local slider, fill, knob, sliderValue = createSlider("SpeedSlider", contentFrame, 
+    UDim2.new(1, 0, 0, 10), UDim2.new(0, 0, 0, 175), 16, 216, 50)
 
--- ปุ่มพับ/ขยาย GUI
-local FoldButton = Instance.new("TextButton")
-FoldButton.Parent = MainFrame
-FoldButton.Size = UDim2.new(0, 20, 0, 20)
-FoldButton.Position = UDim2.new(1, -0, 0, 0)
-FoldButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-FoldButton.Font = Enum.Font.SourceSansBold
-FoldButton.TextSize = 16
-FoldButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-FoldButton.Text = "−"
+-- Mobile Support
+local UserInputService = game:GetService("UserInputService")
+local isMobile = UserInputService.TouchEnabled and not UserInputService.MouseEnabled
 
--- ปุ่มซ่อน/แสดง GUI
-local HideButton = Instance.new("TextButton")
-HideButton.Parent = ScreenGui
-HideButton.Size = UDim2.new(0, 40, 0, 40)
-HideButton.Position = UDim2.new(0.95, -40, 0, 0)
-HideButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-HideButton.Font = Enum.Font.SourceSansBold
-HideButton.TextSize = 20
-HideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-HideButton.Text = "✖"
+if isMobile then
+    MainFrame.Size = UDim2.new(0.8, 0, 0, 250)
+    MainFrame.Position = UDim2.new(0.1, 0, 0.1, 0)
+    
+    -- เพิ่มปุ่มสำหรับซ่อน GUI บนมือถือ
+    local mobileToggleBtn = createButton("MobileToggle", ScreenGui, UDim2.new(0, 50, 0, 50), UDim2.new(0, 10, 0, 10), "☰")
+    mobileToggleBtn.Font = Enum.Font.GothamBold
+    mobileToggleBtn.TextSize = 20
+    mobileToggleBtn.ZIndex = 10
+    
+    mobileToggleBtn.MouseButton1Click:Connect(function()
+        isGuiVisible = not isGuiVisible
+        MainFrame.Visible = isGuiVisible
+    end)
+end
 
 -- ฟังก์ชันดึงรายการอาวุธจาก Backpack
 local function getWeaponsFromBackpack()
@@ -206,43 +300,37 @@ local function getWeaponsFromBackpack()
     return weapons
 end
 
--- ตั้งค่าอาวุธเริ่มต้น
-local weapons = getWeaponsFromBackpack()
-shared.SelectedWeapon = weapons[1] or "Knife"
-WeaponButton.Text = "Weapon: " .. shared.SelectedWeapon
-
+-- Dropdown สำหรับเลือกอาวุธ
 local dropdownVisible = false
 local DropdownFrame
 
--- ฟังก์ชันสร้าง Dropdown
 local function createDropdown()
     if DropdownFrame then DropdownFrame:Destroy() end
     
     local currentWeapons = getWeaponsFromBackpack()
     if #currentWeapons == 0 then
-        table.insert(currentWeapons, "Knife")
+        table.insert(currentWeapons, "No Weapons")
     end
     
     DropdownFrame = Instance.new("Frame")
-    DropdownFrame.Parent = MainFrame
-    DropdownFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    DropdownFrame.Size = UDim2.new(0, 180, 0, #currentWeapons * 25)
-    DropdownFrame.Position = UDim2.new(0, 10, 0, 100)
+    DropdownFrame.Parent = contentFrame
+    DropdownFrame.BackgroundColor3 = colors.primary
+    DropdownFrame.Size = UDim2.new(1, 0, 0, #currentWeapons * 30)
+    DropdownFrame.Position = UDim2.new(0, 0, 0, 85)
+    DropdownFrame.ZIndex = 5
+    
+    local dropdownCorner = Instance.new("UICorner")
+    dropdownCorner.CornerRadius = UDim.new(0, 5)
+    dropdownCorner.Parent = DropdownFrame
     
     for i, weapon in ipairs(currentWeapons) do
-        local button = Instance.new("TextButton")
-        button.Parent = DropdownFrame
-        button.Size = UDim2.new(1, 0, 0, 25)
-        button.Position = UDim2.new(0, 0, 0, (i-1) * 25)
-        button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-        button.Font = Enum.Font.SourceSans
-        button.TextSize = 16
-        button.TextColor3 = Color3.fromRGB(255, 255, 255)
-        button.Text = weapon
+        local button = createButton(weapon, DropdownFrame, 
+            UDim2.new(1, -10, 0, 25), 
+            UDim2.new(0, 5, 0, (i-1) * 30 + 5), weapon)
         
         button.MouseButton1Click:Connect(function()
             shared.SelectedWeapon = weapon
-            WeaponButton.Text = "Weapon: " .. weapon
+            weaponLabel.Text = "Weapon: " .. weapon
             DropdownFrame:Destroy()
             dropdownVisible = false
         end)
@@ -250,26 +338,24 @@ local function createDropdown()
 end
 
 -- Event สำหรับ Weapon Button
-WeaponButton.MouseButton1Click:Connect(function()
-    if isGuiExpanded and isGuiVisible then
-        dropdownVisible = not dropdownVisible
-        if dropdownVisible then
-            createDropdown()
-        elseif DropdownFrame then
-            DropdownFrame:Destroy()
-        end
+weaponBtn.MouseButton1Click:Connect(function()
+    dropdownVisible = not dropdownVisible
+    if dropdownVisible then
+        createDropdown()
+    elseif DropdownFrame then
+        DropdownFrame:Destroy()
     end
 end)
 
 -- Event สำหรับ Refresh Button
-RefreshButton.MouseButton1Click:Connect(function()
+refreshBtn.MouseButton1Click:Connect(function()
     local currentWeapons = getWeaponsFromBackpack()
     if #currentWeapons > 0 then
         shared.SelectedWeapon = currentWeapons[1]
-        WeaponButton.Text = "Weapon: " .. currentWeapons[1]
+        weaponLabel.Text = "Weapon: " .. currentWeapons[1]
     else
-        shared.SelectedWeapon = "Knife"
-        WeaponButton.Text = "Weapon: Knife"
+        shared.SelectedWeapon = nil
+        weaponLabel.Text = "Weapon: None"
     end
     if dropdownVisible then
         createDropdown()
@@ -280,107 +366,74 @@ end)
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
-SpeedToggle.MouseButton1Click:Connect(function()
+speedToggle.MouseButton1Click:Connect(function()
     getgenv().Enabled = not getgenv().Enabled
-    SpeedToggle.Text = getgenv().Enabled and "✅" or "❌"
+    speedToggle.Text = getgenv().Enabled and "✓" or "✗"
+    speedToggle.BackgroundColor3 = getgenv().Enabled and colors.success or colors.danger
 end)
 
 local dragging = false
 
-SpeedSliderKnob.MouseButton1Down:Connect(function()
+knob.MouseButton1Down:Connect(function()
     dragging = true
 end)
 
-UserInputService.InputEnded:Connect(function(input, gameProcessedEvent)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = false
     end
 end)
 
-UserInputService.InputChanged:Connect(function(input, gameProcessedEvent)
-    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-        local mousePos = UserInputService:GetMouseLocation()
-        local mouseX = mousePos.X - SpeedSliderBar.AbsolutePosition.X
-        local clampedX = math.clamp(mouseX - SpeedSliderKnob.Size.X.Offset / 4, 0, SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local mousePos
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            mousePos = input.Position
+        else
+            mousePos = input.Position
+        end
         
-        -- Tween การเคลื่อนที่ของ Knob
-        local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
-        local tweenKnob = TweenService:Create(SpeedSliderKnob, tweenInfo, {Position = UDim2.new(0, clampedX, 0, -7)})
-        tweenKnob:Play()
+        local sliderPos = slider.AbsolutePosition
+        local sliderSize = slider.AbsoluteSize
+        local mouseX = mousePos.X - sliderPos.X
+        local clampedX = math.clamp(mouseX, 0, sliderSize.X)
+        local ratio = clampedX / sliderSize.X
+        local speedValue = math.floor(16 + ratio * 200) -- 16-216
         
-        -- Tween การปรับขนาดของ Fill Bar
-        local fillScale = clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)
-        local tweenFill = TweenService:Create(SpeedSliderFill, tweenInfo, {Size = UDim2.new(fillScale, 0, 2, 0)})
-        tweenFill:Play()
+        -- อัปเดต UI
+        knob.Position = UDim2.new(ratio, -5, 0, -3)
+        fill.Size = UDim2.new(ratio, 0, 1, 0)
+        sliderValue.Text = tostring(speedValue)
+        sliderLabel.Text = "WalkSpeed: " .. speedValue
         
-        -- คำนวณและอัปเดตค่า Speed
-        local speedValue = math.floor((clampedX / (SpeedSliderBar.AbsoluteSize.X - SpeedSliderKnob.Size.X.Offset)) * 500) + 16 -- ช่วง 16-216
+        -- อัปเดตค่า Speed
         getgenv().Speed = speedValue
-        SpeedValue.Text = tostring(speedValue)
     end
 end)
 
--- ฟังก์ชันพับ/ขยาย GUI
-local function toggleFold()
-    if not isGuiVisible then return end
+-- ปุ่มปิด GUI
+closeBtn.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- ปุ่มย่อ GUI
+minimizeBtn.MouseButton1Click:Connect(function()
     isGuiExpanded = not isGuiExpanded
-    local targetSize = isGuiExpanded and UDim2.new(0, 200, 0, 180) or UDim2.new(0, 200, 0, 30)
-    local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-    local tween = TweenService:Create(MainFrame, tweenInfo, {Size = targetSize})
-    tween:Play()
-    FoldButton.Text = isGuiExpanded and "−" or "+"
+    local targetSize = isGuiExpanded and UDim2.new(0, 250, 0, 220) or UDim2.new(0, 250, 0, 30)
+    
+    game:GetService("TweenService"):Create(
+        MainFrame,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {Size = targetSize}
+    ):Play()
+    
+    minimizeBtn.Text = isGuiExpanded and "-" or "+"
     
     if not isGuiExpanded and DropdownFrame then
         DropdownFrame:Destroy()
         dropdownVisible = false
     end
-    
-    Checkbox.Visible = isGuiExpanded
-    Label.Visible = isGuiExpanded
-    WeaponButton.Visible = isGuiExpanded
-    RefreshButton.Visible = isGuiExpanded
-    SpeedToggle.Visible = isGuiExpanded
-    SpeedLabel.Visible = isGuiExpanded
-    SpeedValue.Visible = isGuiExpanded
-    SpeedSliderBar.Visible = isGuiExpanded
-    SpeedSliderKnob.Visible = isGuiExpanded
-    SpeedSliderFill.Visible = isGuiExpanded
-end
-
-FoldButton.MouseButton1Click:Connect(toggleFold)
-
--- ฟังก์ชันซ่อน/แสดง GUI
-local function toggleHide()
-    isGuiVisible = not isGuiVisible
-    local targetPosition = isGuiVisible and UDim2.new(0.5, -100, 0.2, 0) or UDim2.new(0.5, -100, -0.5, 0)
-    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-    local tween = TweenService:Create(MainFrame, tweenInfo, {Position = targetPosition})
-    tween:Play()
-    HideButton.Text = isGuiVisible and "✖" or "✔"
-    
-    if isGuiVisible and not isGuiExpanded then
-        isGuiExpanded = true
-        MainFrame.Size = UDim2.new(0, 200, 0, 180)
-        FoldButton.Text = "−"
-        Checkbox.Visible = true
-        Label.Visible = true
-        WeaponButton.Visible = true
-        RefreshButton.Visible = true
-        SpeedToggle.Visible = true
-        SpeedLabel.Visible = true
-        SpeedValue.Visible = true
-        SpeedSliderBar.Visible = true
-        SpeedSliderKnob.Visible = true
-        SpeedSliderFill.Visible = true
-    end
-    
-    if not isGuiVisible and DropdownFrame then
-        DropdownFrame:Destroy()
-        dropdownVisible = false
-    end
-end
-
-HideButton.MouseButton1Click:Connect(toggleHide)
+end)
 
 -- ฟังก์ชันสำหรับ Auto Attack
 function attackEnemies()
@@ -433,11 +486,22 @@ end
 function toggleAutoAttack()
     shared.AutoAttack = not shared.AutoAttack
     if shared.AutoAttack then
-        Checkbox.Text = "✅"
+        attackToggle.Text = "✓"
+        attackToggle.BackgroundColor3 = colors.success
         spawn(attackEnemies)
     else
-        Checkbox.Text = "❌"
+        attackToggle.Text = "✗"
+        attackToggle.BackgroundColor3 = colors.danger
     end
 end
 
-Checkbox.MouseButton1Click:Connect(toggleAutoAttack)
+attackToggle.MouseButton1Click:Connect(toggleAutoAttack)
+
+-- อัปเดต UI เมื่อเริ่มต้น
+local weapons = getWeaponsFromBackpack()
+if #weapons > 0 then
+    shared.SelectedWeapon = weapons[1]
+    weaponLabel.Text = "Weapon: " .. weapons[1]
+else
+    weaponLabel.Text = "Weapon: None"
+end
