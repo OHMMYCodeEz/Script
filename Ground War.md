@@ -114,6 +114,15 @@ weaponDropdown:OnChanged(function(Value)
     shared.SelectedWeapon = Value
 end)
 
+-- ฟังก์ชัน Auto Attack
+local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", { Title = "Enable Auto Attack", Default = false })
+autoAttackToggle:OnChanged(function()
+    shared.AutoAttack = Options.AutoAttackToggle.Value
+    if shared.AutoAttack then
+        attackEnemies()  -- เริ่มการโจมตีอัตโนมัติ
+    end
+end)
+
 -- เพิ่มปุ่มรีเฟรชรายการอาวุธ
 local refreshButton = Tabs.Main:AddButton({
     Title = "Refresh Weapons",
@@ -140,12 +149,12 @@ function attackEnemies()
                     if head and humanoid then
                         local args = {
                             [1] = {
-                                ["shellMaxDist"] = 0,
+                                ["shellMaxDist"] = getgenv().ShellMaxDist or 100,  -- ใช้ค่าจาก Slider
                                 ["origin"] = localPlayer.Character and localPlayer.Character:GetPivot().Position or Vector3.new(0, 0, 0),
                                 ["weaponName"] = shared.SelectedWeapon,
                                 ["bulletID"] = "Bullet_" .. tostring(math.random(100000, 999999)),
-                                ["currentPenetrationCount"] = 5,
-                                ["shellSpeed"] = 0,
+                                ["currentPenetrationCount"] = getgenv().CurrentPenetrationCount or 5,  -- ใช้ค่าจาก Slider
+                                ["shellSpeed"] = getgenv().ShellSpeed or 100,  -- ใช้ค่าจาก Slider
                                 ["localShellName"] = "Invisible",
                                 ["maxPenetrationCount"] = 1e99,
                                 ["registeredParts"] = { [head] = true },
@@ -156,7 +165,7 @@ function attackEnemies()
                                 }
                             },
                             [2] = humanoid,
-                            [3] = 10,
+                            [3] = getgenv().AttackValue or 10,  -- ใช้ค่าจาก Slider
                             [4] = 1,
                             [5] = head,
                         }
@@ -169,6 +178,56 @@ function attackEnemies()
         wait(0.00001)
     end
 end
+
+-- เพิ่มสไลเดอร์สำหรับการตั้งค่า
+local shellSpeedSlider = Tabs.Main:AddSlider("ShellSpeedSlider", {
+    Title = "Shell Speed",
+    Description = "Set the speed of the shell",
+    Default = 100,
+    Min = 0,
+    Max = 1000,
+    Rounding = 2,
+    Callback = function(Value)
+        getgenv().ShellSpeed = Value
+    end
+})
+
+local currentPenetrationCountSlider = Tabs.Main:AddSlider("CurrentPenetrationCountSlider", {
+    Title = "Current Penetration Count",
+    Description = "Set the current penetration count",
+    Default = 5,
+    Min = 1,
+    Max = 1000,
+    Rounding = 0,
+    Callback = function(Value)
+        getgenv().CurrentPenetrationCount = Value
+    end
+})
+
+local shellMaxDistSlider = Tabs.Main:AddSlider("ShellMaxDistSlider", {
+    Title = "Shell Max Distance",
+    Description = "Set the max distance for shells",
+    Default = 100,
+    Min = 10,
+    Max = 1000,
+    Rounding = 2,
+    Callback = function(Value)
+        getgenv().ShellMaxDist = Value
+    end
+})
+
+-- เพิ่มสไลเดอร์สำหรับ Attack Value (ตำแหน่ง [3])
+local attackValueSlider = Tabs.Main:AddSlider("AttackValueSlider", {
+    Title = "Attack Value (ตำแหน่ง [3])",
+    Description = "Set the attack value (ตำแหน่ง [3])",
+    Default = 10,
+    Min = 1,
+    Max = 1000,
+    Rounding = 0,
+    Callback = function(Value)
+        getgenv().AttackValue = Value
+    end
+})
 
 -- ตั้งค่า Speed Hack
 local speedToggle = Tabs.Main:AddToggle("SpeedHackToggle", { Title = "Enable Speed Hack", Default = false })
@@ -187,15 +246,6 @@ local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
         getgenv().Speed = Value
     end
 })
-
--- ฟังก์ชัน Auto Attack
-local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", { Title = "Enable Auto Attack", Default = false })
-autoAttackToggle:OnChanged(function()
-    shared.AutoAttack = Options.AutoAttackToggle.Value
-    if shared.AutoAttack then
-        attackEnemies()  -- เริ่มการโจมตีอัตโนมัติ
-    end
-end)
 
 -- การตั้งค่า SaveManager และ InterfaceManager
 SaveManager:SetLibrary(Fluent)
