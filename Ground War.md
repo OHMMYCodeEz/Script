@@ -12,7 +12,6 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
---Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
@@ -30,17 +29,13 @@ getgenv().Enabled = false -- สถานะ Speed Hack
 local players = game:GetService("Players")
 local function bypassWalkSpeed()
     if getgenv().executed then
-        print("Walkspeed Already Bypassed - Applying Settings Changes")
         if not getgenv().Enabled then
             return
         end
     else
         getgenv().executed = true
-        print("Walkspeed Bypassed")
-
         local mt = getrawmetatable(game)
         setreadonly(mt, false)
-
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
             if b == "WalkSpeed" then
@@ -171,7 +166,7 @@ screenGui.Parent = players.LocalPlayer:WaitForChild("PlayerGui")
 local hideUIButton = Instance.new("TextButton")
 hideUIButton.Size = UDim2.new(0, 200, 0, 50)
 hideUIButton.Position = UDim2.new(0.5, -100, 0.9, -25)
-hideUIButton.Text = " M "
+hideUIButton.Text = "Hide UI"
 hideUIButton.TextSize = 24
 hideUIButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 hideUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -206,7 +201,7 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 Window:SelectTab(1)
 
 Fluent:Notify({
-    Title = "Maru Hub Private",
+    Title = "Fluent",
     Content = "The script has been loaded.",
     Duration = 8
 })
