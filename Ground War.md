@@ -211,8 +211,8 @@ SaveManager:LoadAutoloadConfig()
 
 -- แจ้งเตือนเมื่อโหลดสคริปต์
 Fluent:Notify({
-    Title = "Fluent",
-    Content = "The script has been loaded.",
+    Title = "Maru Hub Private !!",
+    Content = "The Maru Private script has been loaded.",
     Duration = 8
 })
 
