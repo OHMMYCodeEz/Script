@@ -24,13 +24,13 @@ local Settings = {
     AutoTeleport = true,
     TeleportInterval = 1,
     TeleportLocations = {
-        Vector3.new(1000, 75, 2000),
+        Vector3.new(100, 75, 200),
         Vector3.new(300, 75, -15),
-        Vector3.new(-25, 75, 10000),
+        Vector3.new(-25, 75, 100),
         Vector3.new(150, 75, 400),
-        Vector3.new(-300005, 75, 10),
-        Vector3.new(150, 750, 40),
-        Vector3.new(-10999, 75, -30)
+        Vector3.new(-305, 75, 10),
+        Vector3.new(150, 70, 40),
+        Vector3.new(-109, 75, -30)
     }
 }
 
@@ -61,7 +61,7 @@ print("LocalPlayer found: " .. LocalPlayer.Name)
 
 -- Wait for PlayerGui
 print("Waiting for PlayerGui...")
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 10)
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui", 5)
 if not PlayerGui then
     warn("PlayerGui not found after waiting 10 seconds, script cannot run")
     return
@@ -156,7 +156,7 @@ local function selectNextWeapon()
         if not updateWeaponList() or #_G.AutofarmScript.Weapons == 0 then
             warn("No weapons found in inventory")
             if _G.AutofarmScript.UIElements then
-                _G.AutofarmScript.UIElements.Weapon.Text = "Weapon: None (Refresh in 10s)"
+                _G.AutofarmScript.UIElements.Weapon.Text = "Weapon: None (Refresh in 5s)"
                 _G.AutofarmScript.UIElements.Weapon.TextColor3 = Color3.fromRGB(255, 0, 0)
             end
             return false
@@ -338,8 +338,8 @@ local function createUI()
         _G.AutofarmScript.UI = screenGui
 
         local mainFrame = Instance.new("Frame")
-        mainFrame.Size = UDim2.new(0, 280, 0, 250)
-        mainFrame.Position = UDim2.new(0.5, -140, 0, 10)
+        mainFrame.Size = UDim2.new(0, 200, 0, 260)
+        mainFrame.Position = UDim2.new(0.2, -140, 0, 10)
         mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
         mainFrame.BorderSizePixel = 0
         mainFrame.Active = true
@@ -426,7 +426,7 @@ end
 -- Deploy System
 local function attemptDeploy()
     local success = false
-    local maxAttempts = 1e99
+    local maxAttempts = 5
     local delayBetweenAttempts = 1
     local baseX = 700
     local baseY = 650
