@@ -186,7 +186,7 @@ local shellSpeedSlider = Tabs.Main:AddSlider("ShellSpeedSlider", {
     Default = 100,
     Min = 0,
     Max = 1000,
-    Rounding = 2,
+    Rounding = 5,
     Callback = function(Value)
         getgenv().ShellSpeed = Value
     end
@@ -198,7 +198,7 @@ local currentPenetrationCountSlider = Tabs.Main:AddSlider("CurrentPenetrationCou
     Default = 5,
     Min = 1,
     Max = 1000,
-    Rounding = 0,
+    Rounding = 5,
     Callback = function(Value)
         getgenv().CurrentPenetrationCount = Value
     end
@@ -210,7 +210,7 @@ local shellMaxDistSlider = Tabs.Main:AddSlider("ShellMaxDistSlider", {
     Default = 100,
     Min = 10,
     Max = 1000,
-    Rounding = 2,
+    Rounding = 5,
     Callback = function(Value)
         getgenv().ShellMaxDist = Value
     end
@@ -223,7 +223,7 @@ local attackValueSlider = Tabs.Main:AddSlider("AttackValueSlider", {
     Default = 10,
     Min = 1,
     Max = 1000,
-    Rounding = 0,
+    Rounding = 5,
     Callback = function(Value)
         getgenv().AttackValue = Value
     end
@@ -241,7 +241,7 @@ local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
     Default = 50,
     Min = 0,
     Max = 1000,
-    Rounding = 2,
+    Rounding = 5,
     Callback = function(Value)
         getgenv().Speed = Value
     end
