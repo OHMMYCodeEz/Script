@@ -420,6 +420,7 @@ local function ToggleAutoAttack()
         attackConnection = game:GetService("RunService").Heartbeat:Connect(function()
             if shared.AutoAttack and shared.SelectedWeapon then
                 -- Your attack code here
+                print("Attacking with: " .. shared.SelectedWeapon) -- Debugging line
             end
         end)
     elseif attackConnection then
