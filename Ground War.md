@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "Maru Hub - Private abc-" .. Fluent.Version,
-    SubTitle = "",
+    SubTitle = " ",
     TabWidth = 130,
     Size = UDim2.fromOffset(480, 360),
     Acrylic = true,
