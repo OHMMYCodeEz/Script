@@ -1,23 +1,29 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+-- สร้าง ScreenGui และปุ่มซ่อน/แสดง UI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local Window = Fluent:CreateWindow({
-    Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by dawid",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl 
-})
+local toggleUIButton = Instance.new("TextButton")
+toggleUIButton.Size = UDim2.new(0, 200, 0, 50)
+toggleUIButton.Position = UDim2.new(0.5, -100, 0.9, -25)
+toggleUIButton.Text = "Hide UI"
+toggleUIButton.TextSize = 24
+toggleUIButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggleUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleUIButton.Parent = screenGui
 
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
+local uiVisible = true  -- ตัวแปรในการเช็คสถานะของ UI
 
-local Options = Fluent.Options
+-- ฟังก์ชันซ่อน/แสดง UI
+toggleUIButton.MouseButton1Click:Connect(function()
+    if uiVisible then
+        Window.Enabled = false   -- ซ่อน UI
+        toggleUIButton.Text = "Show UI"   -- เปลี่ยนข้อความของปุ่ม
+    else
+        Window.Enabled = true    -- แสดง UI
+        toggleUIButton.Text = "Hide UI"   -- เปลี่ยนข้อความของปุ่ม
+    end
+    uiVisible = not uiVisible  -- สลับสถานะการแสดง UI
+end)
 
 -- ฟังก์ชันตั้งค่าเริ่มต้น
 shared.AutoAttack = false
@@ -29,13 +35,17 @@ getgenv().Enabled = false -- สถานะ Speed Hack
 local players = game:GetService("Players")
 local function bypassWalkSpeed()
     if getgenv().executed then
+        print("Walkspeed Already Bypassed - Applying Settings Changes")
         if not getgenv().Enabled then
             return
         end
     else
         getgenv().executed = true
+        print("Walkspeed Bypassed")
+
         local mt = getrawmetatable(game)
         setreadonly(mt, false)
+
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
             if b == "WalkSpeed" then
@@ -129,81 +139,78 @@ function attackEnemies()
     end
 end
 
--- ฟังก์ชันการควบคุม AutoAttack, เปลี่ยนอาวุธ, Speed Hack
-local autoAttackToggle = Tabs.Main:AddToggle("Auto Attack", {Title = "Auto Attack", Default = shared.AutoAttack})
-autoAttackToggle:OnChanged(function()
-    shared.AutoAttack = autoAttackToggle.Value
+-- เรียกใช้ Fluent UI
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Fluent " .. Fluent.Version,
+    SubTitle = "by dawid",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+-- ฟังก์ชัน Toggle Auto Attack
+local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", {
+    Title = "Auto Attack",
+    Default = false,  -- เริ่มต้นคือปิด
+})
+
+autoAttackToggle:OnChanged(function(state)
+    shared.AutoAttack = state
     if shared.AutoAttack then
-        attackEnemies()
+        print("Auto Attack Enabled")
+        attackEnemies()  -- เรียกฟังก์ชันโจมตีอัตโนมัติ
+    else
+        print("Auto Attack Disabled")
     end
 end)
 
-local weaponDropdown = Tabs.Main:AddDropdown("Weapon Selector", {
-    Title = "Select Weapon",
-    Values = getWeaponsFromBackpack(),
-    Default = 1,
-    Callback = function(Value)
-        shared.SelectedWeapon = Value
-    end
+-- ฟังก์ชัน Toggle Speed Hack
+local speedHackToggle = Tabs.Main:AddToggle("SpeedHackToggle", {
+    Title = "Speed Hack",
+    Default = false,  -- เริ่มต้นคือปิด
 })
 
-local speedSlider = Tabs.Main:AddSlider("Speed", {
+speedHackToggle:OnChanged(function(state)
+    getgenv().Enabled = state
+    if getgenv().Enabled then
+        print("Speed Hack Enabled")
+    else
+        print("Speed Hack Disabled")
+    end
+end)
+
+-- ฟังก์ชันเปลี่ยนอาวุธ
+local weaponDropdown = Tabs.Main:AddDropdown("WeaponDropdown", {
+    Title = "Select Weapon",
+    Values = weapons,
+    Default = shared.SelectedWeapon,
+})
+
+weaponDropdown:OnChanged(function(selectedWeapon)
+    shared.SelectedWeapon = selectedWeapon
+    print("Selected Weapon: " .. shared.SelectedWeapon)
+end)
+
+-- ฟังก์ชันปรับความเร็ว
+local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
     Title = "Speed",
-    Min = 0,
+    Min = 10,
     Max = 200,
     Default = getgenv().Speed,
-    Rounding = 0,
-    Callback = function(Value)
-        getgenv().Speed = Value
-        bypassWalkSpeed()
-    end
+    Rounding = 1,
 })
 
--- สร้างปุ่มซ่อน/แสดง UI
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = players.LocalPlayer:WaitForChild("PlayerGui")
-
-local hideUIButton = Instance.new("TextButton")
-hideUIButton.Size = UDim2.new(0, 200, 0, 50)
-hideUIButton.Position = UDim2.new(0.5, -100, 0.9, -25)
-hideUIButton.Text = "Hide UI"
-hideUIButton.TextSize = 24
-hideUIButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-hideUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-hideUIButton.Parent = screenGui
-
-local uiVisible = true
-
-hideUIButton.MouseButton1Click:Connect(function()
-    if uiVisible then
-        Window.Enabled = false
-        hideUIButton.Text = "Show UI"
-    else
-        Window.Enabled = true
-        hideUIButton.Text = "Hide UI"
-    end
-    uiVisible = not uiVisible
+speedSlider:OnChanged(function(value)
+    getgenv().Speed = value
+    print("Speed set to: " .. getgenv().Speed)
 end)
 
--- Hand the library over to our managers
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-
-SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({})
-
-InterfaceManager:SetFolder("FluentScriptHub")
-SaveManager:SetFolder("FluentScriptHub/specific-game")
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
-Window:SelectTab(1)
-
-Fluent:Notify({
-    Title = "Fluent",
-    Content = "The script has been loaded.",
-    Duration = 8
-})
-
+-- การโหลดการตั้งค่าที่บันทึกไว้
 SaveManager:LoadAutoloadConfig()
+
