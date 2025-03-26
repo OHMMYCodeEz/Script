@@ -20,7 +20,7 @@ local Settings = {
     AutoWeaponSwitch = true,
     SwitchInterval = 1,
     AutoTeleport = true,
-    TeleportInterval = 15,
+    TeleportInterval = 5,
     TeleportLocations = {
         Vector3.new(10, 35, 20),
         Vector3.new(30, 35, -15),
@@ -37,7 +37,6 @@ local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
-local UserInputService = game:GetService("UserInputService") -- เพิ่ม UserInputService เพื่อจัดการการลาก UI
 
 -- Ensure LocalPlayer is available
 local LocalPlayer = Players.LocalPlayer
@@ -170,14 +169,14 @@ local function attackEnemies()
                                     weaponName = shared.SelectedWeapon,
                                     bulletID = "Bullet_" .. math.random(100000, 999999),
                                     currentPenetrationCount = 5,
-                                    shellSpeed = 1000,
+                                    shellSpeed = 100,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
                                     registeredParts = {[head] = true},
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, humanoid, 100000000, 1, head)
+                                }, humanoid, 1000000, 1, head)
                             end)
                         end
                     end
@@ -191,7 +190,7 @@ local function attackEnemies()
     end
 end
 
--- UI System with Draggable Functionality
+-- UI System
 local function createUI()
     local success, result = pcall(function()
         if _G.AutofarmScript.UI then
@@ -258,37 +257,6 @@ local function createUI()
             label.Parent = mainFrame
             _G.AutofarmScript.UIElements[name] = label
         end
-
-        -- Make the UI draggable
-        local dragging = false
-        local dragStart = nil
-        local startPos = nil
-
-        mainFrame.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                dragging = true
-                dragStart = input.Position
-                startPos = mainFrame.Position
-            end
-        end)
-
-        mainFrame.InputEnded:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                dragging = false
-            end
-        end)
-
-        UserInputService.InputChanged:Connect(function(input)
-            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local delta = input.Position - dragStart
-                mainFrame.Position = UDim2.new(
-                    startPos.X.Scale,
-                    startPos.X.Offset + delta.X,
-                    startPos.Y.Scale,
-                    startPos.Y.Offset + delta.Y
-                )
-            end
-        end)
     end)
 
     if not success then
@@ -489,7 +457,7 @@ local function hopToPopulatedServer()
         local servers = {}
         
         for _, server in pairs(data.data or {}) do
-            if server.playing and server.playing >= Settings.ServerHopMinPlayers and server.id != game.JobId then
+            if server.playing and server.playing >= Settings.ServerHopMinPlayers and server.id ~= game.JobId then
                 table.insert(servers, server.id)
             end
         end
