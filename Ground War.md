@@ -213,4 +213,3 @@ end)
 
 -- การโหลดการตั้งค่าที่บันทึกไว้
 SaveManager:LoadAutoloadConfig()
-
