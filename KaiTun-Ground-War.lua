@@ -25,36 +25,16 @@ local Settings = {
     AutoTeleport = true,
     TeleportInterval = 2,
     TeleportLocations = {
-    Vector3.new(725, 375, -483),
-    Vector3.new(-342, 375, 891),
-    Vector3.new(158, 370, -627),
-    Vector3.new(950, 375, 210),
-    Vector3.new(-801, 375, -450),
-    Vector3.new(632, 375, 777),
-    Vector3.new(-123, 375, -964),
-    Vector3.new(407, 375, 582),
-    Vector3.new(-689, 375, 335),
-    Vector3.new(284, 375, -156),
-    Vector3.new(876, 375, 495),
-    Vector3.new(-537, 375, -721),
-    Vector3.new(195, 372, 843),
-    Vector3.new(-912, 375, 68),
-    Vector3.new(549, 375, -274),
-    Vector3.new(-768, 375, 910),
-    Vector3.new(321, 375, -599),
-    Vector3.new(662, 375, 128),
-    Vector3.new(-453, 375, -837),
-    Vector3.new(789, 375, 346),
-    Vector3.new(-276, 375, 754),
-    Vector3.new(513, 375, -982),
-    Vector3.new(-845, 375, 417),
-    Vector3.new(167, 374, -530),
-    Vector3.new(924, 375, -671),
-    Vector3.new(-394, 375, 205),
-    Vector3.new(598, 375, 863),
-    Vector3.new(-731, 375, -389),
-    Vector3.new(482, 375, 647),
-    Vector3.new(-619, 375, -178)
+        Vector3.new(725, 375, -483), Vector3.new(-342, 375, 891), Vector3.new(158, 370, -627),
+        Vector3.new(950, 375, 210), Vector3.new(-801, 375, -450), Vector3.new(632, 375, 777),
+        Vector3.new(-123, 375, -964), Vector3.new(407, 375, 582), Vector3.new(-689, 375, 335),
+        Vector3.new(284, 375, -156), Vector3.new(876, 375, 495), Vector3.new(-537, 375, -721),
+        Vector3.new(195, 372, 843), Vector3.new(-912, 375, 68), Vector3.new(549, 375, -274),
+        Vector3.new(-768, 375, 910), Vector3.new(321, 375, -599), Vector3.new(662, 375, 128),
+        Vector3.new(-453, 375, -837), Vector3.new(789, 375, 346), Vector3.new(-276, 375, 754),
+        Vector3.new(513, 375, -982), Vector3.new(-845, 375, 417), Vector3.new(167, 374, -530),
+        Vector3.new(924, 375, -671), Vector3.new(-394, 375, 205), Vector3.new(598, 375, 863),
+        Vector3.new(-731, 375, -389), Vector3.new(482, 375, 647), Vector3.new(-619, 375, -178)
     }
 }
 
@@ -92,7 +72,7 @@ if not PlayerGui then
 end
 print("PlayerGui found")
 
--- Weapon System (ปรับเงื่อนไขให้เข้มงวดขึ้น)
+-- Weapon System
 local function updateWeaponList()
     local success, result = pcall(function()
         _G.AutofarmScript.Weapons = {}
@@ -123,10 +103,9 @@ local function updateWeaponList()
                 print("Found and using equipped Tool immediately: " .. item.Name)
                 return true
             elseif item:IsA("Accessory") or item:IsA("Model") then
-                -- ปรับเงื่อนไขให้เข้มงวดขึ้น
                 local isWeapon = (item:FindFirstChild("Handle") or item.Name:lower():match("sword") or item.Name:lower():match("gun") or item.Name:lower():match("weapon"))
-                    and not item.Name:lower():match("hair") -- ข้ามไอเทมที่เป็น "Hair"
-                    and not item.Name:lower():match("hat") -- ข้ามไอเทมที่เป็น "Hat"
+                    and not item.Name:lower():match("hair")
+                    and not item.Name:lower():match("hat")
                 if isWeapon then
                     table.insert(_G.AutofarmScript.Weapons, item)
                     shared.SelectedWeapon = item
@@ -224,14 +203,21 @@ local function selectNextWeapon()
     return result
 end
 
--- Auto Weapon Switch (เพิ่มฟังก์ชันที่ขาดหายไป)
+-- Auto Weapon Switch (แก้ไขให้มีนับถอยหลัง)
 local function autoWeaponSwitch()
     local success, result = pcall(function()
         print("Starting auto weapon switch...")
-        while Settings.AutoWeaponSwitch and task.wait(Settings.SwitchInterval) do
-            selectNextWeapon()
-            if _G.AutofarmScript.UIElements then
-                _G.AutofarmScript.UIElements.NextSwitch.Text = "Next Switch: " .. Settings.SwitchInterval .. "s"
+        while Settings.AutoWeaponSwitch do
+            local timeLeft = Settings.SwitchInterval
+            while timeLeft > 0 and Settings.AutoWeaponSwitch do
+                if _G.AutofarmScript.UIElements then
+                    _G.AutofarmScript.UIElements.NextSwitch.Text = "Next Switch: " .. string.format("%.1f", timeLeft) .. "s"
+                end
+                task.wait(0.1)
+                timeLeft = timeLeft - 0.1
+            end
+            if Settings.AutoWeaponSwitch then
+                selectNextWeapon()
             end
         end
     end)
@@ -267,14 +253,21 @@ local function randomTeleport()
     end
 end
 
--- Auto Teleport System (เพิ่มฟังก์ชันที่ขาดหายไป)
+-- Auto Teleport System (แก้ไขให้มีนับถอยหลัง)
 local function autoTeleportSystem()
     local success, result = pcall(function()
         print("Starting auto teleport system...")
-        while Settings.AutoTeleport and task.wait(Settings.TeleportInterval) do
-            randomTeleport()
-            if _G.AutofarmScript.UIElements then
-                _G.AutofarmScript.UIElements.NextTeleport.Text = "Next Teleport: " .. Settings.TeleportInterval .. "s"
+        while Settings.AutoTeleport do
+            local timeLeft = Settings.TeleportInterval
+            while timeLeft > 0 and Settings.AutoTeleport do
+                if _G.AutofarmScript.UIElements then
+                    _G.AutofarmScript.UIElements.NextTeleport.Text = "Next Teleport: " .. string.format("%.1f", timeLeft) .. "s"
+                end
+                task.wait(0.1)
+                timeLeft = timeLeft - 0.1
+            end
+            if Settings.AutoTeleport then
+                randomTeleport()
             end
         end
     end)
@@ -325,8 +318,8 @@ local function attackEnemies()
                                     shellMaxDist = 0,
                                     origin = character:GetPivot().Position,
                                     weaponName = weaponName,
-                                    bulletID = "Bullet_" .. math.random(10000000, 99999999),
-                                    currentPenetrationCount = 50,
+                                    bulletID = "Bullet_" .. math.random(100000, 999999),
+                                    currentPenetrationCount = 1,
                                     shellSpeed = 0,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
@@ -334,11 +327,10 @@ local function attackEnemies()
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, targetHumanoid, 1000000, 1, head)
+                                }, targetHumanoid, 100000, 2, head)
                             end)
                             
-                            -- ตรวจสอบว่าฆ่าได้หรือไม่
-                            task.wait(0.1) -- รอให้ความเสียหายประมวลผล
+                            task.wait(0.001)
                             if targetHumanoid and targetHumanoid.Health <= 0 and previousHealth > 0 then
                                 _G.AutofarmScript.KillCount = _G.AutofarmScript.KillCount + 1
                                 if _G.AutofarmScript.UIElements then
@@ -373,7 +365,7 @@ local function createUI()
         _G.AutofarmScript.UI = screenGui
 
         local mainFrame = Instance.new("Frame")
-        mainFrame.Size = UDim2.new(0, 205, 0, 285)  -- เพิ่มความสูงเพื่อรองรับ Kill Count
+        mainFrame.Size = UDim2.new(0, 205, 0, 285)
         mainFrame.Position = UDim2.new(0.2, -140, 0, 10)
         mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
         mainFrame.BorderSizePixel = 0
@@ -410,7 +402,7 @@ local function createUI()
             Status = {Text = "Status: Alive", YPos = 180, Color = Color3.fromRGB(0, 255, 0)},
             NextSwitch = {Text = "Next Switch: " .. Settings.SwitchInterval .. "s", YPos = 205, Color = Color3.fromRGB(200, 200, 200)},
             NextTeleport = {Text = "Next Teleport: " .. Settings.TeleportInterval .. "s", YPos = 230, Color = Color3.fromRGB(200, 200, 200)},
-            KillCount = {Text = "Kills: 0", YPos = 255, Color = Color3.fromRGB(255, 215, 0)}  -- เพิ่ม Kill Count Label
+            KillCount = {Text = "Kills: 0", YPos = 255, Color = Color3.fromRGB(255, 215, 0)}
         }
 
         _G.AutofarmScript.UIElements = {}
