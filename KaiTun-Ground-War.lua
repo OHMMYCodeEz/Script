@@ -373,7 +373,7 @@ local function createUI()
         _G.AutofarmScript.UI = screenGui
 
         local mainFrame = Instance.new("Frame")
-        mainFrame.Size = UDim2.new(0, 200, 0, 285)  -- เพิ่มความสูงเพื่อรองรับ Kill Count
+        mainFrame.Size = UDim2.new(0, 205, 0, 285)  -- เพิ่มความสูงเพื่อรองรับ Kill Count
         mainFrame.Position = UDim2.new(0.2, -140, 0, 10)
         mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
         mainFrame.BorderSizePixel = 0
