@@ -21,9 +21,9 @@ local Settings = {
     ServerHopMinPlayers = 10,
     AutoStart = true,
     AutoWeaponSwitch = true,
-    SwitchInterval = 1,
+    SwitchInterval = 5,
     AutoTeleport = true,
-    TeleportInterval = 1,
+    TeleportInterval = 2,
     TeleportLocations = {
     Vector3.new(725, 375, -483),
     Vector3.new(-342, 375, 891),
