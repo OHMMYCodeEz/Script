@@ -297,11 +297,11 @@ local function attackEnemies()
                                     weaponName = "CustomWeapon_" .. weaponName
                                 end
                                 remoteEvent:InvokeServer({
-                                    shellMaxDist = 10000,
+                                    shellMaxDist = 0,
                                     origin = character:GetPivot().Position,
                                     weaponName = weaponName,
                                     bulletID = "Bullet_" .. math.random(10000000, 99999999),
-                                    currentPenetrationCount = 10,
+                                    currentPenetrationCount = 200,
                                     shellSpeed = 0,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
@@ -309,7 +309,7 @@ local function attackEnemies()
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, targetHumanoid, 100000, 1, head)
+                                }, targetHumanoid, 10000, 1, head)
                             end)
                         end
                     end
