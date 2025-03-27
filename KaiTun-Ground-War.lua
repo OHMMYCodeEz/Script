@@ -319,15 +319,15 @@ local function attackEnemies()
                                     origin = character:GetPivot().Position,
                                     weaponName = weaponName,
                                     bulletID = "Bullet_" .. math.random(100000, 999999),
-                                    currentPenetrationCount = 1,
-                                    shellSpeed = 0,
+                                    currentPenetrationCount = 0,
+                                    shellSpeed = 1e99,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
                                     registeredParts = {[head] = true},
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, targetHumanoid, 100, 1, head)
+                                }, targetHumanoid, 50, 1, head)
                             end)
                             
                             task.wait(0.001)
