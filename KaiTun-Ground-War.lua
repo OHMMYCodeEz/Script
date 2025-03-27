@@ -8,7 +8,8 @@ if not _G.AutofarmScript then
         Connections = {},
         Weapons = {},
         TeleportPoints = {},
-        currentWeaponIndex = 0
+        currentWeaponIndex = 0,
+        KillCount = 0  -- เพิ่มตัวแปรนับ Kill
     }
 end
 
@@ -291,26 +292,37 @@ local function attackEnemies()
                         local targetHumanoid = target:FindFirstChild("Humanoid")
                         
                         if head and targetHumanoid and targetHumanoid.Health > 0 then
+                            local previousHealth = targetHumanoid.Health
                             pcall(function()
                                 local weaponName = shared.SelectedWeapon.Name
                                 if not shared.SelectedWeapon:IsA("Tool") then
                                     weaponName = "CustomWeapon_" .. weaponName
                                 end
                                 remoteEvent:InvokeServer({
-                                    shellMaxDist = 0,
+                                    shellMaxDist = 10000,
                                     origin = character:GetPivot().Position,
                                     weaponName = weaponName,
-                                    bulletID = "Bullet_" .. math.random(10000000, 99999999),
-                                    currentPenetrationCount = 200,
-                                    shellSpeed = 0,
+                                    bulletID = "Bullet_" .. math.random(100000, 999999),
+                                    currentPenetrationCount = 50,
+                                    shellSpeed = 1000,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
                                     registeredParts = {[head] = true},
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, targetHumanoid, 10000, 1, head)
+                                }, targetHumanoid, 100000, 1, head)
                             end)
+                            
+                            -- ตรวจสอบว่าฆ่าได้หรือไม่
+                            task.wait(0.1) -- รอให้ความเสียหายประมวลผล
+                            if targetHumanoid and targetHumanoid.Health <= 0 and previousHealth > 0 then
+                                _G.AutofarmScript.KillCount = _G.AutofarmScript.KillCount + 1
+                                if _G.AutofarmScript.UIElements then
+                                    _G.AutofarmScript.UIElements.KillCount.Text = "Kills: " .. _G.AutofarmScript.KillCount
+                                end
+                                print("Kill confirmed! Total kills: " .. _G.AutofarmScript.KillCount)
+                            end
                         end
                     end
                 end
@@ -338,7 +350,7 @@ local function createUI()
         _G.AutofarmScript.UI = screenGui
 
         local mainFrame = Instance.new("Frame")
-        mainFrame.Size = UDim2.new(0, 205, 0, 260)
+        mainFrame.Size = UDim2.new(0, 200, 0, 285)  -- เพิ่มความสูงเพื่อรองรับ Kill Count
         mainFrame.Position = UDim2.new(0.2, -140, 0, 10)
         mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
         mainFrame.BorderSizePixel = 0
@@ -374,7 +386,8 @@ local function createUI()
             Teleport = {Text = "Teleport: Ready", YPos = 155, Color = Color3.fromRGB(200, 200, 255)},
             Status = {Text = "Status: Alive", YPos = 180, Color = Color3.fromRGB(0, 255, 0)},
             NextSwitch = {Text = "Next Switch: " .. Settings.SwitchInterval .. "s", YPos = 205, Color = Color3.fromRGB(200, 200, 200)},
-            NextTeleport = {Text = "Next Teleport: " .. Settings.TeleportInterval .. "s", YPos = 230, Color = Color3.fromRGB(200, 200, 200)}
+            NextTeleport = {Text = "Next Teleport: " .. Settings.TeleportInterval .. "s", YPos = 230, Color = Color3.fromRGB(200, 200, 200)},
+            KillCount = {Text = "Kills: 0", YPos = 255, Color = Color3.fromRGB(255, 215, 0)}  -- เพิ่ม Kill Count Label
         }
 
         _G.AutofarmScript.UIElements = {}
@@ -392,7 +405,7 @@ local function createUI()
             label.Parent = mainFrame
             _G.AutofarmScript.UIElements[name] = label
         end
-
+            
         local dragging, dragStart, startPos
         mainFrame.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
