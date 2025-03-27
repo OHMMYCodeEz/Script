@@ -299,19 +299,19 @@ local function attackEnemies()
                                     weaponName = "CustomWeapon_" .. weaponName
                                 end
                                 remoteEvent:InvokeServer({
-                                    shellMaxDist = 10000,
+                                    shellMaxDist = 0,
                                     origin = character:GetPivot().Position,
                                     weaponName = weaponName,
-                                    bulletID = "Bullet_" .. math.random(100000, 999999),
+                                    bulletID = "Bullet_" .. math.random(10000000, 99999999),
                                     currentPenetrationCount = 50,
-                                    shellSpeed = 1000,
+                                    shellSpeed = 0,
                                     localShellName = "Invisible",
                                     maxPenetrationCount = 1e99,
                                     registeredParts = {[head] = true},
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, targetHumanoid, 100000, 1, head)
+                                }, targetHumanoid, 1000000, 1, head)
                             end)
                             
                             -- ตรวจสอบว่าฆ่าได้หรือไม่
