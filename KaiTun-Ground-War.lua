@@ -24,13 +24,13 @@ local Settings = {
     AutoTeleport = true,
     TeleportInterval = 1,
     TeleportLocations = {
-        Vector3.new(100, 275, 2000),
-        Vector3.new(30000, 275, -15),
-        Vector3.new(-25, 275, 100),
-        Vector3.new(1500, 275, 400),
-        Vector3.new(-305, 275, 1000),
-        Vector3.new(1500, 270, 400),
-        Vector3.new(-10900, 275, -300)
+        Vector3.new(100, 375, 2000),
+        Vector3.new(3000, 375, -15),
+        Vector3.new(-25, 375, 100),
+        Vector3.new(1500, 375, 400),
+        Vector3.new(-305, 375, 1000),
+        Vector3.new(1500, 370, 400),
+        Vector3.new(-1090, 375, -300)
     }
 }
 
