@@ -327,7 +327,7 @@ local function attackEnemies()
                                     shellType = "Bullet",
                                     penetrationMultiplier = 1e99,
                                     filterDescendants = {workspace:FindFirstChild(player.Name)}
-                                }, targetHumanoid, 100000, 2, head)
+                                }, targetHumanoid, 1000, 3, head)
                             end)
                             
                             task.wait(0.001)
