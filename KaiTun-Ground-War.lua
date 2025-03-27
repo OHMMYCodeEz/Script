@@ -551,7 +551,7 @@ local function attemptDeploy()
     end
 
     if _G.AutofarmScript.UIElements then
-        _G.AutofarmScript.UIElements.Status.Text = success and "Status: Deployed" or "Status: Deploy Failed"
+        _G.AutofarmScript.UIElements.Status.Text = success and "Status: กำลังฟาม" or "Status: รอเกิดใหม่"
         _G.AutofarmScript.UIElements.Status.TextColor3 = success and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 165, 0)
     end
 
