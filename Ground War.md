@@ -6,11 +6,13 @@ local Window = Fluent:CreateWindow({
     Title = "Maru Hub - Private abc-" .. Fluent.Version,
     SubTitle = " ",
     TabWidth = 130,
-    Size = UDim2.fromScale(0.4, 0.4),  -- ปรับขนาดให้ยืดหยุ่นตามขนาดหน้าจอ
-    Position = UDim2.fromScale(0.1, 0.2),  -- ให้ UI เริ่มจากตำแหน่งที่เหมาะสมบนหน้าจอ
+    Size = UDim2.fromScale(0.4, 0.4),
+    Position = UDim2.fromScale(0.1, 0.2),
     Acrylic = true,
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
+    MinimizeKey = Enum.KeyCode.LeftControl,
+    Resizeable = true, -- Enable resizing
+    Minimizable = true -- Enable minimizing/collapsing
 })
 
 local Tabs = {
@@ -20,13 +22,12 @@ local Tabs = {
 
 local Options = Fluent.Options
 
--- ฟังก์ชันตั้งค่าเริ่มต้น
 shared.AutoAttack = false
 shared.SelectedWeapon = nil
-getgenv().Speed = 50 -- ความเร็วเริ่มต้น
-getgenv().Enabled = false -- สถานะ Speed Hack
+getgenv().Speed = 50
+getgenv().Enabled = false
+getgenv().InfiniteAmmoEnabled = false
 
--- ฟังก์ชัน Bypass WalkSpeed
 local players = game:GetService("Players")
 local function bypassWalkSpeed()
     if getgenv().executed then
@@ -37,10 +38,8 @@ local function bypassWalkSpeed()
     else
         getgenv().executed = true
         print("Walkspeed Bypassed")
-
         local mt = getrawmetatable(game)
         setreadonly(mt, false)
-
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
             if b == "WalkSpeed" then
@@ -51,13 +50,11 @@ local function bypassWalkSpeed()
     end
 end
 
--- อัปเดต WalkSpeed เมื่อตัวละครเกิดใหม่
 players.LocalPlayer.CharacterAdded:Connect(function(char)
     bypassWalkSpeed()
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
 
--- ลูปอัปเดต WalkSpeed
 spawn(function()
     while wait() do
         if getgenv().Enabled and players.LocalPlayer.Character and players.LocalPlayer.Character:FindFirstChild("Humanoid") then
@@ -66,79 +63,65 @@ spawn(function()
     end
 end)
 
--- ฟังก์ชันดึงรายการอาวุธจาก Backpack
 local function getWeaponsFromBackpack()
     local player = game:GetService("Players").LocalPlayer
     local backpack = player:WaitForChild("Backpack")
     local weapons = {}
-
     for _, item in pairs(backpack:GetChildren()) do
         if item:IsA("Tool") then
             table.insert(weapons, item.Name)
         end
     end
-
     return weapons
 end
 
--- ฟังก์ชันรีเฟรชรายการอาวุธ
 local function refreshWeapons()
     local weapons = getWeaponsFromBackpack()
-
-    -- รีเฟรชค่าของ Dropdown ด้วยรายการอาวุธใหม่
     if weaponDropdown then
         weaponDropdown:SetValues(weapons)
-        
-        -- หากรายการอาวุธไม่ว่าง, ให้เลือกอาวุธแรก
         if #weapons > 0 then
             shared.SelectedWeapon = weapons[1]
-            weaponDropdown:SetValue(weapons[1])  -- ตั้งค่าให้ Dropdown แสดงอาวุธแรก
+            weaponDropdown:SetValue(weapons[1])
         else
-            shared.SelectedWeapon = nil  -- หากไม่มีอาวุธ, ให้ตั้งค่าเป็น nil
+            shared.SelectedWeapon = nil
         end
     end
 end
 
--- ตั้งค่าอาวุธเริ่มต้น
 local weapons = getWeaponsFromBackpack()
 shared.SelectedWeapon = weapons[1] or "Knife"
 
--- ตั้งค่า Dropdown อาวุธเริ่มต้น
 local weaponDropdown = Tabs.Main:AddDropdown("WeaponDropdown", {
     Title = "Select Weapon",
     Values = weapons,
     Multi = false,
-    Default = 1,  -- เลือกอาวุธแรก
+    Default = 1,
 })
 
 weaponDropdown:OnChanged(function(Value)
     shared.SelectedWeapon = Value
 end)
 
--- ฟังก์ชัน Auto Attack
 local autoAttackToggle = Tabs.Main:AddToggle("AutoAttackToggle", { Title = "Enable Auto Attack", Default = false })
 autoAttackToggle:OnChanged(function()
     shared.AutoAttack = Options.AutoAttackToggle.Value
     if shared.AutoAttack then
-        attackEnemies()  -- เริ่มการโจมตีอัตโนมัติ
+        attackEnemies()
     end
 end)
 
--- เพิ่มปุ่มรีเฟรชรายการอาวุธ
 local refreshButton = Tabs.Main:AddButton({
     Title = "Refresh Weapons",
     Description = "Refresh weapon list from backpack",
     Callback = function()
-        refreshWeapons()  -- เรียกฟังก์ชันรีเฟรชอาวุธ
+        refreshWeapons()
     end
 })
 
--- ฟังก์ชัน Auto Attack
 function attackEnemies()
     local players = game:GetService("Players")
     local localPlayer = players.LocalPlayer
     local remoteEvent = game:GetService("ReplicatedStorage"):WaitForChild("ACS_Engine"):WaitForChild("Events"):WaitForChild("Damage")
-
     while shared.AutoAttack do
         for _, player in pairs(players:GetPlayers()) do
             if player ~= localPlayer and player.Team ~= localPlayer.Team then
@@ -146,16 +129,15 @@ function attackEnemies()
                 if targetModel then
                     local head = targetModel:FindFirstChild("Head")
                     local humanoid = targetModel:FindFirstChild("Humanoid")
-
                     if head and humanoid then
                         local args = {
                             [1] = {
-                                ["shellMaxDist"] = getgenv().ShellMaxDist or 100,  -- ใช้ค่าจาก Slider
+                                ["shellMaxDist"] = getgenv().ShellMaxDist or 100,
                                 ["origin"] = localPlayer.Character and localPlayer.Character:GetPivot().Position or Vector3.new(0, 0, 0),
                                 ["weaponName"] = shared.SelectedWeapon,
                                 ["bulletID"] = "Bullet_" .. tostring(math.random(100000, 999999)),
-                                ["currentPenetrationCount"] = getgenv().CurrentPenetrationCount or 5,  -- ใช้ค่าจาก Slider
-                                ["shellSpeed"] = getgenv().ShellSpeed or 100,  -- ใช้ค่าจาก Slider
+                                ["currentPenetrationCount"] = getgenv().CurrentPenetrationCount or 5,
+                                ["shellSpeed"] = getgenv().ShellSpeed or 100,
                                 ["localShellName"] = "Invisible",
                                 ["maxPenetrationCount"] = 1e99,
                                 ["registeredParts"] = { [head] = true },
@@ -166,11 +148,10 @@ function attackEnemies()
                                 }
                             },
                             [2] = humanoid,
-                            [3] = getgenv().AttackValue or 10,  -- ใช้ค่าจาก Slider
+                            [3] = getgenv().AttackValue or 10,
                             [4] = 1,
                             [5] = head,
                         }
-
                         remoteEvent:InvokeServer(unpack(args))
                     end
                 end
@@ -180,7 +161,6 @@ function attackEnemies()
     end
 end
 
--- เพิ่มสไลเดอร์สำหรับการตั้งค่า
 local shellSpeedSlider = Tabs.Main:AddSlider("ShellSpeedSlider", {
     Title = "Shell Speed",
     Description = "Set the speed of the shell",
@@ -217,7 +197,6 @@ local shellMaxDistSlider = Tabs.Main:AddSlider("ShellMaxDistSlider", {
     end
 })
 
--- เพิ่มสไลเดอร์สำหรับ Attack Value (ตำแหน่ง [3])
 local attackValueSlider = Tabs.Main:AddSlider("AttackValueSlider", {
     Title = "Attack Damage (ตำแหน่ง [3])",
     Description = "Set the attack value (ตำแหน่ง [3])",
@@ -230,7 +209,6 @@ local attackValueSlider = Tabs.Main:AddSlider("AttackValueSlider", {
     end
 })
 
--- ตั้งค่า Speed Hack
 local speedToggle = Tabs.Main:AddToggle("SpeedHackToggle", { Title = "Enable Speed Hack", Default = false })
 speedToggle:OnChanged(function()
     getgenv().Enabled = Options.SpeedHackToggle.Value
@@ -248,7 +226,86 @@ local speedSlider = Tabs.Main:AddSlider("SpeedSlider", {
     end
 })
 
--- การตั้งค่า SaveManager และ InterfaceManager
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local function infiniteAmmoServer()
+    local function applySettings(tool)
+        if tool:IsA("Tool") then
+            local acsSettings = tool:FindFirstChild("ACS_Settings")
+            if acsSettings and acsSettings:IsA("ModuleScript") then
+                local m = require(acsSettings)
+                if type(m) == "table" then
+                    m.AmmoInGun = 999999
+                    m.ShellInsert = true
+                    m.ShootRate = 160000
+                    m.adsTime = 0.1
+                    m.MuzzleVelocity = 1000
+                    m.Bullets = 3
+                    m.ShootType = 3
+                    m.MinDamage = 6000
+                    m.Explosion = {Radius = 140000, Damage = 1400}
+                    m.camRecoil = {
+                        camRecoilUp = {0, 0},
+                        camRecoilTilt = {0, 0},
+                        camRecoilLeft = {0, 0},
+                        camRecoilRight = {0, 0}
+                    }
+                    m.gunRecoil = {
+                        gunRecoilUp = {0, 0},
+                        gunRecoilTilt = {0, 0},
+                        gunRecoilLeft = {0, 0},
+                        gunRecoilRight = {0, 0}
+                    }
+                    m.MinSpread = 0
+                    m.MaxSpread = 0
+                    m.AimRecoilReduction = 1e999
+                    m.AimSpreadReduction = 0
+                    m.AimInaccuracyStepAmount = 0
+                    m.AimInaccuracyDecrease = 1e999
+                    m.MinRecoilPower = 1e999
+                    m.MaxRecoilPower = 0
+                    m.WalkMult = 300
+                    m.MaxZero = 0
+                end
+            end
+        end
+    end
+    
+    spawn(function()
+        while wait(0.1) do
+            if getgenv().InfiniteAmmoEnabled then
+                if player.Character then
+                    for _, tool in pairs(player.Character:GetChildren()) do
+                        applySettings(tool)
+                    end
+                end
+                for _, tool in pairs(player.Backpack:GetChildren()) do
+                    applySettings(tool)
+                end
+            end
+        end
+    end)
+end
+
+local infiniteAmmoToggle = Tabs.Main:AddToggle("InfiniteAmmoToggle", { 
+    Title = "Enable Infinite Ammo", 
+    Default = false,
+    Description = "Gives infinite ammo and enhanced weapon stats"
+})
+infiniteAmmoToggle:OnChanged(function()
+    getgenv().InfiniteAmmoEnabled = Options.InfiniteAmmoToggle.Value
+    if getgenv().InfiniteAmmoEnabled then
+        Fluent:Notify({
+            Title = "Infinite Ammo",
+            Content = "Infinite ammo and enhanced weapon stats enabled!",
+            Duration = 3
+        })
+    end
+end)
+
+infiniteAmmoServer()
+
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
 SaveManager:IgnoreThemeSettings()
@@ -260,7 +317,6 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 
 SaveManager:LoadAutoloadConfig()
 
--- แจ้งเตือนเมื่อโหลดสคริปต์
 Fluent:Notify({
     Title = "Maru Hub Private !!",
     Content = "The Maru Private script has been loaded.",
@@ -269,5 +325,4 @@ Fluent:Notify({
 
 Window:SelectTab(1)
 
--- เรียกใช้ฟังก์ชันรีเฟรชเมื่อเริ่มต้น
 refreshWeapons()
