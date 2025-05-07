@@ -178,31 +178,21 @@ Tabs.Main:AddSlider("TweenSpeed", {
 })
 
 Tabs.Main:AddToggle("AutoAttack", {
-    Title = "Auto Attack (with Auto Skill)",
+    Title = "Auto Attack",
     Default = false,
     Callback = function(enabled)
         attacking = enabled
         if enabled then
             task.spawn(function()
                 while attacking do
-                    for _, enemy in ipairs(workspace.Enemys:GetChildren()) do
-                        if enemy:IsA("Model") and enemy:FindFirstChild("HumanoidRootPart") and isAlive(enemy) and (selectedEnemy == nil or enemy.Name == selectedEnemy) then
-                            selectedEnemy = enemy.Name
-                            highlightTarget(enemy)
+                    local enemy = workspace.Enemys:FindFirstChild(selectedEnemy)
+                    if enemy and enemy:FindFirstChild("HumanoidRootPart") and isAlive(enemy) then
                         local humanoid = getHumanoid(enemy)
-                        local dist = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
-                        local time = math.clamp(dist / tweenSpeed, 0.05, 5)
-                        TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
-                            CFrame = enemy.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
-                        }):Play()
-                        task.wait(time + 0.1)
-
+                        attack(enemy)
                         repeat
-                            attack(enemy)
                             task.wait(0.15)
                         until not attacking or humanoid.Health <= 0
                     else
-                        print("[DEBUG] No valid enemy found or alive.")
                         task.wait(0.5)
                     end
                 end
