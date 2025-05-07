@@ -122,7 +122,7 @@ local function attack(enemy)
 
     -- Auto Skill
     if autoSkillEnabled then
-        for _, key in ipairs({ Enum.KeyCode.Z, Enum.KeyCode.X, Enum.KeyCode.C, Enum.KeyCode.V, Enum.KeyCode.F }) do
+        for _, key in ipairs({ Enum.KeyCode.Z, Enum.KeyCode.X, Enum.KeyCode.C, Enum.KeyCode.V }) do
             VirtualInputManager:SendKeyEvent(true, key, false, game)
             task.wait(0.05)
             VirtualInputManager:SendKeyEvent(false, key, false, game)
@@ -203,7 +203,7 @@ Tabs.Main:AddToggle("AutoAttack", {
                         until not attacking or humanoid.Health <= 0
                     else
                         print("[DEBUG] No valid enemy found or alive.")
-                        task.wait(0.1)
+                        task.wait(0.5)
                     end
                 end
             end)
