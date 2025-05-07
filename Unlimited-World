@@ -12,23 +12,30 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-local success, PlayerClickAttack = pcall(function()
-    return ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("PlayerClickAttack")
-end)
-if not success then
-    warn("[Maru Hub] ⚠️ ไม่พบ Remote PlayerClickAttack")
-    return
-end
+local PlayerClickAttack = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("PlayerClickAttack")
 
 -- States
 local selectedEnemy = nil
 local tweenSpeed = 350
 local attacking = false
+local tweenSelected = false
 local tweenNearby = false
 local rebornEnabled = false
 local autoSkillEnabled = false
+local isUIVisible = true
 
--- สร้างปุ่ม Toggle UI บนหน้าจอ
+-- Fluent Window
+local Window = Fluent:CreateWindow({
+    Title = "Maru Hub - Premium Script",
+    SubTitle = "ac-v0.01c",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+-- ปุ่ม Toggle UI
 local playerGui = player:WaitForChild("PlayerGui")
 local toggleGui = Instance.new("ScreenGui")
 toggleGui.Name = "ToggleUIButton"
@@ -57,23 +64,7 @@ toggleButton.MouseButton1Click:Connect(function()
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
 end)
 
--- ✅ ตรวจสอบว่ามี workspace.Enemys
-if not workspace:FindFirstChild("Enemys") then
-    warn("[Maru Hub] ⚠️ ไม่พบ workspace.Enemys — โปรดตรวจสอบว่าเกมของคุณมีโฟลเดอร์นี้")
-    return
-end
-
--- Fluent Window
-local Window = Fluent:CreateWindow({
-    Title = "Maru Hub - Premium Script",
-    SubTitle = "ac-v0.01c",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
-})
-
+-- Tabs
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "swords" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
@@ -81,22 +72,7 @@ local Tabs = {
 
 local Options = Fluent.Options
 
--- Utility Functions
-
--- Highlight Target
-local function highlightTarget(target)
-    if not target:FindFirstChild("Highlight") then
-        local hl = Instance.new("Highlight")
-        hl.Name = "Highlight"
-        hl.FillColor = Color3.new(1, 0, 0)
-        hl.OutlineColor = Color3.new(1, 1, 1)
-        hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-        hl.Parent = target
-    end
-end
-
--- Smart Pathing Placeholder (avoid obstacles)
--- Actual pathfinding logic can be added here if needed
+-- Utility
 local function getEnemyList()
     local names = {}
     for _, enemy in ipairs(workspace.Enemys:GetChildren()) do
@@ -109,66 +85,13 @@ local function getEnemyList()
     return names
 end
 
-local function getHumanoid(model)
-    return model and model:FindFirstChildOfClass("Humanoid")
-end
-
-local function isAlive(enemy)
-    local h = getHumanoid(enemy)
-    return h and h.Health > 0
-end
-
-local function attack(enemy)
-    if not isAlive(enemy) then return end
-    print("[DEBUG] Attacking:", enemy.Name)
-    local dir = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Unit
-    humanoidRootPart.CFrame = CFrame.lookAt(humanoidRootPart.Position, humanoidRootPart.Position + dir)
-
-    -- Click Attack
-    pcall(function()
-        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
-        task.wait(0.01)
-        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
-        PlayerClickAttack:FireServer({})
-    end)
-
-    -- Auto Skill
-    if autoSkillEnabled then
-        for _, key in ipairs({ Enum.KeyCode.Z, Enum.KeyCode.X, Enum.KeyCode.C, Enum.KeyCode.V }) do
-            VirtualInputManager:SendKeyEvent(true, key, false, game)
-            task.wait(0.05)
-            VirtualInputManager:SendKeyEvent(false, key, false, game)
-            task.wait(0.2)
-        end
-    end
-end
-
-local function findNearestAliveEnemy()
-    local nearest, dist = nil, math.huge
-    for _, enemy in ipairs(workspace.Enemys:GetChildren()) do
-        if enemy:IsA("Model") and enemy:FindFirstChild("HumanoidRootPart") and isAlive(enemy) then
-            local d = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
-            if d < dist then
-                dist = d
-                nearest = enemy
-            end
-        end
-    end
-    return nearest
-end
-
--- UI Dropdown
+-- UI Components
 local Dropdown = Tabs.Main:AddDropdown("EnemySelect", {
     Title = "Select Enemy",
     Values = getEnemyList(),
     Multi = false,
-    Default = 1
+    Default = 5
 })
-
--- ✅ ตั้งค่าค่า fallback ถ้าไม่มี selectedEnemy
-selectedEnemy = getEnemyList()[1] or nil
-
-selectedEnemy = getEnemyList()[1]
 
 Dropdown:OnChanged(function(value)
     selectedEnemy = value
@@ -183,12 +106,40 @@ Tabs.Main:AddButton({
 
 Tabs.Main:AddSlider("TweenSpeed", {
     Title = "Tween Speed",
+    Description = "Higher = faster tweening",
     Default = 350,
     Min = 350,
     Max = 500,
     Rounding = 0,
     Callback = function(value)
         tweenSpeed = value
+    end
+})
+
+Tabs.Main:AddToggle("AutoAttack", {
+    Title = "Auto Attack",
+    Default = false,
+    Callback = function(enabled)
+        attacking = enabled
+        if enabled then
+            task.spawn(function()
+                while attacking do
+                    for _, enemy in ipairs(workspace.Enemys:GetChildren()) do
+                        if enemy:IsA("Model") and enemy.Name == selectedEnemy and enemy:FindFirstChild("HumanoidRootPart") then
+                            local dir = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Unit
+                            humanoidRootPart.CFrame = CFrame.lookAt(humanoidRootPart.Position, humanoidRootPart.Position + dir)
+                            pcall(function()
+                                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                                task.wait(0.01)
+                                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+                            end)
+                            PlayerClickAttack:FireServer({})
+                        end
+                    end
+                    task.wait(0.000000001)
+                end
+            end)
+        end
     end
 })
 
@@ -214,8 +165,6 @@ Tabs.Main:AddToggle("TweenSelected", {
         end
     end
 })
-
-%1
 
 Tabs.Main:AddToggle("TweenNearby", {
     Title = "Auto Farm Nearest Enemy",
@@ -251,23 +200,47 @@ Tabs.Main:AddToggle("TweenNearby", {
     end
 })
 
-Tabs.Main:AddToggle("TweenSelected", {
-    Title = "Auto Farm Selected Enemy",
+Tabs.Main:AddToggle("AutoReborn", {
+    Title = "Auto Reborn",
     Default = false,
     Callback = function(enabled)
-        tweenSelected = enabled
+        rebornEnabled = enabled
         if enabled then
             task.spawn(function()
-                while tweenSelected do
-                    local enemy = workspace.Enemys:FindFirstChild(selectedEnemy)
-                    if enemy and enemy:FindFirstChild("HumanoidRootPart") then
-                        local dist = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
-                        local time = math.clamp(dist / tweenSpeed, 0.0001, 5000)
-                        TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
-                            CFrame = enemy.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
-                        }):Play()
+                while rebornEnabled do
+                    pcall(function()
+                        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("PlayerReborn"):FireServer()
+                    end)
+                    task.wait(60)
+                end
+            end)
+        end
+    end
+})
+
+-- ✅ Auto Skill Toggle
+local skillKeys = {
+    Enum.KeyCode.Z,
+    Enum.KeyCode.X,
+    Enum.KeyCode.C,
+    Enum.KeyCode.V
+}
+
+Tabs.Main:AddToggle("AutoSkill", {
+    Title = "Auto Skill (Z/X/C/V)",
+    Default = false,
+    Callback = function(enabled)
+        autoSkillEnabled = enabled
+        if enabled then
+            task.spawn(function()
+                while autoSkillEnabled do
+                    for _, key in ipairs(skillKeys) do
+                        VirtualInputManager:SendKeyEvent(true, key, false, game)
+                        task.wait(0.05)
+                        VirtualInputManager:SendKeyEvent(false, key, false, game)
+                        task.wait(0.2)
                     end
-                    task.wait(0.01)
+                    task.wait(0.5)
                 end
             end)
         end
