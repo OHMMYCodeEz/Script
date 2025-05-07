@@ -236,6 +236,29 @@ Tabs.Main:AddToggle("TweenNearby", {
     end
 })
 
+Tabs.Main:AddToggle("TweenSelected", {
+    Title = "Auto Farm Selected Enemy",
+    Default = false,
+    Callback = function(enabled)
+        tweenSelected = enabled
+        if enabled then
+            task.spawn(function()
+                while tweenSelected do
+                    local enemy = workspace.Enemys:FindFirstChild(selectedEnemy)
+                    if enemy and enemy:FindFirstChild("HumanoidRootPart") then
+                        local dist = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
+                        local time = math.clamp(dist / tweenSpeed, 0.0001, 5000)
+                        TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
+                            CFrame = enemy.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
+                        }):Play()
+                    end
+                    task.wait(0.01)
+                end
+            end)
+        end
+    end
+})
+
 -- Fluent Addons
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
