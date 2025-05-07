@@ -12,7 +12,13 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-local PlayerClickAttack = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("PlayerClickAttack")
+local success, PlayerClickAttack = pcall(function()
+    return ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("PlayerClickAttack")
+end)
+if not success then
+    warn("[Maru Hub] ⚠️ ไม่พบ Remote PlayerClickAttack")
+    return
+end
 
 -- States
 local selectedEnemy = nil
@@ -50,6 +56,12 @@ toggleButton.MouseButton1Click:Connect(function()
     task.wait(0.1)
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
 end)
+
+-- ✅ ตรวจสอบว่ามี workspace.Enemys
+if not workspace:FindFirstChild("Enemys") then
+    warn("[Maru Hub] ⚠️ ไม่พบ workspace.Enemys — โปรดตรวจสอบว่าเกมของคุณมีโฟลเดอร์นี้")
+    return
+end
 
 -- Fluent Window
 local Window = Fluent:CreateWindow({
@@ -152,6 +164,9 @@ local Dropdown = Tabs.Main:AddDropdown("EnemySelect", {
     Multi = false,
     Default = 1
 })
+
+-- ✅ ตั้งค่าค่า fallback ถ้าไม่มี selectedEnemy
+selectedEnemy = getEnemyList()[1] or nil
 
 selectedEnemy = getEnemyList()[1]
 
