@@ -177,29 +177,30 @@ Tabs.Main:AddSlider("TweenSpeed", {
     end
 })
 
-Tabs.Main:AddToggle("AutoAttack", {
-    Title = "Auto Attack",
+Tabs.Main:AddToggle("TweenSelected", {
+    Title = "Auto Farm Selected Enemy",
     Default = false,
     Callback = function(enabled)
-        attacking = enabled
+        tweenSelected = enabled
         if enabled then
             task.spawn(function()
-                while attacking do
+                while tweenSelected do
                     local enemy = workspace.Enemys:FindFirstChild(selectedEnemy)
-                    if enemy and enemy:FindFirstChild("HumanoidRootPart") and isAlive(enemy) then
-                        local humanoid = getHumanoid(enemy)
-                        attack(enemy)
-                        repeat
-                            task.wait(0.15)
-                        until not attacking or humanoid.Health <= 0
-                    else
-                        task.wait(0.5)
+                    if enemy and enemy:FindFirstChild("HumanoidRootPart") then
+                        local dist = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
+                        local time = math.clamp(dist / tweenSpeed, 0.0001, 5000)
+                        TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
+                            CFrame = enemy.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
+                        }):Play()
                     end
+                    task.wait(0.01)
                 end
             end)
         end
     end
 })
+
+%1
 
 Tabs.Main:AddToggle("TweenNearby", {
     Title = "Auto Farm Nearest Enemy",
@@ -209,18 +210,26 @@ Tabs.Main:AddToggle("TweenNearby", {
         if enabled then
             task.spawn(function()
                 while tweenNearby do
-                    local enemy = findNearestAliveEnemy()
-                    if enemy and enemy:FindFirstChild("HumanoidRootPart") then
-                        highlightTarget(enemy)
-                        local dist = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
-                        local time = math.clamp(dist / tweenSpeed, 0.05, 5)
-                        TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
-                            CFrame = enemy.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
-                        }):Play()
-                        task.wait(time + 0.1)
-                    else
-                        task.wait(0.5)
+                    local nearest, dist = nil, math.huge
+                    for _, enemy in ipairs(workspace.Enemys:GetChildren()) do
+                        if enemy:IsA("Model") and enemy:FindFirstChild("HumanoidRootPart") then
+                            local d = (enemy.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
+                            if d < dist then
+                                dist = d
+                                nearest = enemy
+                            end
+                        end
                     end
+                    if nearest then
+                        selectedEnemy = nearest.Name
+                        local dir = (nearest.HumanoidRootPart.Position - humanoidRootPart.Position).Unit
+                        humanoidRootPart.CFrame = CFrame.lookAt(humanoidRootPart.Position, humanoidRootPart.Position + dir)
+                        local time = math.clamp(dist / tweenSpeed, 0.0001, 5000)
+                        TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
+                            CFrame = nearest.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
+                        }):Play()
+                    end
+                    task.wait(0.01)
                 end
             end)
         end
