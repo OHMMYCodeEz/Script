@@ -72,6 +72,6 @@ TeleportService.TeleportInitFailed:Connect(function(player, teleportResult, erro
     currentTryIndex = currentTryIndex + 1
     
     -- Retry with the next server after a short delay
-    wait(2)  -- Adjust delay as needed to avoid rate limits
+    wait(1)  -- Adjust delay as needed to avoid rate limits
     tryTeleportToNextServer()
 end)
