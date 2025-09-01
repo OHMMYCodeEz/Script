@@ -5,18 +5,7 @@ local LocalPlayer = Players.LocalPlayer
 -- Define the target PlaceId and a list of InstanceIds (add as many as you want)
 local targetPlaceId = game.PlaceId -- Current place
 local targetInstanceIds = {
-    "a81a47e8-3a42-4b5b-ae30-0db04d7b5760",  -- Server 1
-    "24a0aa1c-ee10-4077-839f-763048ce2541",                  -- Server 2 (replace with actual ID)
-    "9231665b-145c-40f6-9129-54788db0e760",
-    "3eed1a38-23f3-4b68-99aa-cd102fae8a80",
-    "8f47fd82-0dac-41f3-8fff-45e722fac902",
-    "2d05b606-7708-4f8e-8837-9363520e5329",
-    "fc9fea5f-4a1d-4109-9fff-596c10dde700",
-    "e9e99095-4ccb-4ad6-a4cc-212f3b64d57f",
-    "6d5b9207-de1c-4674-a4eb-fd40b38b1fec",
-    "1d7ef0a4-9a21-4030-9f02-f64f46baf806",
-    "528644a0-df50-4a21-ac8e-db27480d4930",
-    "6ed2592a-6453-4ddf-aa72-7936985cf681"-- Server 3 (replace with actual ID)
+    "BONKHUBOGNiOGJkNjEtMGVkNS00NGM4LWEzY2MtZmM2N2ViZTllYzEy"-- Server 3 (replace with actual ID)
     -- Add more InstanceIds here if needed
 }
 
