@@ -466,7 +466,7 @@ do
                         Options.CompleteFishingToggle:SetValue(false)
                         break
                     end
-                    wait(0.5)
+                    wait(0.2)
                 end
             end)
         end
