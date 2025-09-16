@@ -444,7 +444,7 @@ do
                         Options.FishingToggle:SetValue(false)
                         break
                     end
-                    wait(4)
+                    wait(3)
                 end
             end)
         end
