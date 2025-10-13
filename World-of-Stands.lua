@@ -5,6 +5,22 @@ local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 local Workspace = game:GetService("Workspace")
 local TeleportService = game:GetService("TeleportService")
+local Camera = game:GetService("Workspace").CurrentCamera
+
+local baseGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("BaseGui")
+if baseGui and baseGui:FindFirstChild("StartScreen") then
+    local playButton = baseGui.StartScreen:FindFirstChild("PlayButton")
+    if playButton then
+        game:GetService("GuiService").SelectedObject = playButton
+        task.wait()
+        if game:GetService("GuiService").SelectedObject == playButton then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+            task.wait()
+            game:GetService("GuiService").SelectedObject = nil
+        end
+    end
+end
 
 local function collectBottle(crateNumber)
     local cratePath = Workspace:FindFirstChild(tostring(crateNumber))
@@ -14,6 +30,9 @@ local function collectBottle(crateNumber)
         if targetPart then
             local bottlePosition = targetPart.Position
             HumanoidRootPart.CFrame = CFrame.new(bottlePosition + Vector3.new(0, 5, 0))
+
+            Camera.CameraType = Enum.CameraType.Scriptable
+            Camera.CFrame = CFrame.new(bottlePosition + Vector3.new(0, 5, -10))
 
             wait(0.5)
 
@@ -25,18 +44,16 @@ local function collectBottle(crateNumber)
         else
             print("No valid BasePart found in crate " .. crateNumber)
         end
-    else
-        print("Crate " .. crateNumber .. " not found!")
     end
 end
 
-for round = 1, 5 do
+for round = 1, 3 do
     for i = 1, 100 do
         collectBottle(i)
         wait(0.1)
     end
-    print("Completed round " .. round .. " of 5")
-    if round < 5 then
+    print("Completed round " .. round .. " of 3")
+    if round < 3 then
         wait(1)
     end
 end
