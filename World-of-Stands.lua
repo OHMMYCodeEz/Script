@@ -7,6 +7,7 @@ local Workspace = game:GetService("Workspace")
 local TeleportService = game:GetService("TeleportService")
 local Camera = game:GetService("Workspace").CurrentCamera
 
+wait(5)
 local baseGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("BaseGui")
 if baseGui and baseGui:FindFirstChild("StartScreen") then
     local playButton = baseGui.StartScreen:FindFirstChild("PlayButton")
