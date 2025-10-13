@@ -30,13 +30,13 @@ local function collectBottle(crateNumber)
     end
 end
 
-for round = 1, 10 do
+for round = 1, 5 do
     for i = 1, 100 do
         collectBottle(i)
         wait(0.1)
     end
-    print("Completed round " .. round .. " of 3")
-    if round < 10 then
+    print("Completed round " .. round .. " of 5")
+    if round < 5 then
         wait(1)
     end
 end
