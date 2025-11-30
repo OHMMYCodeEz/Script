@@ -1,3 +1,67 @@
+-- UI สำหรับแสดงข้อความ MARU HUB กลางจอแบบไม่มีพื้นหลัง (เวอร์ชันกระพริบ)
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- สร้าง ScreenGui
+local MaruHubUI = Instance.new("ScreenGui")
+MaruHubUI.Name = "MaruHubUI"
+MaruHubUI.ResetOnSpawn = false
+MaruHubUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- สร้าง TextLabel สำหรับข้อความ (ไม่มีพื้นหลัง)
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Size = UDim2.new(0, 600, 0, 50)
+TitleLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+TitleLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+TitleLabel.BackgroundTransparency = 1 -- ไม่มีพื้นหลัง
+TitleLabel.Text = "MARU HUB Next Gen Pro Max Galaxy A17 Pro++"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- สีขาว
+TitleLabel.TextSize = 48
+TitleLabel.Font = Enum.Font.GothamBlack
+TitleLabel.TextStrokeTransparency = 0.5
+TitleLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+-- ประกอบ UI เข้าด้วยกัน
+TitleLabel.Parent = MaruHubUI
+MaruHubUI.Parent = PlayerGui
+
+-- ฟังก์ชันสำหรับแอนิเมชันกระพริบ
+local function blinkAnimation()
+    local colors = {
+        Color3.fromRGB(255, 215, 0), -- Gold
+        Color3.fromRGB(255, 255, 255), -- White
+        Color3.fromRGB(255, 100, 100), -- Red
+        Color3.fromRGB(100, 255, 100), -- Green
+        Color3.fromRGB(100, 100, 255) -- Blue
+    }
+    
+    local currentColor = 1
+    
+    while MaruHubUI.Parent do
+        -- เปลี่ยนสี
+        TitleLabel.TextColor3 = colors[currentColor]
+        currentColor = currentColor + 1
+        if currentColor > #colors then
+            currentColor = 1
+        end
+        
+        -- เอฟเฟกต์กระพริบ
+        for i = 1, 3 do
+            TitleLabel.TextTransparency = 0.2
+            wait(0.1)
+            TitleLabel.TextTransparency = 0
+            wait(0.1)
+        end
+        
+        wait(1)
+    end
+end
+
+-- เริ่มแอนิเมชัน
+coroutine.wrap(blinkAnimation)()
 -- เปลี่ยนที่อยู่ของกล่องเป็นไข่ workspace.AreaEgg
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local Players = game:GetService("Players")
@@ -358,7 +422,7 @@ print("Egg collection completed! Starting server hop...")
                               wait()
                               game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
                           end)
-                          wait(4)
+                          wait(1)
                       end
                   end
               end
