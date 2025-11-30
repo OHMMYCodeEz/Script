@@ -196,6 +196,10 @@ local function collectAllEggsInArea()
                         VirtualInputManager:SendKeyEvent(true, "E", false, game)
                         wait(1.5)
                         VirtualInputManager:SendKeyEvent(false, "E", false, game)
+                        wait(0.5)
+                        VirtualInputManager:SendKeyEvent(true, "E", false, game)
+                        wait(1.5)
+                        VirtualInputManager:SendKeyEvent(false, "E", false, game)
                         collectedCount = collectedCount + 1
                         print("Collected egg: " .. eggCrate.Name .. " (" .. collectedCount .. ")")
                     else
