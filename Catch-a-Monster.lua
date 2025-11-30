@@ -259,8 +259,8 @@ end
 local function collectEggsFromAllIslands()
     local islands = {"Ice", "Root", "Volcano"} -- เพิ่มชื่อเกาะอื่นๆ ตามต้องการ
     
-    for round = 1, 3 do
-        print("Starting round " .. round .. " of 3")
+    for round = 1, 2 do
+        print("Starting round " .. round .. " of 2")
         local totalCollected = 0
         
         for _, islandName in pairs(islands) do
@@ -282,7 +282,7 @@ local function collectEggsFromAllIslands()
         
         print("Completed round " .. round .. ": " .. totalCollected .. " eggs total")
         
-        if round < 3 then
+        if round < 2 then
             print("Waiting before next round...")
             wait(5) -- รอนานขึ้นระหว่างรอบ
         end
