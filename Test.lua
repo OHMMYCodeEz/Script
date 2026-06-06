@@ -79,10 +79,10 @@ local function isValidObject(obj)
         return false
     end
     -- ตรวจสอบว่าวัตถุถูกทำลายหรือไม่
-    pcall(function()
+    local success, _ = pcall(function()
         return obj.Position
     end)
-    return true
+    return success
 end
 
 -- ฟังก์ชันหลักในการเก็บของ
@@ -113,10 +113,10 @@ local function collectObjects()
         for _, obj in ipairs(gubby:GetDescendants()) do
             if obj:IsA("BasePart") and not obj:IsDescendantOf(player.Character) then
                 -- ตรวจสอบว่าวัตถุมี Position ที่ถูกต้อง
-                local success, pos = pcall(function()
+                local success, _ = pcall(function()
                     return obj.Position
                 end)
-                if success and pos then
+                if success then
                     table.insert(objects, obj)
                 end
             end
@@ -151,75 +151,71 @@ local function collectObjects()
         if not isValidObject(targetObj) then
             print(string.format("⚠️ [%d/%d] ข้าม: %s (วัตถุหายไปหรือถูกทำลายแล้ว)", i, #allObjects, targetObj.Name))
             skippedCount = skippedCount + 1
-            goto continue
+            -- ข้ามไปชิ้นถัดไป
+        else
+            print(string.format("📦 [%d/%d] กำลังเก็บ: %s", i, #allObjects, targetObj.Name))
+            
+            -- ตรวจสอบสถานะตัวละคร
+            char, hrp, humanoid = waitForCharacter()
+            if not checkAlive(humanoid) then
+                print("⚠️ Character ตาย ข้ามไปชิ้นถัดไป")
+                skippedCount = skippedCount + 1
+                -- ข้ามไปชิ้นถัดไป
+            elseif not isValidObject(targetObj) then
+                print(string.format("⚠️ วัตถุ %s หายไประหว่างรอ ข้ามไป", targetObj.Name))
+                skippedCount = skippedCount + 1
+                -- ข้ามไปชิ้นถัดไป
+            else
+                -- ดึงตำแหน่งล่าสุด
+                local targetPosition
+                local success, pos = pcall(function()
+                    return targetObj.Position
+                end)
+                
+                if not success or not pos then
+                    print(string.format("⚠️ ไม่สามารถดึงตำแหน่งของ %s ได้ ข้ามไป", targetObj.Name))
+                    skippedCount = skippedCount + 1
+                    -- ข้ามไปชิ้นถัดไป
+                else
+                    targetPosition = pos
+                    
+                    -- เทเลพอร์ตไปยังวัตถุ
+                    print(string.format("📍 เทเลพอร์ตไปที่ %s (%.1f, %.1f, %.1f)", 
+                        targetObj.Name, 
+                        targetPosition.X, 
+                        targetPosition.Y, 
+                        targetPosition.Z))
+                    
+                    local teleportSuccess = teleportToPosition(targetPosition)
+                    
+                    if not teleportSuccess then
+                        print(string.format("⚠️ เทเลพอร์ตล้มเหลวที่ %s ข้ามไป", targetObj.Name))
+                        skippedCount = skippedCount + 1
+                        -- ข้ามไปชิ้นถัดไป
+                    else
+                        -- ตรวจสอบวัตถุอีกครั้งก่อนกดปุ่ม
+                        if not isValidObject(targetObj) then
+                            print(string.format("⚠️ วัตถุ %s หายไประหว่างเทเลพอร์ต ข้ามไป", targetObj.Name))
+                            skippedCount = skippedCount + 1
+                            -- ข้ามไปชิ้นถัดไป
+                        else
+                            task.wait(0.3)
+                            
+                            -- กดปุ่มเพื่อเก็บ
+                            print(string.format("⌨️ กดปุ่ม %s ที่ %s", COLLECT_BUTTON, targetObj.Name))
+                            pressButton(COLLECT_BUTTON)
+                            
+                            collectedCount = collectedCount + 1
+                            print(string.format("✅ เก็บสำเร็จ! (%d/%d) เก็บแล้ว %d ชิ้น, ข้าม %d ชิ้น", 
+                                collectedCount, #allObjects, collectedCount, skippedCount))
+                            
+                            -- รอระหว่างเก็บ
+                            task.wait(0.5)
+                        end
+                    end
+                end
+            end
         end
-        
-        print(string.format("📦 [%d/%d] กำลังเก็บ: %s", i, #allObjects, targetObj.Name))
-        
-        -- ตรวจสอบสถานะตัวละคร
-        char, hrp, humanoid = waitForCharacter()
-        if not checkAlive(humanoid) then
-            print("⚠️ Character ตาย ข้ามไปชิ้นถัดไป")
-            skippedCount = skippedCount + 1
-            goto continue
-        end
-        
-        -- ตรวจสอบอีกครั้งก่อนเทเลพอร์ต
-        if not isValidObject(targetObj) then
-            print(string.format("⚠️ วัตถุ %s หายไประหว่างรอ ข้ามไป", targetObj.Name))
-            skippedCount = skippedCount + 1
-            goto continue
-        end
-        
-        -- ดึงตำแหน่งล่าสุด
-        local targetPosition
-        local success, pos = pcall(function()
-            return targetObj.Position
-        end)
-        
-        if not success or not pos then
-            print(string.format("⚠️ ไม่สามารถดึงตำแหน่งของ %s ได้ ข้ามไป", targetObj.Name))
-            skippedCount = skippedCount + 1
-            goto continue
-        end
-        targetPosition = pos
-        
-        -- เทเลพอร์ตไปยังวัตถุ
-        print(string.format("📍 เทเลพอร์ตไปที่ %s (%.1f, %.1f, %.1f)", 
-            targetObj.Name, 
-            targetPosition.X, 
-            targetPosition.Y, 
-            targetPosition.Z))
-        
-        local teleportSuccess = teleportToPosition(targetPosition)
-        
-        if not teleportSuccess then
-            print(string.format("⚠️ เทเลพอร์ตล้มเหลวที่ %s ข้ามไป", targetObj.Name))
-            skippedCount = skippedCount + 1
-            goto continue
-        end
-        
-        -- ตรวจสอบวัตถุอีกครั้งก่อนกดปุ่ม
-        if not isValidObject(targetObj) then
-            print(string.format("⚠️ วัตถุ %s หายไประหว่างเทเลพอร์ต ข้ามไป", targetObj.Name))
-            skippedCount = skippedCount + 1
-            goto continue
-        end
-        
-        task.wait(0.3)
-        
-        -- กดปุ่มเพื่อเก็บ
-        print(string.format("⌨️ กดปุ่ม %s ที่ %s", COLLECT_BUTTON, targetObj.Name))
-        pressButton(COLLECT_BUTTON)
-        
-        collectedCount = collectedCount + 1
-        print(string.format("✅ เก็บสำเร็จ! (%d/%d) เก็บแล้ว %d ชิ้น, ข้าม %d ชิ้น", 
-            collectedCount, #allObjects, collectedCount, skippedCount))
-        
-        -- รอระหว่างเก็บ (ลดลงเล็กน้อย)
-        task.wait(0.5)
-        
-        ::continue::
     end
 
     print(string.format("🎊 เก็บเสร็จ! เก็บได้ %d/%d ชิ้น (ข้าม %d ชิ้น)", 
