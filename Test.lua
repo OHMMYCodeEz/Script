@@ -63,7 +63,7 @@ end
 -- ฟังก์ชันกดปุ่ม
 local function pressButton(button)
     VirtualInputManager:SendKeyEvent(true, button, false, game)
-    task.wait(0.1)
+    task.wait(1)
     VirtualInputManager:SendKeyEvent(false, button, false, game)
 end
 
