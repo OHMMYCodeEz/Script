@@ -164,7 +164,7 @@ local function main()
     if not success then
         warn("❌ เกิดข้อผิดพลาด: " .. tostring(err))
         print("🔄 ลองใหม่ใน 3 วินาที...")
-        task.wait(2)
+        task.wait(1)
         pcall(function()
             collectObjects()
         end)
