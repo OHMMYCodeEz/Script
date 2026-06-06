@@ -6,7 +6,7 @@ local player = Players.LocalPlayer
 
 -- ===== ตั้งค่าต่างๆ =====
 local TARGET_PATH = workspace.World.NPC.Gubby  -- ตำแหน่งที่ต้องการเก็บ
-local TARGET_OBJECT_NAMES = {"TouchPart", "Gubby", "Part", "Collectible"}  -- ชื่อวัตถุที่ต้องการเก็บ (เพิ่ม/ลดได้)
+local TARGET_OBJECT_NAMES = {"TouchPart", "Gubby", "240601"}  -- ชื่อวัตถุที่ต้องการเก็บ (เพิ่ม/ลดได้)
 local COLLECT_BUTTON = "E"  -- ปุ่มที่ใช้เก็บ
 local TELEPORT_OFFSET_Y = 3  -- ระยะห่างแนวแกน Y เมื่อเทเลพอร์ต
 -- =========================
