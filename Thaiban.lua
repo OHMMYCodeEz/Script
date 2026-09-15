@@ -1,6 +1,8 @@
 if not game:IsLoaded() then game.Loaded:Wait() end 
 
 local Players = game:GetService('Players')
+local VirtualUser = game:GetService("VirtualUser")
+local player = Players.LocalPlayer
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 local CollectionService = game:GetService("CollectionService")
 local RunService = game:GetService('RunService')
