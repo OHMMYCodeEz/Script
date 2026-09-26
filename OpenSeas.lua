@@ -1,5 +1,3 @@
-local dialogResult, v123
-
 local function v0(p1, p2, p3)
     local v17, xorKey, currentByte, decryptedByte
     local byte = string.byte
